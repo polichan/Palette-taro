@@ -39,15 +39,36 @@ export default class Index extends Component {
     navigationBarTitleText: "首页"
   };
 
+  /**
+   * 登录事件
+   */
   handleLoginClick() {
     Taro.navigateTo({
       url: "/pages/login/index"
     });
   }
 
-  handleAboutClick()
+  /**
+   * 底部文字跳转
+   * @param {*} type 
+   */
+  handleBottomTextClick(type)
   {
-
+    let page = null;
+    switch (type) {
+      case 'about':
+        page = 'pages/about/index'
+        break;
+      case 'user-license':
+        page = 'pages/license/user/index'
+        break;
+      case 'open-source':
+        page = 'pages/license/open-source/index'
+        break;
+    }
+    Taro.navigateTo({
+      url: page
+    })
   }
 
   render() {
@@ -87,14 +108,19 @@ export default class Index extends Component {
             </View>
           </View>
           <View className='at-row at-row-about'>
-            <View className='at-col at-col-12'>
-              <Text className='about' onClick={this.handleAboutClick.bind(this)}>
+            <View className='at-col at-col-2'>
+              <Text className='user-license bottom-text' onClick={this.handleBottomTextClick.bind(this, 'user-license')}>
+                用户协议
+              </Text>
+            </View>
+            <View className='at-col at-col-2'>
+              <Text className='about bottom-text' onClick={this.handleBottomTextClick.bind(this, 'about')}>
                 关于本实验
               </Text>
             </View>
-            <View className='at-col at-col-12'>
-              <Text className='license' onClick={this.handleAboutClick.bind(this)}>
-                用户协议
+            <View className='at-col at-col-2'>
+              <Text className='open-source-license bottom-text' onClick={this.handleBottomTextClick.bind(this, 'open-source')}>
+                开源协议
               </Text>
             </View>
           </View>

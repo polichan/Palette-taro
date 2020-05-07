@@ -32,12 +32,17 @@
   width: 300px;
 }
 
-.about{
-  color: #999;
-  font-size: 23px;
+.at-row.at-row-about{
+  display: flex;
+  flex-direction: row;
+  align-items: self;
+  justify-content: center;
+  position: fixed;
+  bottom: 50px;
+  text-align: center;
 }
 
-.at-row.at-row-about{
-  position: absolute;
-  bottom: 50px;
+.bottom-text{
+  color: #999;
+  font-size: 23px;
 }
