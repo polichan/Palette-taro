@@ -17,6 +17,8 @@ export default class Index extends Component {
   componentDidCatchError() {}
   componentDidNotFound() {}
   render() {
-    return <View></View>;
+    return <View>
+        
+    </View>;
   }
 }

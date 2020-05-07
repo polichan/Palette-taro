@@ -1,27 +1,81 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View , Text} from "@tarojs/components";
 import { AtFloatLayout } from "taro-ui";
 import "./index.scss";
+import * as Explain from "./../../constants/explain";
 
 export default class FloatLayout extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      title: null,
+      content: null
+    };
   }
   state = {};
 
+
+
+  componentDidMount() {
+    switch (this.props.type) {
+      case "patch":
+        this.setState({
+          title: Explain.PATCH_EXPLAIN.name,
+          content: Explain.PATCH_EXPLAIN.content
+        });
+        break;
+      case "eigenvector":
+        this.setState({
+          title: Explain.EIGENVECTOR_EXPLAIN.name,
+          content: Explain.EIGENVECTOR_EXPLAIN.content
+        });
+        break;
+      case "convolution":
+        this.setState({
+          title: Explain.CONVOLUTION_EXPLAIN.name,
+          content: Explain.CONVOLUTION_EXPLAIN.content
+        });
+        break;
+      case "binaryzation":
+        this.setState({
+          title: Explain.BINARYZATION_EXPLAIN.name,
+          content: Explain.BINARYZATION_EXPLAIN.content
+        });
+      case "block":
+        this.setState({
+          title: Explain.BLOCK_EXPLAIN.name,
+          content: Explain.BLOCK_EXPLAIN.content
+        });
+        break;
+      case "histogram":
+        this.setState({
+          title: Explain.HISTOGRAM_EXPLAIN.name,
+          content: Explain.HISTOGRAM_EXPLAIN.content
+        });
+      default:
+        break;
+    }
+  }
+
+  /**
+   * close 浮动层
+   */
   handleClose() {
     this.props.onClose();
   }
 
   render() {
-    const { isOpened, title } = this.props;
+    const { isOpened } = this.props;
+    const { title, content } = this.state;
     return (
       <AtFloatLayout
         isOpened={isOpened}
         title={title}
         onClose={this.handleClose.bind(this)}
       >
-        <View>{this.props.children}</View>
+        <View>
+          <Text className='content'>{content}</Text>
+        </View>
       </AtFloatLayout>
     );
   }

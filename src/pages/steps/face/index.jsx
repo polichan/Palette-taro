@@ -6,7 +6,7 @@ export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      facesList: []
+      facesList: [],
     };
   }
   componentWillMount() {}
@@ -37,7 +37,7 @@ export default class Index extends Component {
     });
     return (
       <View className='container'>
-          <FloatLayout isOpened onClose={()=>{this.handleCloseFloatLayout()}} title='你好'></FloatLayout>
+          <FloatLayout isOpened onClose={()=>{this.handleCloseFloatLayout()}} title='你好' type='patch'></FloatLayout>
         <View className='at-row'>{faces}</View>
       </View>
     );
