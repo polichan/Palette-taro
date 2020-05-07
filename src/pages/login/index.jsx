@@ -7,8 +7,8 @@ export default class Index extends Component {
   constructor() {
     super(...arguments);
     this.state = {
-      stuNumber: "",
-      password: ""
+      stuNumber: null,
+      password: null
     };
   }
   state = {};
@@ -26,33 +26,58 @@ export default class Index extends Component {
     navigationBarTitleText: "登录"
   };
 
-  handleChange(value) {
+  handlePasswordChange(value) {
     this.setState({
-      value
+      password: value
     });
   }
-  onSubmit(event) {
-    console.log(this.state.stuNumber);
-  }
-  onReset(event) {
+
+  handleStuNumberChange(value) {
     this.setState({
-      stuNumber: ""
+      stuNumber: value
     });
   }
+
+  /**
+   * 登录
+   */
+  handleLoginClick() {
+    this.validateFields((err, params) => {
+      if (!err) {
+        // todo  Login API
+      } else {
+        console.log;
+        Taro.showToast({
+          icon: "none",
+          title: err.message
+        });
+      }
+    });
+  }
+
+  /**
+   * 验证字段
+   */
+  validateFields(callback) {
+    if (this.state.stuNumber === null) {
+      callback({ message: "学号不能为空" });
+    } else if (this.state.password === null) {
+      callback({ message: "密码不能为空" });
+    }
+    callback(false, this.state);
+  }
+
   render() {
     return (
       <View className='container'>
-        <AtForm
-          onSubmit={this.onSubmit.bind(this)}
-          onReset={this.onReset.bind(this)}
-        >
+        <AtForm>
           <AtInput
             name='stuNumber'
             title='学号'
             type='text'
             placeholder='请输入您的学号'
             value={this.state.stuNumber}
-            onChange={this.handleChange.bind(this, "stuNumber")}
+            onChange={this.handleStuNumberChange.bind(this)}
           />
 
           <AtInput
@@ -61,7 +86,7 @@ export default class Index extends Component {
             type='password'
             placeholder='请输入您的密码'
             value={this.state.password}
-            onChange={this.handleChange.bind(this, "password")}
+            onChange={this.handlePasswordChange.bind(this)}
           />
         </AtForm>
         <AtButton
@@ -69,7 +94,9 @@ export default class Index extends Component {
           className='login-btn'
           size='normal'
           openType='getUserInfo'
-          formType='submit'
+          onClick={() => {
+            this.handleLoginClick();
+          }}
         >
           登录
         </AtButton>
