@@ -21,7 +21,7 @@ export default class FloatLayout extends Component {
         title={title}
         onClose={this.handleClose.bind(this)}
       >
-        <View>this.props.children</View>
+        <View>{this.props.children}</View>
       </AtFloatLayout>
     );
   }
