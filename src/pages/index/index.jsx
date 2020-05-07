@@ -25,12 +25,6 @@ import "./index.scss";
   })
 )
 class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false
-    };
-  }
 
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps);
@@ -45,6 +39,13 @@ class Index extends Component {
   config = {
     navigationBarTitleText: "首页"
   };
+
+  handleLoginClick()
+  {
+    Taro.navigateTo({
+      url: '/pages/login/index'
+    })
+  }
 
   render() {
     return (
@@ -69,7 +70,7 @@ class Index extends Component {
           </View>
           <View className='at-row'>
             <View className='at-col at-col-24 at-col--wrap'>
-              <AtButton type='primary' loading={this.state.loading} className='login-btn' size='normal' openType='getUserInfo'>
+              <AtButton type='primary'  className='login-btn' size='normal' openType='getUserInfo' onClick={()=>{this.handleLoginClick()}}>
                 登录
               </AtButton>
             </View>
