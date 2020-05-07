@@ -1,4 +1,34 @@
+@import "~taro-ui/dist/style/components/flex.scss";
+
 .index {
   flex-direction: column;
   width: 100%;
+}
+.container{
+  text-align: center;
+  padding: 20px;
+}
+
+.login-btn{
+  width: 250px;
+  border-radius: 20px;
+}
+
+.at-row{
+  margin-top: 50px;
+}
+
+.logo{
+  width: 146px;
+  height: 159px;
+}
+
+.title{
+  font-weight: 500;
+  font-size: 40px;
+}
+
+.desc{
+  color: #333;
+  font-size: 30px;
 }
