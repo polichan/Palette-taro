@@ -1,0 +1,27 @@
+.panel {
+  margin: 0.68267rem 0 1.19467rem;
+}
+
+.panel__title {
+  color: #6a6a77;
+  font-size: 0.88267rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  margin-bottom: 1.069rem;
+  padding-left: 1.069rem;
+}
+
+.panel__title::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0.512rem;
+  top: 50%;
+  margin-top: -0.42667rem;
+  width: 2px;
+  height: 0.85333rem;
+  background-color: #6190e8;
+  box-shadow: 0 0.14933rem 0.256rem 0 rgba(97, 144, 232, 0.2);
+  border-radius: 1px;
+}

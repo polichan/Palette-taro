@@ -74,7 +74,7 @@ export default class FloatLayout extends Component {
         onClose={this.handleClose.bind(this)}
       >
         <View>
-          <Text className='content'>{content}</Text>
+          <Text className='content-text'>{content}</Text>
         </View>
       </AtFloatLayout>
     );

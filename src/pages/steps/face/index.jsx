@@ -9,14 +9,9 @@ export default class Index extends Component {
       facesList: [],
     };
   }
-  componentWillMount() {}
+  
   componentDidMount() {}
-  componentWillReceiveProps(nextProps, nextContext) {}
-  componentWillUnmount() {}
-  componentDidShow() {}
-  componentDidHide() {}
-  componentDidCatchError() {}
-  componentDidNotFound() {}
+
 
   config = {
     navigationBarTitleText: "人脸图像"
