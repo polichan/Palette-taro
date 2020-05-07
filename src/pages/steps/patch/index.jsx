@@ -18,6 +18,8 @@ export default class Index extends Component {
   };
 
   render() {
-    return <View></View>;
+    return <View>
+        
+    </View>;
   }
 }

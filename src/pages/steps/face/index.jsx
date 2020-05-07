@@ -1,26 +1,44 @@
-import Taro , { Component } from '@tarojs/taro';
-import { View, Text , Button} from '@tarojs/components';
+import Taro, { Component } from "@tarojs/taro";
+import { View, Text, Button, Image } from "@tarojs/components";
+import FloatLayout from './../../../components/FloatLayout/index'
 
 export default class Index extends Component {
-
-   config = {
-       navigationBarTitleText: ''
+  constructor(props) {
+    super(props);
+    this.state = {
+      facesList: []
+    };
   }
+  componentWillMount() {}
+  componentDidMount() {}
+  componentWillReceiveProps(nextProps, nextContext) {}
+  componentWillUnmount() {}
+  componentDidShow() {}
+  componentDidHide() {}
+  componentDidCatchError() {}
+  componentDidNotFound() {}
 
-  state={}
+  config = {
+    navigationBarTitleText: "人脸图像"
+  };
 
-  componentWillMount () {}
-  componentDidMount () {} 
-  componentWillReceiveProps (nextProps,nextContext) {} 
-  componentWillUnmount () {} 
-  componentDidShow () {} 
-  componentDidHide () {} 
-  componentDidCatchError () {} 
-  componentDidNotFound () {} 
+  handleCloseFloatLayout(){
+      console.log(1)
+  }
   render() {
+    const facesList = this.state.facesList.slice(0);
+    // 脸部
+    const faces = facesList.map(item => {
+      return (
+        <View className='at-col' key={item.id}>
+          <Image src={item.url} ></Image>
+        </View>
+      );
+    });
     return (
-      <View>
-        
+      <View className='container'>
+          <FloatLayout isOpened onClose={()=>{this.handleCloseFloatLayout()}} title='你好'></FloatLayout>
+        <View className='at-row'>{faces}</View>
       </View>
     );
   }
