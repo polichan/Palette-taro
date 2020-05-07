@@ -1,8 +1,8 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Button, Text, Image } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
-import SchoolLogo from './../../assets/imgs/school_logo.png'
+import SchoolLogo from "./../../assets/imgs/school_logo.png";
 
 import { add, minus, asyncAdd } from "../../actions/counter";
 
@@ -24,8 +24,7 @@ import "./index.scss";
     }
   })
 )
-class Index extends Component {
-
+export default class Index extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps);
   }
@@ -40,18 +39,22 @@ class Index extends Component {
     navigationBarTitleText: "首页"
   };
 
-  handleLoginClick()
-  {
+  handleLoginClick() {
     Taro.navigateTo({
-      url: '/pages/login/index'
-    })
+      url: "/pages/login/index"
+    });
+  }
+
+  handleAboutClick()
+  {
+
   }
 
   render() {
     return (
       <View className='index'>
         <View className='container'>
-        <View className='at-row'>
+          <View className='at-row'>
             <View className='at-col at-col-24 at-col--wrap'>
               <Image src={SchoolLogo} className='logo'></Image>
             </View>
@@ -70,9 +73,29 @@ class Index extends Component {
           </View>
           <View className='at-row'>
             <View className='at-col at-col-24 at-col--wrap'>
-              <AtButton type='primary'  className='login-btn' size='normal' openType='getUserInfo' onClick={()=>{this.handleLoginClick()}}>
+              <AtButton
+                type='primary'
+                className='login-btn'
+                size='normal'
+                openType='getUserInfo'
+                onClick={() => {
+                  this.handleLoginClick();
+                }}
+              >
                 登录
               </AtButton>
+            </View>
+          </View>
+          <View className='at-row at-row-about'>
+            <View className='at-col at-col-12'>
+              <Text className='about' onClick={this.handleAboutClick.bind(this)}>
+                关于本实验
+              </Text>
+            </View>
+            <View className='at-col at-col-12'>
+              <Text className='license' onClick={this.handleAboutClick.bind(this)}>
+                用户协议
+              </Text>
             </View>
           </View>
         </View>
@@ -80,5 +103,3 @@ class Index extends Component {
     );
   }
 }
-
-export default Index;

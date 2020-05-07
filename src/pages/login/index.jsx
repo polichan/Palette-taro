@@ -13,14 +13,8 @@ export default class Index extends Component {
   }
   state = {};
 
-  componentWillMount() {}
   componentDidMount() {}
-  componentWillReceiveProps(nextProps, nextContext) {}
-  componentWillUnmount() {}
-  componentDidShow() {}
-  componentDidHide() {}
-  componentDidCatchError() {}
-  componentDidNotFound() {}
+ 
 
   config = {
     navigationBarTitleText: "登录"
@@ -46,7 +40,6 @@ export default class Index extends Component {
       if (!err) {
         // todo  Login API
       } else {
-        console.log;
         Taro.showToast({
           icon: "none",
           title: err.message

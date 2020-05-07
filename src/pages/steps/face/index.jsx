@@ -1,6 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Button, Image } from "@tarojs/components";
-import FloatLayout from './../../../components/FloatLayout/index'
 
 export default class Index extends Component {
   constructor(props) {
@@ -14,7 +13,7 @@ export default class Index extends Component {
 
 
   config = {
-    navigationBarTitleText: "人脸图像"
+    navigationBarTitleText: "选择人脸图像"
   };
 
   handleCloseFloatLayout(){
@@ -31,7 +30,6 @@ export default class Index extends Component {
     });
     return (
       <View className='container'>
-          <FloatLayout isOpened onClose={()=>{this.handleCloseFloatLayout()}} title='你好' type='patch'></FloatLayout>
         <View className='at-row'>{faces}</View>
       </View>
     );
