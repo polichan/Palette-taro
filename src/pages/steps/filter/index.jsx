@@ -9,30 +9,24 @@ export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: null,
+      filterValue: null,
       helpFloatLayoutOpened: false
     };
   }
   componentDidMount() {}
 
   config = {
-    navigationBarTitleText: "选择 Patch"
+    navigationBarTitleText: "选择 Filter"
   };
 
-  handlePatchChange(value) {
+  handleFilterChange(value) {
     this.setState({
-      value: value
+      filterValue: value
     });
   }
 
   handleConfirmClick() {
     console.log(this.state);
-  }
-
-  handleHelpClick() {
-    this.setState({
-      helpFloatLayoutOpened: true
-    });
   }
 
   handeCloseHelpFloatLayoutClick() {
@@ -41,34 +35,37 @@ export default class Index extends Component {
     });
   }
 
+  handleHelpClick() {
+    this.setState({
+      helpFloatLayoutOpened: true
+    });
+  }
+
   render() {
     const { helpFloatLayoutOpened } = this.state;
     return (
       <View className='step-container'>
         <Panel
-          title='请选择 Patch 大小'
+          title='请选择 Filter 个数'
           onHelp={this.handleHelpClick.bind(this)}
         >
           <AtRadio
             options={[
               {
-                label: "31 * 31",
-                value: "1",
-                desc: "Patch 大小为 31 x 31 像素"
+                label: "L1=10",
+                value: "1"
               },
               {
-                label: "29 * 29",
-                value: "2",
-                desc: "Patch 大小为 29 x 29 像素"
+                label: "L1=8",
+                value: "2"
               },
               {
-                label: "27 * 27",
-                value: "3",
-                desc: "Patch 大小为 27 x 27 像素"
+                label: "L1=6",
+                value: "3"
               }
             ]}
-            value={this.state.value}
-            onClick={this.handlePatchChange.bind(this)}
+            value={this.state.filterValue}
+            onClick={this.handleFilterChange.bind(this)}
           />
           <ATButton
             type='primary'
@@ -85,7 +82,7 @@ export default class Index extends Component {
           onClose={() => {
             this.handeCloseHelpFloatLayoutClick();
           }}
-          type='patch'
+          type='filter'
         ></FloatLayout>
       </View>
     );

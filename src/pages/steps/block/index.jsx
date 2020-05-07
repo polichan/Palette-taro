@@ -9,30 +9,24 @@ export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: null,
+      blockValue: null,
       helpFloatLayoutOpened: false
     };
   }
   componentDidMount() {}
 
   config = {
-    navigationBarTitleText: "选择 Patch"
+    navigationBarTitleText: "选择 Block"
   };
 
-  handlePatchChange(value) {
+  handleBlockChange(value) {
     this.setState({
-      value: value
+        blockValue: value
     });
   }
 
   handleConfirmClick() {
     console.log(this.state);
-  }
-
-  handleHelpClick() {
-    this.setState({
-      helpFloatLayoutOpened: true
-    });
   }
 
   handeCloseHelpFloatLayoutClick() {
@@ -41,34 +35,30 @@ export default class Index extends Component {
     });
   }
 
+  handleHelpClick() {
+    this.setState({
+      helpFloatLayoutOpened: true
+    });
+  }
+
   render() {
     const { helpFloatLayoutOpened } = this.state;
     return (
       <View className='step-container'>
-        <Panel
-          title='请选择 Patch 大小'
-          onHelp={this.handleHelpClick.bind(this)}
-        >
+        <Panel title='请选择卷积层数' onHelp={this.handleHelpClick.bind(this)}>
           <AtRadio
             options={[
               {
-                label: "31 * 31",
-                value: "1",
-                desc: "Patch 大小为 31 x 31 像素"
+                label: "5 * 5",
+                value: "1"
               },
               {
-                label: "29 * 29",
-                value: "2",
-                desc: "Patch 大小为 29 x 29 像素"
-              },
-              {
-                label: "27 * 27",
-                value: "3",
-                desc: "Patch 大小为 27 x 27 像素"
+                label: "7 * 7",
+                value: "2"
               }
             ]}
-            value={this.state.value}
-            onClick={this.handlePatchChange.bind(this)}
+            value={this.state.blockValue}
+            onClick={this.handleBlockChange.bind(this)}
           />
           <ATButton
             type='primary'
@@ -85,7 +75,7 @@ export default class Index extends Component {
           onClose={() => {
             this.handeCloseHelpFloatLayoutClick();
           }}
-          type='patch'
+          type='block'
         ></FloatLayout>
       </View>
     );

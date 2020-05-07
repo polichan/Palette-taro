@@ -21,9 +21,8 @@ export default class Index extends Component {
       console.log(1)
   }
   render() {
-    const facesList = this.state.facesList.slice(0);
     // 脸部
-    const faces = facesList.map(item => {
+    const faces = this.state.facesList.map(item => {
       return (
         <View className='at-col' key={item.id}>
           <Image src={item.url} ></Image>

@@ -17,12 +17,23 @@ const store = configStore()
 
 class App extends Component {
 
+  componentDidMount () {}
+
+  componentDidShow () {}
+
+  componentDidHide () {}
+
+  componentDidCatchError () {}
+
   config = {
     pages: [
       'pages/index/index',
       'pages/login/index',
       'pages/steps/face/index',
-      'pages/steps/patch/index'
+      'pages/steps/patch/index',
+      'pages/steps/filter/index',
+      'pages/steps/convolution/index',
+      'pages/steps/block/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -31,14 +42,6 @@ class App extends Component {
       navigationBarTextStyle: 'black'
     }
   }
-
-  componentDidMount () {}
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数

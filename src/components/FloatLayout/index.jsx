@@ -12,9 +12,6 @@ export default class FloatLayout extends Component {
       content: null
     };
   }
-  state = {};
-
-
 
   componentDidMount() {
     switch (this.props.type) {
@@ -57,6 +54,10 @@ export default class FloatLayout extends Component {
     }
   }
 
+  static options = {
+    addGlobalClass: true
+  }
+
   /**
    * close 浮动层
    */
@@ -69,6 +70,7 @@ export default class FloatLayout extends Component {
     const { title, content } = this.state;
     return (
       <AtFloatLayout
+        className='custom-float-layout'
         isOpened={isOpened}
         title={title}
         onClose={this.handleClose.bind(this)}
