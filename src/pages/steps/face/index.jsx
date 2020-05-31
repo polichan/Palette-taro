@@ -8,8 +8,11 @@ export default class Index extends Component {
       facesList: [],
     };
   }
-  
-  componentDidMount() {}
+
+  componentWillMount()
+  {
+    
+  }
 
 
   config = {

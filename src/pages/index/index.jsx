@@ -35,7 +35,7 @@ export default class Index extends Component {
   handleBegin()
   {
     Taro.navigateTo({
-      url: '/pages/steps'
+      url: '/pages/steps/workflow/index'
     })
   }
 
