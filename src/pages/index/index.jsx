@@ -47,14 +47,13 @@ export default class Index extends Component {
     let page = null;
     switch (type) {
       case "about":
-        page = "pages/about/index";
+        page = "/pages/about/index";
         break;
       case "user-license":
-        page = "pages/license/user/index";
+        page = "/pages/license/index?type=user";
         break;
       case "open-source":
-        page = "pages/license/open-source/index";
-        break;
+        page = "/pages/license/index?type=opensource";
     }
     Taro.navigateTo({
       url: page

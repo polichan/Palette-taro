@@ -31,7 +31,9 @@ class App extends Component {
       'pages/steps/patch/index',
       'pages/steps/filter/index',
       'pages/steps/convolution/index',
-      'pages/steps/block/index'
+      'pages/steps/block/index',
+      'pages/steps/workflow/index',
+      'pages/license/index'
     ],
     window: {
       backgroundTextStyle: 'light',
