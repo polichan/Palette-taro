@@ -1,44 +1,29 @@
 import Taro from "@tarojs/taro";
-import { HTTP_STATUS } from "./config";
 
 const customInterceptor = chain => {
   const requestParams = chain.requestParams;
 
   return chain.proceed(requestParams).then(res => {
-    // 只要请求成功，不管返回什么状态码，都走这个回调
-    if (res.statusCode === HTTP_STATUS.NOT_FOUND) {
+    const resultBody = res.data;
+    if (resultBody.code === 401) {
+      if (
+        resultBody.message ==
+        "No active account found with the given credentials"
+      ) {
+        return resultBody
+      } else {
+        Taro.showToast({
+          title: "您已退出",
+          icon: "none"
+        });
+      }
+    } else if (resultBody.code >= 400) {
       Taro.showToast({
-        icon: "none",
-        title: "请求有误"
-      });
-    } else if (res.statusCode === HTTP_STATUS.BAD_GATEWAY) {
-      Taro.showToast({
-        icon: "none",
-        title: "服务端错误"
-      });
-    } else if (res.statusCode === HTTP_STATUS.FORBIDDEN) {
-      Taro.setStorageSync("Authorization", "");
-      // login
-      // TODO 根据自身业务修改
-      return Promise.reject("没有权限访问");
-    } else if (res.statusCode === HTTP_STATUS.AUTHENTICATE) {
-      // 登录操作
-      Taro.showToast({
-        icon: "none",
-        title: "请先登录"
-      });
-      Taro.setStorageSync("Authorization", "");
-      // login
-      return Promise.reject("需要鉴权");
-    } else if (res.statusCode === HTTP_STATUS.CLIENT_ERROR) {
-      Taro.showToast({
-        title: "请求错误",
+        title: "请求有误",
         icon: "none"
       });
-    } else if (res.statusCode === HTTP_STATUS.NO_CONTENT) {
-      return res.data;
-    } else if (res.statusCode === HTTP_STATUS.SUCCESS) {
-      return res.data;
+    } else {
+      return resultBody;
     }
   });
 };

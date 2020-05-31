@@ -3,27 +3,11 @@ import { View, Text, Image } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
 import SchoolLogo from "./../../assets/imgs/school_logo.png";
-
-import { add, minus, asyncAdd } from "../../actions/counter";
-
 import "./index.scss";
 
-@connect(
-  ({ counter }) => ({
-    counter
-  }),
-  dispatch => ({
-    add() {
-      dispatch(add());
-    },
-    dec() {
-      dispatch(minus());
-    },
-    asyncAdd() {
-      dispatch(asyncAdd());
-    }
-  })
-)
+@connect(({ login }) => ({
+  login
+}))
 export default class Index extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps);
@@ -48,30 +32,37 @@ export default class Index extends Component {
     });
   }
 
+  handleBegin()
+  {
+    Taro.navigateTo({
+      url: '/pages/steps'
+    })
+  }
+
   /**
    * 底部文字跳转
-   * @param {*} type 
+   * @param {*} type
    */
-  handleBottomTextClick(type)
-  {
+  handleBottomTextClick(type) {
     let page = null;
     switch (type) {
-      case 'about':
-        page = 'pages/about/index'
+      case "about":
+        page = "pages/about/index";
         break;
-      case 'user-license':
-        page = 'pages/license/user/index'
+      case "user-license":
+        page = "pages/license/user/index";
         break;
-      case 'open-source':
-        page = 'pages/license/open-source/index'
+      case "open-source":
+        page = "pages/license/open-source/index";
         break;
     }
     Taro.navigateTo({
       url: page
-    })
+    });
   }
 
   render() {
+    const { isLogin } = this.props.login;
     return (
       <View className='index'>
         <View className='container'>
@@ -94,32 +85,54 @@ export default class Index extends Component {
           </View>
           <View className='at-row'>
             <View className='at-col at-col-24 at-col--wrap'>
-              <AtButton
-                type='primary'
-                className='login-btn'
-                size='normal'
-                openType='getUserInfo'
-                onClick={() => {
-                  this.handleLoginClick();
-                }}
-              >
-                登录
-              </AtButton>
+              {isLogin ? (
+                <AtButton
+                  type='primary'
+                  className='login-btn'
+                  size='normal'
+                  onClick={() => {
+                    this.handleBegin();
+                  }}
+                >
+                  进行实验
+                </AtButton>
+              ) : (
+                <AtButton
+                  type='primary'
+                  className='login-btn'
+                  size='normal'
+                  openType='getUserInfo'
+                  onClick={() => {
+                    this.handleLoginClick();
+                  }}
+                >
+                  登录
+                </AtButton>
+              )}
             </View>
           </View>
           <View className='at-row at-row-about'>
             <View className='at-col at-col-2'>
-              <Text className='user-license bottom-text' onClick={this.handleBottomTextClick.bind(this, 'user-license')}>
+              <Text
+                className='user-license bottom-text'
+                onClick={this.handleBottomTextClick.bind(this, "user-license")}
+              >
                 用户协议
               </Text>
             </View>
             <View className='at-col at-col-2'>
-              <Text className='about bottom-text' onClick={this.handleBottomTextClick.bind(this, 'about')}>
+              <Text
+                className='about bottom-text'
+                onClick={this.handleBottomTextClick.bind(this, "about")}
+              >
                 关于本实验
               </Text>
             </View>
             <View className='at-col at-col-2'>
-              <Text className='open-source-license bottom-text' onClick={this.handleBottomTextClick.bind(this, 'open-source')}>
+              <Text
+                className='open-source-license bottom-text'
+                onClick={this.handleBottomTextClick.bind(this, "open-source")}
+              >
                 开源协议
               </Text>
             </View>

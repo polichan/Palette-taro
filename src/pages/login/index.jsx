@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Button } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import { AtForm, AtInput, AtButton } from "taro-ui";
 import { connect } from "@tarojs/redux";
 import "./index.scss";
@@ -44,7 +44,12 @@ export default class Index extends Component {
       if (canLogin) {
         this.props.dispatch({
           type: "login/login",
-          payload: { data: params }
+          payload: { data: params },
+          onLoginSuccessfully: () => {
+            Taro.redirectTo({
+              url: "/pages/index/index"
+            });
+          }
         });
       } else {
         Taro.showToast({
@@ -86,7 +91,6 @@ export default class Index extends Component {
             value={this.state.codeNumber}
             onChange={this.handleCodeNumberChange.bind(this)}
           />
-
           <AtInput
             required
             name='password'

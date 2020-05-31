@@ -1,10 +1,11 @@
+import Taro from "@tarojs/taro";
 import * as loginApi from "./service";
 
 export default {
   namespace: "login",
   state: {
-    userInfo: null,
     token: null,
+    refresh: null,
     isLogin: false
   },
 
@@ -14,19 +15,25 @@ export default {
      * @param {*} param0
      * @param {*} param1
      */
-    *login({ payload }, { call, put }) {
+    *login({ payload, onLoginSuccessfully }, { call, put }) {
       const res = yield call(loginApi.login, payload.data);
-      console.log(res)
-      // 设置 token
-    //   yield put({
-    //     type: "save",
-    //     payload: {
-    //       userInfo: user,
-    //       token: token,
-    //       isLogin: true
-    //     }
-    //   });
-    },
+      if (res.status) {
+        yield put({
+          type: "save",
+          payload: {
+            token: res.data.access,
+            refresh: res.data.refresh,
+            isLogin: true
+          }
+        });
+        onLoginSuccessfully();
+      } else {
+        Taro.showToast({
+          title: "学号或密码不正确",
+          icon: "none"
+        });
+      }
+    }
   },
 
   reducers: {
