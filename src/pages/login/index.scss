@@ -8,3 +8,183 @@
 .container {
   padding: 20px;
 }
+
+.authorization-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.authorization-header {
+  width: 750px;
+  height: 580px;
+  background-image: url(https://img-asset.chemm.com/assets/wcjs/img/authorization-bg.jpg);
+  background-size: 100% 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 5px solid rgba(255,255,255,0.2);
+}
+
+.header-name {
+  font-size: 40px;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.authorization-header-wave1 {
+  background-image: url(https://img-asset.chemm.com/assets/wcjs/img/authorization-wave1.png);
+  background-size: 1920px 130px;
+  width: 3840px;
+  height: 130px;
+  position: absolute;
+  left: -350px;
+  bottom: 0;
+  animation: wave1 34s infinite linear;
+}
+
+.authorization-header-wave2 {
+  background-image: url(https://img-asset.chemm.com/assets/wcjs/img/authorization-wave2.png);
+  background-size: 1262px 144px;
+  width: 2524px;
+  height: 144px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  animation: wave2 50s infinite linear;
+}
+
+.authorization-header-wave3 {
+  background-image: url(https://img-asset.chemm.com/assets/wcjs/img/authorization-wave3.png);
+  background-size: 1418px 88px;
+  width: 2836px;
+  height: 88px;
+  position: absolute;
+  left: -510px;
+  bottom: 0;
+  animation: wave3 28s infinite linear;
+}
+
+@-webkit-keyframes wave1 {
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+      transform: translate(-1920px,0);
+  }
+}
+
+@keyframes wave1 {
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+      transform: translate(-1920px,0);
+  }
+}
+
+@-webkit-keyframes wave2 {
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+      transform: translate(-1262px,0);
+  }
+}
+
+@keyframes wave2 {
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+      transform: translate(-1262px,0);
+  }
+}
+
+@-webkit-keyframes wave3 {
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+      transform: translate(-1418px,0);
+  }
+}
+
+@keyframes wave3 {
+  0% {
+      transform: translate(0,0);
+  }
+
+  100% {
+      transform: translate(-1418px,0);
+  }
+}
+
+.authorization-main {
+  flex: 1;
+  width: 100%;
+  position: relative;
+}
+
+.getPhone,.getUserInfo {
+  width: 750px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.4s,-webkit-transform 0.4s;
+  transition: transform 0.4s,opacity 0.4s;
+  transition: transform 0.4s,opacity 0.4s,-webkit-transform 0.4s;
+}
+
+.getPhone.hide {
+  transform: translate(-400px,0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.getUserInfo {
+  transform: translate(400px,0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.getUserInfo.show {
+  transform: translate(0,0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.main-content {
+  font-size: 32px;
+  color: #4A4A4A;
+  margin-top: 66px;
+}
+
+.authorize-btn {
+  width: 544px;
+  height: 92px;
+  box-shadow: 0px 8px 26px 0px rgba(0,136,241,0.3);
+  border-radius: 46px;
+  margin-top: 126px;
+}
+
+.authorize-tips {
+  font-size: 26px;
+  color: #CCCCCC;
+  display: block;
+  margin-bottom: 62px;
+}

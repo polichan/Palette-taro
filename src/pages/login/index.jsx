@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Text} from "@tarojs/components";
 import { AtForm, AtInput, AtButton } from "taro-ui";
 import { connect } from "@tarojs/redux";
 import "./index.scss";
@@ -81,6 +81,26 @@ export default class Index extends Component {
     const isLoginLoading = this.props.loading.effects["login/login"];
     return (
       <View className='container'>
+        <View className='authorization-page'>
+        <View className='authorization-wrapper flex flex-direction-column flex-alignItems-center'>
+          <View className='authorization-header flex flex-direcation-column flex-center'>
+            <View className='authorization-header-wave1'></View>
+            <View className='authorization-header-wave2'></View>
+            <View className='authorization-header-wave3'></View>
+          </View>
+          <View className='authorization-main'>
+            <View className='flex flex-direction-column flex-alignItems-center'>
+              <View className='main-content flex flex-direction-column flex-alignItems-center'>
+                <Text>众多功能，尽在登陆后</Text>
+                <AtButton openType='getUserInfo' loading={isLoginLoading} className='authorize-btn authorize-btn c-btn-linergradient-blue' onGetUserInfo={this.handleLoginClick.bind(this)}>
+                  微信快速登陆
+                </AtButton>
+              </View>
+            </View>
+          </View>
+        <Text className='authorize-tips'>登录注册即代表同意用户使用协议</Text>
+        </View>
+      </View>
         <AtForm>
           <AtInput
             required
