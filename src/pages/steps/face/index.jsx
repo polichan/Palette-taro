@@ -20,8 +20,9 @@ export default class Index extends Component {
   };
 
   handleCloseFloatLayout(){
-      console.log(1)
+      
   }
+  
   render() {
     // 脸部
     const faces = this.state.facesList.map(item => {
