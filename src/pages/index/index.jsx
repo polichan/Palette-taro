@@ -2,30 +2,19 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
-import SchoolLogo from "./../../assets/imgs/school_logo.png";
+import * as CONSTANTS from '@/constants'
+import SchoolLogo from "../../assets/imgs/school_logo.png";
 import "./index.scss";
 
 @connect(({ login }) => ({
   login
 }))
 export default class Index extends Component {
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps);
-  }
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
 
   config = {
     navigationBarTitleText: "首页"
   };
 
-  /**
-   * 登录事件
-   */
   handleLoginClick() {
     Taro.navigateTo({
       url: "/pages/login/index"
@@ -44,19 +33,8 @@ export default class Index extends Component {
    * @param {*} type
    */
   handleBottomTextClick(type) {
-    let page = null;
-    switch (type) {
-      case "about":
-        page = "/pages/about/index";
-        break;
-      case "user-license":
-        page = "/pages/license/index?type=user";
-        break;
-      case "open-source":
-        page = "/pages/license/index?type=opensource";
-    }
     Taro.navigateTo({
-      url: page
+      url: type == 'about' ? "/pages/about/index" : `/pages/license/index?type=${type}`
     });
   }
 
@@ -110,16 +88,16 @@ export default class Index extends Component {
               )}
             </View>
           </View>
-          <View className='at-row at-row-about'>
-            <View className='at-col at-col-2'>
+          <View className='about-box'>
+            <View className='at-col'>
               <Text
                 className='user-license bottom-text'
-                onClick={this.handleBottomTextClick.bind(this, "user-license")}
+                onClick={this.handleBottomTextClick.bind(this, CONSTANTS.LICENSE_TYPE.USER_LICENSE)}
               >
                 用户协议
               </Text>
             </View>
-            <View className='at-col at-col-2'>
+            <View className='at-col'>
               <Text
                 className='about bottom-text'
                 onClick={this.handleBottomTextClick.bind(this, "about")}
@@ -127,10 +105,10 @@ export default class Index extends Component {
                 关于本实验
               </Text>
             </View>
-            <View className='at-col at-col-2'>
+            <View className='at-col'>
               <Text
                 className='open-source-license bottom-text'
-                onClick={this.handleBottomTextClick.bind(this, "open-source")}
+                onClick={this.handleBottomTextClick.bind(this, CONSTANTS.LICENSE_TYPE.OPEN_SOURCE_LICENSE)}
               >
                 开源协议
               </Text>

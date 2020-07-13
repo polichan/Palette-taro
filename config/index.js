@@ -34,6 +34,13 @@ const config = {
   plugins: [
     '@tarojs/plugin-sass',
   ],
+  alias: {
+    '@/components': 'src/components',
+    '@/utils': 'src/utils',
+    "@/imgs":'src/assets/imgs',
+    "@/constants": 'src/constants',
+    "@/models": 'src/models'
+  },
   mini: {
     postcss: {
       autoprefixer: {

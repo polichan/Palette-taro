@@ -1,16 +1,26 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Image } from "@tarojs/components";
-import { connect } from "@tarojs/redux";
+import { View } from "@tarojs/components";
+import Article from '@/components/Article'
+import * as CONSTANTS from '@/constants'
 import "./index.scss";
 
-@connect(({ login }) => ({
-  login
-}))
 export default class License extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      licenseType: "user"
+      licenseType: "user",
+      data:[
+        {
+          key: CONSTANTS.LICENSE_TYPE.USER_LICENSE,
+          title: "用户协议",
+          sections: []
+        },
+        {
+          key: CONSTANTS.LICENSE_TYPE.OPEN_SOURCE_LICENSE,
+          title: "开源协议",
+          sections: []
+        }
+      ]
     };
   }
   
@@ -20,25 +30,16 @@ export default class License extends Component {
       licenseType: licenseType
     });
     Taro.setNavigationBarTitle({
-      title: licenseType === "user" ? "用户协议" : "开源协议"
+      title: licenseType
     });
   }
 
-  renderUserLicense() {
-    return <Text>用户协议</Text>;
-  }
-
-  renderOpenSourceLicense() {
-    return <Text>开源协议</Text>;
-  }
-
   render() {
-    const { licenseType } = this.state;
+    const { licenseType, data } = this.state;
+    const license = data.filter((item) => { return item.key == licenseType})
+    console.log(license)
     return (
       <View className='license-page'>
-        {licenseType === "user"
-          ? this.renderUserLicense()
-          : this.renderOpenSourceLicense()}
       </View>
     );
   }

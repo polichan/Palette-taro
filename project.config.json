@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "Palette-taro",
   "description": "",
-  "appid": "touristappid",
+  "appid": "wx48445c750d2fcfbc",
   "setting": {
     "urlCheck": true,
     "es6": false,

@@ -33,7 +33,8 @@ class App extends Component {
       'pages/steps/convolution/index',
       'pages/steps/block/index',
       'pages/steps/workflow/index',
-      'pages/license/index'
+      'pages/license/index',
+      'pages/about/index'
     ],
     window: {
       backgroundTextStyle: 'light',
