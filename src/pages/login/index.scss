@@ -172,6 +172,7 @@
   font-size: 32px;
   color: #4A4A4A;
   margin-top: 66px;
+  width: 100%;
 }
 
 .authorize-btn {
@@ -190,8 +191,12 @@
 }
 
 .input_name{
-  max-width: 200px;
+  min-width: 400px !important;
   text-align: left;
   color: #8b9399;
   margin-left: 20px;
+}
+
+page{
+  width: 100%;
 }

@@ -102,7 +102,8 @@ export default class Index extends Component {
                     <Input
                       onInput={this.handlePasswordChange.bind(this)}
                       className='input_name'
-                      maxLength='10'
+                      maxLength='16'
+                      type='password'
                       value={this.state.password}
                     ></Input>
                   </FormBox>

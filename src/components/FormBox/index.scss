@@ -1,3 +1,6 @@
+.form-box {
+  width: 100%;
+}
 
 .form-item {
   height: 108px;
@@ -27,15 +30,13 @@
   font-size: 17px;
 }
 
-.form-item .input_name {
-  max-width: 200px;
-  text-align: right;
-  color: #8b9399;
-}
-
 .form-item .info-item {
   display: flex;
   align-items: center;
   color: #999;
   font-size: 30px;
+}
+
+page {
+  width: 100%;
 }
