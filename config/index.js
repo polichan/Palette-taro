@@ -31,6 +31,9 @@ const config = {
   },
   defineConstants: {
   },
+  plugins: [
+    '@tarojs/plugin-sass',
+  ],
   mini: {
     postcss: {
       autoprefixer: {
