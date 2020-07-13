@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text} from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { AtForm, AtInput, AtButton } from "taro-ui";
+import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
 import "./index.scss";
 
@@ -81,58 +82,54 @@ export default class Index extends Component {
     const isLoginLoading = this.props.loading.effects["login/login"];
     return (
       <View className='container'>
+        <NavBar background='rgba(255,255,255,0.0)' back />
         <View className='authorization-page'>
-        <View className='authorization-wrapper flex flex-direction-column flex-alignItems-center'>
-          <View className='authorization-header flex flex-direcation-column flex-center'>
-            <View className='authorization-header-wave1'></View>
-            <View className='authorization-header-wave2'></View>
-            <View className='authorization-header-wave3'></View>
-          </View>
-          <View className='authorization-main'>
-            <View className='flex flex-direction-column flex-alignItems-center'>
-              <View className='main-content flex flex-direction-column flex-alignItems-center'>
-                <Text>众多功能，尽在登陆后</Text>
-                <AtButton openType='getUserInfo' loading={isLoginLoading} className='authorize-btn authorize-btn c-btn-linergradient-blue' onGetUserInfo={this.handleLoginClick.bind(this)}>
-                  微信快速登陆
-                </AtButton>
+          <View className='authorization-wrapper flex flex-direction-column flex-alignItems-center'>
+            <View className='authorization-header flex flex-direcation-column flex-center'>
+              <View className='authorization-header-wave1'></View>
+              <View className='authorization-header-wave2'></View>
+              <View className='authorization-header-wave3'></View>
+            </View>
+            <View className='authorization-main'>
+              <View className='flex flex-direction-column flex-alignItems-center'>
+                <View className='main-content flex flex-direction-column flex-alignItems-center'>
+                  <AtForm>
+                    <AtInput
+                      required
+                      name='codeNumber'
+                      title='学号'
+                      type='text'
+                      placeholder='请输入您的学号'
+                      value={this.state.codeNumber}
+                      onChange={this.handleCodeNumberChange.bind(this)}
+                    />
+                    <AtInput
+                      required
+                      name='password'
+                      title='密码'
+                      type='password'
+                      placeholder='请输入您的密码'
+                      value={this.state.password}
+                      onChange={this.handlePasswordChange.bind(this)}
+                    />
+                  </AtForm>
+                  <AtButton
+                    openType='getUserInfo'
+                    loading={isLoginLoading}
+                    className='authorize-btn authorize-btn c-btn-linergradient-blue'
+                    onGetUserInfo={this.handleLoginClick.bind(this)}
+                    onClick={() => {
+                      this.handleLoginClick();
+                    }}
+                  >
+                    立即登陆
+                  </AtButton>
+                </View>
               </View>
             </View>
+            <Text className='authorize-tips'>登录即代表同意用户使用协议</Text>
           </View>
-        <Text className='authorize-tips'>登录注册即代表同意用户使用协议</Text>
         </View>
-      </View>
-        <AtForm>
-          <AtInput
-            required
-            name='codeNumber'
-            title='学号'
-            type='text'
-            placeholder='请输入您的学号'
-            value={this.state.codeNumber}
-            onChange={this.handleCodeNumberChange.bind(this)}
-          />
-          <AtInput
-            required
-            name='password'
-            title='密码'
-            type='password'
-            placeholder='请输入您的密码'
-            value={this.state.password}
-            onChange={this.handlePasswordChange.bind(this)}
-          />
-        </AtForm>
-        <AtButton
-          type='primary'
-          className='login-btn'
-          size='normal'
-          openType='getUserInfo'
-          loading={isLoginLoading}
-          onClick={() => {
-            this.handleLoginClick();
-          }}
-        >
-          登录
-        </AtButton>
       </View>
     );
   }

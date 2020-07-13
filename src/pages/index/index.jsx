@@ -1,8 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
+import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
-import * as CONSTANTS from "@/constants/index"
+import * as CONSTANTS from "@/constants/index";
 import SchoolLogo from "../../assets/imgs/school_logo.png";
 import "./index.scss";
 
@@ -10,7 +11,6 @@ import "./index.scss";
   login
 }))
 export default class Index extends Component {
-
   config = {
     navigationBarTitleText: "首页"
   };
@@ -21,11 +21,10 @@ export default class Index extends Component {
     });
   }
 
-  handleBegin()
-  {
+  handleBegin() {
     Taro.navigateTo({
-      url: '/pages/steps/workflow/index'
-    })
+      url: "/pages/steps/workflow/index"
+    });
   }
 
   /**
@@ -34,7 +33,10 @@ export default class Index extends Component {
    */
   handleBottomTextClick(type) {
     Taro.navigateTo({
-      url: type == 'about' ? "/pages/about/index" : `/pages/license/index?type=${type}`
+      url:
+        type == "about"
+          ? "/pages/about/index"
+          : `/pages/license/index?type=${type}`
     });
   }
 
@@ -42,6 +44,7 @@ export default class Index extends Component {
     const { isLogin } = this.props.login;
     return (
       <View className='index'>
+        <NavBar background='#fff' />
         <View className='container'>
           <View className='at-row'>
             <View className='at-col at-col-24 at-col--wrap'>
@@ -65,7 +68,7 @@ export default class Index extends Component {
               {isLogin ? (
                 <AtButton
                   type='primary'
-                  className='login-btn'
+                  className='login-btn c-btn-linergradient-blue'
                   size='normal'
                   onClick={() => {
                     this.handleBegin();
@@ -76,7 +79,7 @@ export default class Index extends Component {
               ) : (
                 <AtButton
                   type='primary'
-                  className='login-btn'
+                  className='login-btn c-btn-linergradient-blue'
                   size='normal'
                   openType='getUserInfo'
                   onClick={() => {
@@ -92,9 +95,12 @@ export default class Index extends Component {
             <View className='at-col'>
               <Text
                 className='user-license bottom-text'
-                onClick={this.handleBottomTextClick.bind(this, CONSTANTS.LICENSE_TYPE.USER_LICENSE)}
+                onClick={this.handleBottomTextClick.bind(
+                  this,
+                  CONSTANTS.LICENSE_TYPE.USER_LICENSE
+                )}
               >
-                用户协议
+                {CONSTANTS.LICENSE_TYPE.USER_LICENSE}
               </Text>
             </View>
             <View className='at-col'>
@@ -108,9 +114,12 @@ export default class Index extends Component {
             <View className='at-col'>
               <Text
                 className='open-source-license bottom-text'
-                onClick={this.handleBottomTextClick.bind(this, CONSTANTS.LICENSE_TYPE.OPEN_SOURCE_LICENSE)}
+                onClick={this.handleBottomTextClick.bind(
+                  this,
+                  CONSTANTS.LICENSE_TYPE.OPEN_SOURCE_LICENSE
+                )}
               >
-                开源协议
+                {CONSTANTS.LICENSE_TYPE.OPEN_SOURCE_LICENSE}
               </Text>
             </View>
           </View>

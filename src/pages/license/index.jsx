@@ -2,17 +2,18 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import Article from '@/components/Article'
 import * as CONSTANTS from '@/constants'
+import NavBar from '@/components/NavBar'
 import "./index.scss";
 
 export default class License extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      licenseType: "user",
+      licenseType: "",
       data:[
         {
           key: CONSTANTS.LICENSE_TYPE.USER_LICENSE,
-          title: "用户协议",
+          title: "用户使用协议",
           sections: [
             "欢迎您使用人脸识别虚拟仿真实验", 
             "重要提示：请您仔细阅读以下条款，并确认您已完全理解本协议之规定，尤其是免除及限制责任的条款、知识产权条款、法律适用及争议解决条款。",
@@ -67,6 +68,7 @@ export default class License extends Component {
     const license = data.filter((item) => { return item.key == licenseType})
     return (
       <View className='license-page'>
+        <NavBar background='#fff' back home title={this.state.licenseType} />
         {
           license.length == 0 ? null : (
             <Article title={license[0].title} sections={license[0].sections}></Article>

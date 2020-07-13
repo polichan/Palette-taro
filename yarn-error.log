@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/Cellar/node/14.3.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add @components/Article --silent --no-progress
+  /usr/local/Cellar/node/14.3.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add lodash.isFunction
 
 PATH: 
-  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/richter/Documents/Projects/Palette/Palette-taro/node_modules/.bin:/var/folders/9k/cn0q732d2l9g4mp76lcl0yr00000gn/T/yarn--1594613832979-0.4647956791416503:/Users/richter/Documents/Projects/Palette/Palette-taro/node_modules/.bin:/Users/richter/.config/yarn/link/node_modules/.bin:/usr/local/Cellar/node/14.3.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/14.3.0/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/Cellar/node/14.3.0/bin/node_modules/npm/bin/node-gyp-bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/opt/coreutils/libexec/gnubin
+  /usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/opt/coreutils/libexec/gnubin
 
 Yarn version: 
   1.22.4
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/@components%2fArticle: Not found
+  Error: https://registry.npm.taobao.org/lodash.isFunction: Not found
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66987:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140748:22)
       at Request.emit (events.js:315:20)

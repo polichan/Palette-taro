@@ -24,7 +24,8 @@
 		"dev:h5": "npm run build:h5 -- --watch",
 		"dev:rn": "npm run build:rn -- --watch",
 		"dev:qq": "npm run build:qq -- --watch",
-		"dev:quickapp": "npm run build:quickapp -- --watch"
+		"dev:quickapp": "npm run build:quickapp -- --watch",
+		"tep": "node template"
 	},
 	"author": "",
 	"license": "MIT",
@@ -47,6 +48,7 @@
 		"dva-core": "^2.0.2",
 		"dva-loading": "^3.0.20",
 		"dvajs": "^0.1.8",
+		"lodash.isfunction": "^3.0.9",
 		"nerv-devtools": "^1.5.7",
 		"nervjs": "^1.5.7",
 		"redux": "^4.0.0",
