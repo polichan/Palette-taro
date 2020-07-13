@@ -1,8 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View, Text, Input } from "@tarojs/components";
 import { AtForm, AtInput, AtButton } from "taro-ui";
 import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
+import FormBox from "@/components/FormBox";
 import "./index.scss";
 
 @connect(({ login, loading }) => ({
@@ -10,14 +11,10 @@ import "./index.scss";
   loading
 }))
 export default class Index extends Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      codeNumber: null,
-      password: null
-    };
-  }
-  state = {};
+  state = {
+    codeNumber: null,
+    password: null
+  };
 
   componentDidMount() {}
 
@@ -25,15 +22,15 @@ export default class Index extends Component {
     navigationBarTitleText: "登录"
   };
 
-  handlePasswordChange(value) {
+  handlePasswordChange(e) {
     this.setState({
-      password: value
+      password: e.detail.value
     });
   }
 
-  handleCodeNumberChange(value) {
+  handleCodeNumberChange(e) {
     this.setState({
-      codeNumber: value
+      codeNumber: e.detail.value
     });
   }
 
@@ -93,26 +90,22 @@ export default class Index extends Component {
             <View className='authorization-main'>
               <View className='flex flex-direction-column flex-alignItems-center'>
                 <View className='main-content flex flex-direction-column flex-alignItems-center'>
-                  <AtForm>
-                    <AtInput
-                      required
-                      name='codeNumber'
-                      title='学号'
-                      type='text'
-                      placeholder='请输入您的学号'
+                  <FormBox label='学号'>
+                    <Input
+                      onInput={this.handleCodeNumberChange.bind(this)}
+                      className='input_name'
+                      maxLength='10'
                       value={this.state.codeNumber}
-                      onChange={this.handleCodeNumberChange.bind(this)}
-                    />
-                    <AtInput
-                      required
-                      name='password'
-                      title='密码'
-                      type='password'
-                      placeholder='请输入您的密码'
+                    ></Input>
+                  </FormBox>
+                  <FormBox label='密码'>
+                    <Input
+                      onInput={this.handlePasswordChange.bind(this)}
+                      className='input_name'
+                      maxLength='10'
                       value={this.state.password}
-                      onChange={this.handlePasswordChange.bind(this)}
-                    />
-                  </AtForm>
+                    ></Input>
+                  </FormBox>
                   <AtButton
                     openType='getUserInfo'
                     loading={isLoginLoading}

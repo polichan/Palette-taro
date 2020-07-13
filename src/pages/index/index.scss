@@ -37,13 +37,12 @@
 }
 
 .about-box{
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50px;
+  right: 50px;
   bottom: 50px;
 }
 
