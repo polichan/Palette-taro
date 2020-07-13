@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
-import * as CONSTANTS from '@/constants'
+import * as CONSTANTS from "@/constants/index"
 import SchoolLogo from "../../assets/imgs/school_logo.png";
 import "./index.scss";
 

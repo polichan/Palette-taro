@@ -37,9 +37,13 @@ export default class License extends Component {
   render() {
     const { licenseType, data } = this.state;
     const license = data.filter((item) => { return item.key == licenseType})
-    console.log(license)
     return (
       <View className='license-page'>
+        {
+          license.length == 0 ? null : (
+            <Article title={license[0].title} sections={license[0].sections}></Article>
+          )
+        }
       </View>
     );
   }
