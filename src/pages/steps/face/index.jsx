@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Button, Image } from "@tarojs/components";
+import StepPage from '@/components/StepPage';
 
 export default class Index extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export default class Index extends Component {
   handleCloseFloatLayout(){
       
   }
-  
+
   render() {
     // 脸部
     const faces = this.state.facesList.map(item => {
@@ -34,7 +35,9 @@ export default class Index extends Component {
     });
     return (
       <View className='container'>
+        <StepPage>
         <View className='at-row'>{faces}</View>
+        </StepPage>
       </View>
     );
   }

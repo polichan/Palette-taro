@@ -6,7 +6,7 @@ export default {
   state: {
     token: null,
     refresh: null,
-    isLogin: false
+    isLogin: true
   },
 
   effects: {

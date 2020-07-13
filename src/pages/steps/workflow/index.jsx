@@ -1,6 +1,8 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Image } from "@tarojs/components";
 import { AtButton } from "taro-ui";
+import StepPage from '@/components/StepPage'
+import WorkFlowPng from '../../../assets/imgs/workflow.png'
 import "./index.scss";
 
 export default class Index extends Component {
@@ -23,7 +25,9 @@ export default class Index extends Component {
   render() {
     return (
       <View className='workflow-page'>
-        <AtButton onClick={this.handleNextStep} type='primary'>下一步</AtButton>
+        <StepPage>
+          <Image src={WorkFlowPng} mode='aspectFit' className='work-flow-img'></Image>
+        </StepPage>
       </View>
     );
   }

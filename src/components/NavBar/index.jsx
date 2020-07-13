@@ -1,7 +1,7 @@
-import _isFunction from 'lodash/isFunction';
-import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
-import './index.scss';
+import _isFunction from "lodash/isFunction";
+import Taro, { Component } from "@tarojs/taro";
+import { View } from "@tarojs/components";
+import "./index.scss";
 
 function getSystemInfo() {
   if (Taro.globalSystemInfo && !Taro.globalSystemInfo.ios) {
@@ -12,27 +12,29 @@ function getSystemInfo() {
       return null;
     }
     let systemInfo = Taro.getSystemInfoSync() || {
-      model: '',
-      system: ''
+      model: "",
+      system: ""
     };
-    let ios = !!(systemInfo.system.toLowerCase().search('ios') + 1);
+    let ios = !!(systemInfo.system.toLowerCase().search("ios") + 1);
     let rect;
     try {
-      rect = Taro.getMenuButtonBoundingClientRect ? Taro.getMenuButtonBoundingClientRect() : null;
+      rect = Taro.getMenuButtonBoundingClientRect
+        ? Taro.getMenuButtonBoundingClientRect()
+        : null;
       if (rect === null) {
-        throw 'getMenuButtonBoundingClientRect error';
+        throw "getMenuButtonBoundingClientRect error";
       }
       //取值为0的情况  有可能width不为0 top为0的情况
       if (!rect.width || !rect.top || !rect.left || !rect.height) {
-        throw 'getMenuButtonBoundingClientRect error';
+        throw "getMenuButtonBoundingClientRect error";
       }
     } catch (error) {
-      let gap = ''; //胶囊按钮上下间距 使导航内容居中
+      let gap = ""; //胶囊按钮上下间距 使导航内容居中
       let width = 96; //胶囊的宽度
-      if (systemInfo.platform === 'android') {
+      if (systemInfo.platform === "android") {
         gap = 8;
         width = 96;
-      } else if (systemInfo.platform === 'devtools') {
+      } else if (systemInfo.platform === "devtools") {
         if (ios) {
           gap = 5.5; //开发工具中ios手机
         } else {
@@ -44,7 +46,8 @@ function getSystemInfo() {
       }
       if (!systemInfo.statusBarHeight) {
         //开启wifi的情况下修复statusBarHeight值获取不到
-        systemInfo.statusBarHeight = systemInfo.screenHeight - systemInfo.windowHeight - 20;
+        systemInfo.statusBarHeight =
+          systemInfo.screenHeight - systemInfo.windowHeight - 20;
       }
       rect = {
         //获取不到胶囊信息就自定义重置一个
@@ -55,14 +58,15 @@ function getSystemInfo() {
         top: systemInfo.statusBarHeight + gap,
         width: width
       };
-      console.log('error', error);
-      console.log('rect', rect);
+      console.log("error", error);
+      console.log("rect", rect);
     }
 
-    let navBarHeight = '';
+    let navBarHeight = "";
     if (!systemInfo.statusBarHeight) {
       //开启wifi和打电话下
-      systemInfo.statusBarHeight = systemInfo.screenHeight - systemInfo.windowHeight - 20;
+      systemInfo.statusBarHeight =
+        systemInfo.screenHeight - systemInfo.windowHeight - 20;
       navBarHeight = (function() {
         let gap = rect.top - systemInfo.statusBarHeight;
         return 2 * gap + rect.height;
@@ -92,18 +96,16 @@ function getSystemInfo() {
 }
 let globalSystemInfo = getSystemInfo();
 class AtComponent extends Component {
-
-
   static defaultProps = {
-    extClass: '',
-    background: 'rgba(255,255,255,1)', //导航栏背景
-    color: '#000000',
-    title: '',
-    searchText: '点我搜索',
+    extClass: "",
+    background: "rgba(255,255,255,1)", //导航栏背景
+    color: "#000000",
+    title: "",
+    searchText: "点我搜索",
     searchBar: false,
     back: false,
     home: false,
-    iconTheme: 'black',
+    iconTheme: "black",
     delta: 1
   };
 
@@ -114,6 +116,7 @@ class AtComponent extends Component {
     };
   }
 
+  state = {};
 
   componentDidShow() {
     if (globalSystemInfo.ios) {
@@ -123,16 +126,16 @@ class AtComponent extends Component {
       });
     }
   }
+
   handleBackClick() {
     if (_isFunction(this.props.onBack)) {
       this.props.onBack();
-    } else {
-      const pages = Taro.getCurrentPages();
-      if (pages.length >= 2) {
-        Taro.navigateBack({
-          delta: this.props.delta
-        });
-      }
+    }
+    const pages = Taro.getCurrentPages();
+    if (pages.length >= 2) {
+      Taro.navigateBack({
+        delta: this.props.delta
+      });
     }
   }
   handleGoHomeClick() {
@@ -146,15 +149,20 @@ class AtComponent extends Component {
     }
   }
 
-  state = {};
-
   static options = {
     multipleSlots: true,
     addGlobalClass: true
   };
 
   setStyle(systemInfo) {
-    const { statusBarHeight, navBarHeight, capsulePosition, navBarExtendHeight, ios, windowWidth } = systemInfo;
+    const {
+      statusBarHeight,
+      navBarHeight,
+      capsulePosition,
+      navBarExtendHeight,
+      ios,
+      windowWidth
+    } = systemInfo;
     const { back, home, title, color } = this.props;
     let rightDistance = windowWidth - capsulePosition.right; //胶囊按钮右侧到屏幕右侧的边距
     let leftWidth = windowWidth - capsulePosition.left; //胶囊按钮左侧到屏幕右侧的边距
@@ -166,7 +174,7 @@ class AtComponent extends Component {
       `padding-top:${statusBarHeight}px`,
       `padding-right:${leftWidth}px`,
       `padding-bottom:${navBarExtendHeight}px`
-    ].join(';');
+    ].join(";");
     let navBarLeft = [];
     if ((back && !home) || (!back && home)) {
       navBarLeft = [
@@ -174,15 +182,15 @@ class AtComponent extends Component {
         `height:${capsulePosition.height}px`,
         `margin-left:0px`,
         `margin-right:${rightDistance}px`
-      ].join(';');
+      ].join(";");
     } else if ((back && home) || title) {
       navBarLeft = [
         `width:${capsulePosition.width}px`,
         `height:${capsulePosition.height}px`,
         `margin-left:${rightDistance}px`
-      ].join(';');
+      ].join(";");
     } else {
-      navBarLeft = [`width:auto`, `margin-left:0px`].join(';');
+      navBarLeft = [`width:auto`, `margin-left:0px`].join(";");
     }
     return {
       navigationbarinnerStyle,
@@ -237,16 +245,17 @@ class AtComponent extends Component {
     }
     return (
       <View
-        className={`lxy-nav-bar ${ios ? 'ios' : 'android'} ${extClass}`}
-        style={`background: ${backgroundColorTop ? backgroundColorTop : background};height:${navBarHeight +
-          navBarExtendHeight}px;`}
+        className={`lxy-nav-bar ${ios ? "ios" : "android"} ${extClass}`}
+        style={`background: ${
+          backgroundColorTop ? backgroundColorTop : background
+        };height:${navBarHeight + navBarExtendHeight}px;`}
       >
         <View
-          className={`lxy-nav-bar__placeholder ${ios ? 'ios' : 'android'}`}
+          className={`lxy-nav-bar__placeholder ${ios ? "ios" : "android"}`}
           style={`padding-top: ${navBarHeight + navBarExtendHeight}px;`}
         />
         <View
-          className={`lxy-nav-bar__inner ${ios ? 'ios' : 'android'}`}
+          className={`lxy-nav-bar__inner ${ios ? "ios" : "android"}`}
           style={`background:${background};${navigationbarinnerStyle};`}
         >
           <View className='lxy-nav-bar__left' style={navBarLeft}>
@@ -263,7 +272,9 @@ class AtComponent extends Component {
               />
             )}
             {back && home && (
-              <View className={`lxy-nav-bar__buttons ${ios ? 'ios' : 'android'}`}>
+              <View
+                className={`lxy-nav-bar__buttons ${ios ? "ios" : "android"}`}
+              >
                 <View
                   onClick={this.handleBackClick.bind(this)}
                   className={`lxy-nav-bar__button lxy-nav-bar__btn_goback ${iconTheme}`}
@@ -276,10 +287,16 @@ class AtComponent extends Component {
             )}
             {!back && !home && this.props.renderLeft}
           </View>
-          <View className='lxy-nav-bar__center' style={`padding-left: ${rightDistance}px`}>
+          <View
+            className='lxy-nav-bar__center'
+            style={`padding-left: ${rightDistance}px`}
+          >
             {nav_bar__center}
           </View>
-          <View className='lxy-nav-bar__right' style={`margin-right: ${rightDistance}px`}>
+          <View
+            className='lxy-nav-bar__right'
+            style={`margin-right: ${rightDistance}px`}
+          >
             {this.props.renderRight}
           </View>
         </View>
