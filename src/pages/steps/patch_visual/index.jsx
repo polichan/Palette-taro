@@ -7,10 +7,14 @@ export default class PatchVisual extends Component {
 
   state={}
 
+  handleNextClick(callback)
+  {
+      callback(true)
+  }
   render() {
     return (
       <View>
-        <StepPage></StepPage>
+        <StepPage onNext={this.handleNextClick.bind(this)}></StepPage>
       </View>
     );
   }

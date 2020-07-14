@@ -26,8 +26,16 @@ export default class Index extends Component {
     });
   }
 
-  handleConfirmClick() {
-    console.log(this.state);
+  handleOnNextClick(callback) {
+    if(this.state.value == null){
+      Taro.showToast({
+        icon: 'none',
+        title: '请选择 Patch 大小'
+      })
+      callback(false)
+    }else{
+      callback(true)
+    }
   }
 
   handleHelpClick() {
@@ -45,7 +53,7 @@ export default class Index extends Component {
   render() {
     const { helpFloatLayoutOpened } = this.state;
     return (
-      <StepPage>
+      <StepPage onNext={this.handleOnNextClick.bind(this)}>
         <View className='step-container'>
           <Panel
             title='请选择 Patch 大小'
@@ -72,15 +80,6 @@ export default class Index extends Component {
               value={this.state.value}
               onClick={this.handlePatchChange.bind(this)}
             />
-            {/* <ATButton
-              type='primary'
-              className='confirm-btn'
-              onClick={() => {
-                this.handleConfimClick();
-              }}
-            >
-              确认
-            </ATButton> */}
           </Panel>
           <FloatLayout
             isOpened={helpFloatLayoutOpened}

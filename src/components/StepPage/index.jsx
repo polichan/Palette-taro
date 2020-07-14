@@ -50,18 +50,36 @@ export default class StepPage extends Component {
 
   handleNextStepClick() {
     if (_isFunction(this.props.onNext)) {
-      this.props.onNext();
+      this.props.onNext(canNext => {
+        if (canNext) {
+          this.state.stepQueue
+            .next()
+            .then(() => {
+              Taro.navigateTo({
+                url: this.state.stepQueue.getCurrent().getPagePath()
+              });
+            })
+            .catch(() => {
+              Taro.showToast({
+                title: "没有下一步了",
+                icon: "none"
+              });
+            });
+        }
+      });
     }
-    this.state.stepQueue.next().then(() => {
+  }
+
+
+  handleBackClick() {
+    if (_isFunction(this.props.onBack)) {
+      this.props.onBack();
+    }
+    this.state.stepQueue.back().then(() => {
       Taro.navigateTo({
         url: this.state.stepQueue.getCurrent().getPagePath()
       });
-    }).catch(() => {
-      Taro.showToast({
-        title: '没有下一步了',
-        icon: 'none'
-      })
-    })
+    });
   }
 
   handleBack() {

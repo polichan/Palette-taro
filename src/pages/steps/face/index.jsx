@@ -1,27 +1,22 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Button, Image } from "@tarojs/components";
-import StepPage from '@/components/StepPage';
+import StepPage from "@/components/StepPage";
 
 export default class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      facesList: [],
+      facesList: []
     };
   }
 
-  componentWillMount()
+  componentWillMount() {}
+
+  handleCloseFloatLayout() {}
+
+  handleNextClick(callback)
   {
-    
-  }
-
-
-  config = {
-    navigationBarTitleText: "选择人脸图像"
-  };
-
-  handleCloseFloatLayout(){
-      
+    callback(true)
   }
 
   render() {
@@ -29,16 +24,14 @@ export default class Index extends Component {
     const faces = this.state.facesList.map(item => {
       return (
         <View className='at-col' key={item.id}>
-          <Image src={item.url} ></Image>
+          <Image src={item.url}></Image>
         </View>
       );
     });
     return (
-      <View className='container'>
-        <StepPage>
+      <StepPage onNext={this.handleNextClick.bind(this)}>
         <View className='at-row'>{faces}</View>
-        </StepPage>
-      </View>
+      </StepPage>
     );
   }
 }
