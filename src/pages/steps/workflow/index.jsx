@@ -11,22 +11,19 @@ export default class Index extends Component {
     this.state = {};
   }
   componentDidMount() {}
-
-  config = {
-    navigationBarTitleText: "实验流程"
-  };
-
-  handleNextStep() {
-    Taro.navigateTo({
-      url: "/pages/steps/face/index"
-    });
+  
+  handleImageClick()
+  {
+    Taro.previewImage({
+      urls: [WorkFlowPng]
+    })
   }
 
   render() {
     return (
       <View className='workflow-page'>
         <StepPage>
-          <Image src={WorkFlowPng} mode='aspectFit' className='work-flow-img'></Image>
+          <Image src={WorkFlowPng} mode='aspectFit' className='work-flow-img' onClick={this.handleImageClick.bind(this)}></Image>
         </StepPage>
       </View>
     );

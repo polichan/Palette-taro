@@ -9,6 +9,7 @@ import "./index.scss";
 let sQueue = new StepQueue()
 sQueue.add(new Step({navigationTitle: "流程图", buttonTitle: "下一步", pagePath: "/pages/steps/workflow/index"}))
 sQueue.add(new Step({navigationTitle: "人脸图像", buttonTitle: "下一步", pagePath: "/pages/steps/face/index"}))
+
 export default class StepPage extends Component {
   state = {
     stepQueue: sQueue
@@ -26,7 +27,7 @@ export default class StepPage extends Component {
   handleNextStepClick() {
       this.state.stepQueue.next()
       Taro.navigateTo({
-          url: this.state.stepQueue.getCurrent().pagePath
+          url: this.state.stepQueue.getCurrent().getPagePath()
       })
   }
 
@@ -39,12 +40,12 @@ export default class StepPage extends Component {
       const {stepQueue} = this.state
     return (
       <View>
-        <NavBar background='#fff' back home title={stepQueue.getCurrent().navigationTitle} onBack={this.handleBack.bind(this)} />
+        <NavBar background='#fff' back home title={stepQueue.getCurrent().getNavigationTitle()} onBack={this.handleBack.bind(this)} />
         <View className='main-content'>
             {this.props.children}
         </View>
         <View className='footer-content'>
-          <ToolBar title={stepQueue.getCurrent().buttonTitle} onClick={this.handleNextStepClick.bind(this)} />
+          <ToolBar title={stepQueue.getCurrent().getButtonTitle()} onClick={this.handleNextStepClick.bind(this)} />
         </View>
       </View>
     );
