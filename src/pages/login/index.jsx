@@ -110,7 +110,7 @@ export default class Index extends Component {
                   <AtButton
                     openType='getUserInfo'
                     loading={isLoginLoading}
-                    className='authorize-btn authorize-btn c-btn-linergradient-blue'
+                    className='authorize-btn c-btn-linergradient-blue'
                     onGetUserInfo={this.handleLoginClick.bind(this)}
                     onClick={() => {
                       this.handleLoginClick();

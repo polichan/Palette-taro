@@ -21,17 +21,36 @@ export default class StepQueue {
   }
 
   next() {
-    if (this.current + 1 > this.steps.length - 1) {
-        throw Error("没有下一个队列了")
-    }else{
+    return new Promise((success, fail) => {
+      if (this.canNext()) {
         this.current ++ 
-    }
+        success()
+      }else{
+        fail()
+      }
+    })
+
+  }
+
+  canNext()
+  {
+    return this.current + 1 <= this.steps.length - 1
   }
 
   back() {
-    if (this.current !== 0) {
-      this.current--;
-    }
+    return new Promise((success, fail) => {
+      if (this.canBack()) {
+        this.current--;
+        success()
+      }else{
+        fail()
+      }
+    })
+  }
+
+  canBack()
+  {
+    return this.current !== 0
   }
 
   getFirst() {

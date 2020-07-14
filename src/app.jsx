@@ -68,12 +68,13 @@ class App extends Component {
       'pages/login/index',
       'pages/steps/face/index',
       'pages/steps/patch/index',
+      'pages/steps/patch_visual/index',
       'pages/steps/filter/index',
       'pages/steps/convolution/index',
       'pages/steps/block/index',
       'pages/steps/workflow/index',
       'pages/license/index',
-      'pages/about/index'
+      'pages/about/index',
     ],
     window: {
       backgroundTextStyle: 'light',

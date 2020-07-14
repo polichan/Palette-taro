@@ -22,7 +22,7 @@ export default class ToolBar extends Component {
       <View className='tool-bar-wrapper'>
         <View className='container flex flex-direction-column flex-justifyContent-end'>
           <AtButton
-            className='c-btn-linergradient-blue radius-btn'
+            className='c-btn-linergradient-blue common-btn toolbar-btn'
             onClick={this.handleOnClick.bind(this)}
           >
             {title}
