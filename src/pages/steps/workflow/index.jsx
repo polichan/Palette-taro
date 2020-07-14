@@ -1,6 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
-import { AtButton } from "taro-ui";
 import StepPage from "@/components/StepPage";
 import WorkFlowPng from "../../../assets/imgs/workflow.png";
 import "./index.scss";
@@ -14,7 +13,8 @@ export default class Index extends Component {
 
   handleImageClick() {
     Taro.previewImage({
-      urls: [WorkFlowPng]
+      current: "https://s1.ax1x.com/2020/07/14/UUoHit.png",
+      urls: ["https://s1.ax1x.com/2020/07/14/UUoHit.png"]
     });
   }
 

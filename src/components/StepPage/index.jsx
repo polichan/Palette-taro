@@ -10,28 +10,28 @@ import "./index.scss";
 let sQueue = new StepQueue();
 sQueue.add(
   new Step({
-    navigationTitle: "流程图",
+    navigationTitle: "实验流程图",
     buttonTitle: "下一步",
     pagePath: "/pages/steps/workflow/index"
   })
 );
 sQueue.add(
   new Step({
-    navigationTitle: "人脸图像",
+    navigationTitle: "选择人脸图像",
     buttonTitle: "下一步",
     pagePath: "/pages/steps/face/index"
   })
 );
 sQueue.add(
   new Step({
-    navigationTitle: "选择Patch",
+    navigationTitle: "选择 Patch",
     buttonTitle: "下一步",
     pagePath: "/pages/steps/patch/index"
   })
 );
 sQueue.add(
   new Step({
-    navigationTitle: "Patch可视化",
+    navigationTitle: "Patch 可视化",
     buttonTitle: "下一步",
     pagePath: "/pages/steps/patch_visual/index"
   })
@@ -42,6 +42,12 @@ export default class StepPage extends Component {
     stepQueue: sQueue
   };
 
+  static defaultProps = {
+    onNext: () => {},
+    onBack: () => {},
+    nextButtonLoading: false,
+    backButtonLoading: false
+  }
   componentWillMount() {
     this.setSteps();
   }
@@ -88,6 +94,7 @@ export default class StepPage extends Component {
 
   render() {
     const { stepQueue } = this.state;
+    const {nextButtonLoading} = this.props
     return (
       <View>
         <NavBar
@@ -97,10 +104,11 @@ export default class StepPage extends Component {
           onBack={this.handleBack.bind(this)}
         />
         <View className='main-content'>{this.props.children}</View>
-        <View className='footer-content'>
+        <View className='footer-content flex flex-direction-column flex-center'>
           <ToolBar
             title={stepQueue.getCurrent().getButtonTitle()}
             onClick={this.handleNextStepClick.bind(this)}
+            nextButtonLoading={nextButtonLoading}
           />
         </View>
       </View>

@@ -8,6 +8,7 @@ export default class ToolBar extends Component {
   static defaultProps = {
     onClick: () => {},
     title: "",
+    nextButtonLoading: false
   };
 
   handleOnClick(){
@@ -17,11 +18,12 @@ export default class ToolBar extends Component {
   }
 
   render() {
-    const { title } = this.props;
+    const { title, nextButtonLoading } = this.props;
     return (
-      <View className='tool-bar-wrapper'>
-        <View className='container flex flex-direction-column flex-justifyContent-end'>
+      <View className='tool-bar-wrapper flex flex-direction-column flex-center'>
+        <View className='flex flex-direction-column flex-center'>
           <AtButton
+            loading={nextButtonLoading}
             className='c-btn-linergradient-blue common-btn toolbar-btn'
             onClick={this.handleOnClick.bind(this)}
           >
