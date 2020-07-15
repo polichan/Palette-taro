@@ -12,9 +12,10 @@ import "./index.scss";
 }))
 export default class Index extends Component {
   state = {
-    captcha: {},
+    captchaObj: {},
     codeNumber: null,
-    password: null
+    password: null,
+    captcha: null
   };
 
   componentWillMount() {
@@ -39,18 +40,22 @@ export default class Index extends Component {
     });
   }
 
-  handleCaptchaClick()
-  {
+  handleCaptchaChange(e) {
+    this.setState({
+      captcha: e.detail.value
+    });
+  }
+
+  handleCaptchaClick() {
     this.getCaptchaCode()
   }
 
-  getCaptchaCode()
-  {
+  getCaptchaCode() {
     this.props.dispatch({
       type: 'user/getCaptcha'
     }).then(res => {
       this.setState({
-        captcha: res.data
+        captchaObj: res.data
       })
     })
   }
@@ -64,12 +69,11 @@ export default class Index extends Component {
         this.props.dispatch({
           type: "user/login",
           payload: { data: params },
-          onLoginSuccessfully: () => {
-            Taro.redirectTo({
-              url: "/pages/index/index"
-            });
-          }
-        });
+        }).then(res => {
+          Taro.redirectTo({
+            url: "/pages/index/index"
+          });
+        })
       } else {
         Taro.showToast({
           icon: "none",
@@ -89,10 +93,15 @@ export default class Index extends Component {
     } else if (this.state.password == null || this.state.password == "") {
       callback(false, { message: "密码不能为空" });
       return;
+    } else if (this.state.captcha == null || this.state.captcha == "") {
+      callback(false, { message: "验证码不能为空" })
+      return
     }
     callback(true, {
-      code_number: this.state.codeNumber,
-      password: this.state.password
+      username: this.state.codeNumber,
+      password: this.state.password,
+      captcha: this.state.captcha,
+      captchaId: this.state.captchaObj.captchaId
     });
   }
 
@@ -133,13 +142,13 @@ export default class Index extends Component {
                   </FormBox>
                   <FormBox label='验证码'>
                     <Input
-                      onInput={this.handlePasswordChange.bind(this)}
+                      onInput={this.handleCaptchaChange.bind(this)}
                       className='input_name input_captcha'
                       maxLength='16'
                       placeholder="请输入验证码"
-                      value={this.state.password}
+                      value={this.state.captcha}
                     ></Input>
-                    <Image mode='aspectFit' src={captcha.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)}/>
+                    <Image mode='aspectFit' src={captchaObj.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)} />
                   </FormBox>
                   <AtButton
                     openType='getUserInfo'

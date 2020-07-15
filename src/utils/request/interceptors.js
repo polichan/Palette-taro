@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 15:07:49
+ * @LastEditTime: 2020-07-15 15:30:18
  * @LastEditors: 陈鹏宇
  * @Description: 请求结束拦截器
  * @Version: 1.0
@@ -12,7 +12,7 @@ const customInterceptor = chain => {
   const requestParams = chain.requestParams;
 
   return chain.proceed(requestParams).then(response => {
-    if (response.data.code == 0 || response.headers.success === "true") {
+    if (response.data.code == 0) {
       return response.data
     } else {
       Taro.showToast({

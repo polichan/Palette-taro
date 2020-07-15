@@ -1,7 +1,7 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 15:03:29
+ * @LastEditTime: 2020-07-15 15:26:58
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
  */ 
@@ -22,24 +22,18 @@ export default {
      * @param {*} param0
      * @param {*} param1
      */
-    *login({ payload, onLoginSuccessfully }, { call, put }) {
+    *login({ payload }, { call, put }) {
       const res = yield call(userApi.login, payload.data);
-      if (res.status) {
-        yield put({
-          type: "save",
-          payload: {
-            token: res.data.access,
-            refresh: res.data.refresh,
-            isLogin: true
-          }
-        });
-        onLoginSuccessfully();
-      } else {
-        Taro.showToast({
-          title: "学号或密码不正确",
-          icon: "none"
-        });
-      }
+      console.log(res)
+      return res
+        // yield put({
+        //   type: "save",
+        //   payload: {
+        //     token: res.data.access,
+        //     refresh: res.data.refresh,
+        //     isLogin: true
+        //   }
+        // });
     },
     
     *getCaptcha({_}, {call,put}){
