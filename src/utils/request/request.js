@@ -1,3 +1,11 @@
+/*
+ * @Author: 陈鹏宇
+ * @Date: 2020-07-11 19:15:18
+ * @LastEditTime: 2020-07-15 14:26:37
+ * @LastEditors: 陈鹏宇
+ * @Description: Request 请求封装
+ * @FilePath: \Palette-taro\src\utils\request\request.js
+ */ 
 import Taro from '@tarojs/taro'
 import getBaseUrl from './baseUrl'
 import interceptors from './interceptors'
@@ -13,10 +21,10 @@ class request {
     contentType = params.contentType || contentType;
     let header = {'content_type': contentType};
     const token = Taro.getStorageSync('token');
+    const user = Taro.getStorageSync('user')
     if (token) {
-      header = Object.assign(header, {'Authorization': token})
+      header = Object.assign(header, {'x-token': token, 'x-user-id': user.id})
     }
-    console.log(BASE_URL)
     const option = {
       url: BASE_URL + url,
       data: data,

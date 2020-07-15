@@ -1,12 +1,19 @@
+/*
+ * @Author: 陈鹏宇
+ * @Date: 2020-07-11 19:15:18
+ * @LastEditTime: 2020-07-15 14:24:01
+ * @Description: 用户登录
+ * @FilePath: \Palette-taro\src\pages\login\model.js
+ */ 
 import Taro from "@tarojs/taro";
 import * as loginApi from "./service";
 
 export default {
-  namespace: "login",
+  namespace: "user",
   state: {
     token: null,
     refresh: null,
-    isLogin: true
+    isLogin: false
   },
 
   effects: {

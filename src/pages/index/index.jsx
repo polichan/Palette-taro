@@ -7,8 +7,8 @@ import * as CONSTANTS from "@/constants/index";
 import SchoolLogo from "../../assets/imgs/school_logo.png";
 import "./index.scss";
 
-@connect(({ login }) => ({
-  login
+@connect(({ user }) => ({
+  user
 }))
 export default class Index extends Component {
   config = {
@@ -41,7 +41,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { isLogin } = this.props.login;
+    const { isLogin } = this.props.user;
     return (
       <View className='index'>
         <NavBar background='#fff' />

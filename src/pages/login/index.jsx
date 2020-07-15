@@ -6,8 +6,8 @@ import { connect } from "@tarojs/redux";
 import FormBox from "@/components/FormBox";
 import "./index.scss";
 
-@connect(({ login, loading }) => ({
-  login,
+@connect(({ user, loading }) => ({
+  user,
   loading
 }))
 export default class Index extends Component {
@@ -41,7 +41,7 @@ export default class Index extends Component {
     this.canLogin((canLogin, params) => {
       if (canLogin) {
         this.props.dispatch({
-          type: "login/login",
+          type: "user/login",
           payload: { data: params },
           onLoginSuccessfully: () => {
             Taro.redirectTo({
@@ -95,6 +95,7 @@ export default class Index extends Component {
                       onInput={this.handleCodeNumberChange.bind(this)}
                       className='input_name'
                       maxLength='10'
+                      placeholder="请输入学号"
                       value={this.state.codeNumber}
                     ></Input>
                   </FormBox>
@@ -104,6 +105,7 @@ export default class Index extends Component {
                       className='input_name'
                       maxLength='16'
                       type='password'
+                      placeholder="请输入密码"
                       value={this.state.password}
                     ></Input>
                   </FormBox>
