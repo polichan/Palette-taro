@@ -1,13 +1,13 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 14:26:37
+ * @LastEditTime: 2020-07-15 14:59:37
  * @LastEditors: 陈鹏宇
  * @Description: Request 请求封装
  * @FilePath: \Palette-taro\src\utils\request\request.js
  */ 
 import Taro from '@tarojs/taro'
-import getBaseUrl from './baseUrl'
+import * as Utils from "../utils"
 import interceptors from './interceptors'
 
 interceptors.forEach(interceptorItem => Taro.addInterceptor(interceptorItem));
@@ -16,7 +16,7 @@ class request {
 
   baseOptions(params, method = "GET") {
     let {url, data} = params;
-    const BASE_URL = getBaseUrl(url);
+    const BASE_URL = Utils.getBaseApi();
     let contentType = "application/json";
     contentType = params.contentType || contentType;
     let header = {'content_type': contentType};

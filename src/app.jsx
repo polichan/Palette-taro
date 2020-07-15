@@ -15,15 +15,15 @@ const reduxStore = store
 
 class App extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.updateWeapp()
   }
 
-  componentDidShow () {}
+  componentDidShow() { }
 
-  componentDidHide () {}
+  componentDidHide() { }
 
-  componentDidCatchError () {}
+  componentDidCatchError() { }
 
   updateWeapp = () => {
     if (Taro.canIUse('getUpdateManager')) {
@@ -36,7 +36,7 @@ class App extends Component {
         Taro.showModal({
           title: '更新提示',
           content: '新版本已经准备好，是否重启应用？',
-          success: function(res) {
+          success: function (res) {
             Taro.setStorageSync('updateDone', false);
             if (res.confirm) {
               updateManager.applyUpdate()
@@ -87,7 +87,7 @@ class App extends Component {
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (
       <Provider store={reduxStore}>
         <Index />

@@ -1,30 +1,36 @@
+/*
+ * @Autor: 陈鹏宇
+ * @Date: 2020-07-11 19:15:18
+ * @LastEditTime: 2020-07-15 15:07:49
+ * @LastEditors: 陈鹏宇
+ * @Description: 请求结束拦截器
+ * @Version: 1.0
+ */
 import Taro from "@tarojs/taro";
 
 const customInterceptor = chain => {
   const requestParams = chain.requestParams;
 
-  return chain.proceed(requestParams).then(res => {
-    const resultBody = res.data;
-    if (resultBody.code === 401) {
-      if (
-        resultBody.message ==
-        "No active account found with the given credentials"
-      ) {
-        return resultBody
-      } else {
-        Taro.showToast({
-          title: "您已退出",
-          icon: "none"
-        });
-      }
-    } else if (resultBody.code >= 400) {
-      Taro.showToast({
-        title: "请求有误",
-        icon: "none"
-      });
+  return chain.proceed(requestParams).then(response => {
+    if (response.data.code == 0 || response.headers.success === "true") {
+      return response.data
     } else {
-      return resultBody;
+      Taro.showToast({
+        icon: 'none',
+        message: response.data.msg || decodeURI(response.headers.msg)
+      })
+      if (response.data.data && response.data.data.reload) {
+        // todo 退出登录
+        store.commit('user/LoginOut')
+      }
+      return Promise.reject(response.data.msg)
     }
+  }, error => {
+    Taro.showToast({
+      icon: "none",
+      title: error
+    })
+    return Promise.reject(error)
   });
 };
 

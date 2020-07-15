@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Input } from "@tarojs/components";
+import { View, Text, Input, Image } from "@tarojs/components";
 import { AtForm, AtInput, AtButton } from "taro-ui";
 import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
@@ -12,11 +12,16 @@ import "./index.scss";
 }))
 export default class Index extends Component {
   state = {
+    captcha: {},
     codeNumber: null,
     password: null
   };
 
-  componentDidMount() {}
+  componentWillMount() {
+    this.getCaptchaCode()
+  }
+
+  componentDidMount() { }
 
   config = {
     navigationBarTitleText: "登录"
@@ -32,6 +37,22 @@ export default class Index extends Component {
     this.setState({
       codeNumber: e.detail.value
     });
+  }
+
+  handleCaptchaClick()
+  {
+    this.getCaptchaCode()
+  }
+
+  getCaptchaCode()
+  {
+    this.props.dispatch({
+      type: 'user/getCaptcha'
+    }).then(res => {
+      this.setState({
+        captcha: res.data
+      })
+    })
   }
 
   /**
@@ -76,6 +97,7 @@ export default class Index extends Component {
   }
 
   render() {
+    const { captcha } = this.state
     const isLoginLoading = this.props.loading.effects["login/login"];
     return (
       <View className='container'>
@@ -108,6 +130,16 @@ export default class Index extends Component {
                       placeholder="请输入密码"
                       value={this.state.password}
                     ></Input>
+                  </FormBox>
+                  <FormBox label='验证码'>
+                    <Input
+                      onInput={this.handlePasswordChange.bind(this)}
+                      className='input_name input_captcha'
+                      maxLength='16'
+                      placeholder="请输入验证码"
+                      value={this.state.password}
+                    ></Input>
+                    <Image mode='aspectFit' src={captcha.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)}/>
                   </FormBox>
                   <AtButton
                     openType='getUserInfo'

@@ -1,19 +1,19 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 14:24:01
+ * @LastEditTime: 2020-07-15 15:03:29
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
  */ 
 import Taro from "@tarojs/taro";
-import * as loginApi from "./service";
+import * as userApi from "./service";
 
 export default {
   namespace: "user",
   state: {
     token: null,
     refresh: null,
-    isLogin: false
+    isLogin: false,
   },
 
   effects: {
@@ -23,7 +23,7 @@ export default {
      * @param {*} param1
      */
     *login({ payload, onLoginSuccessfully }, { call, put }) {
-      const res = yield call(loginApi.login, payload.data);
+      const res = yield call(userApi.login, payload.data);
       if (res.status) {
         yield put({
           type: "save",
@@ -40,7 +40,12 @@ export default {
           icon: "none"
         });
       }
-    }
+    },
+    
+    *getCaptcha({_}, {call,put}){
+      const res = yield call(userApi.getCaptcha)
+      return res
+    },
   },
 
   reducers: {

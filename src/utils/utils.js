@@ -40,3 +40,10 @@ export function base64src(base64data, cb) {
 export function getSrc(name){
     return Config.BASE_API + name
 }
+
+/**
+ * 获取请求地址
+ */
+export function getBaseApi(){
+  return Config.BASE_API
+}
