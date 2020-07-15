@@ -1,0 +1,49 @@
+$BOX_SHADOW: 0px 8px 50px 0px rgba(22, 23, 24, 0.3);
+
+.page-cont,.shadow-box{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    background-color: rgba(22, 23, 24, 0.5);
+  }
+  .page-cont .top{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+  }
+  .page-cont .top image{
+    width:32px;
+    height:41px;
+    margin:4% 0 4% 48%;
+  }
+
+  .page-cont .top .p_one{
+    width:60%;
+    font-size:28px;
+    line-height:72px;
+    color:#fff;
+    text-align:center;
+    border-radius:34px;
+    margin:2% auto 0 auto;
+    border:1px solid #fff;
+    box-shadow: $BOX_SHADOW;
+  }
+
+  .page-cont .bottom{
+    width: 50%;
+    font-size:30px;
+    line-height:72px;
+    text-align:center;
+    border-radius:44px;
+    margin:8% auto 0 auto;
+    color: #fff;
+  }
+
+  .close-img{
+    height: 50px;
+    width: 50px;
+  }

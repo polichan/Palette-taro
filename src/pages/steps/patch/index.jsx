@@ -1,9 +1,11 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { ATButton, AtRadio } from "taro-ui";
-import Panel from "./../../../components/Panel/index";
-import FloatLayout from "./../../../components/FloatLayout/index";
+import Panel from "@/components/Panel/index";
+import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
+import GuideTip from "@/components/GuideTip";
+import * as CONSTANT from "@/constants/index";
 import "./index.scss";
 
 export default class Index extends Component {
@@ -11,14 +13,33 @@ export default class Index extends Component {
     super(props);
     this.state = {
       value: null,
-      helpFloatLayoutOpened: false
+      helpFloatLayoutOpened: false,
+      showGuideTip: false
     };
   }
-  componentDidMount() {}
+
+  componentWillMount() {
+    if (Taro.getStorageSync(CONSTANT.FIRST_LAUNCH_KEY)) {
+      this.setState({
+        showGuideTip: true
+      })
+    }
+  }
+
+
+  componentDidMount() { }
 
   config = {
     navigationBarTitleText: "选择 Patch"
   };
+
+  handleGuideTipConfirmClick() {
+    this.setState({
+      showGuideTip: false
+    }, () => {
+      Taro.setStorageSync(CONSTANT.FIRST_LAUNCH_KEY, false)
+    })
+  }
 
   handlePatchChange(value) {
     this.setState({
@@ -27,13 +48,13 @@ export default class Index extends Component {
   }
 
   handleOnNextClick(callback) {
-    if(this.state.value == null){
+    if (this.state.value == null) {
       Taro.showToast({
         icon: 'none',
         title: '请选择 Patch 大小'
       })
       callback(false)
-    }else{
+    } else {
       callback(true)
     }
   }
@@ -51,9 +72,12 @@ export default class Index extends Component {
   }
 
   render() {
-    const { helpFloatLayoutOpened } = this.state;
+    const { helpFloatLayoutOpened, showGuideTip } = this.state;
     return (
       <StepPage onNext={this.handleOnNextClick.bind(this)}>
+        <View hidden={!showGuideTip}>
+          <GuideTip onConfirm={this.handleGuideTipConfirmClick.bind(this)} />
+        </View>
         <View className='step-container'>
           <Panel
             title='请选择 Patch 大小'

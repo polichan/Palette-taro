@@ -60,6 +60,13 @@ export default class Index extends Component {
     })
   }
 
+  handleCaptchaError() {
+    Taro.showToast({
+      icon: 'none',
+      title: '验证码加载失败'
+    })
+  }
+
   /**
    * 登录
    */
@@ -148,7 +155,7 @@ export default class Index extends Component {
                       placeholder="请输入验证码"
                       value={this.state.captcha}
                     ></Input>
-                    <Image mode='aspectFit' src={captchaObj.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)} />
+                    <Image mode='aspectFit' src={captchaObj.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)} onError={this.handleCaptchaError.bind(this)} />
                   </FormBox>
                   <AtButton
                     loading={isLoginLoading}
