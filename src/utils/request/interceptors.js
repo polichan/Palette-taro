@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 15:30:18
+ * @LastEditTime: 2020-07-15 15:45:39
  * @LastEditors: 陈鹏宇
  * @Description: 请求结束拦截器
  * @Version: 1.0
@@ -17,7 +17,7 @@ const customInterceptor = chain => {
     } else {
       Taro.showToast({
         icon: 'none',
-        message: response.data.msg || decodeURI(response.headers.msg)
+        message: response.data.msg
       })
       if (response.data.data && response.data.data.reload) {
         // todo 退出登录
@@ -25,12 +25,6 @@ const customInterceptor = chain => {
       }
       return Promise.reject(response.data.msg)
     }
-  }, error => {
-    Taro.showToast({
-      icon: "none",
-      title: error
-    })
-    return Promise.reject(error)
   });
 };
 

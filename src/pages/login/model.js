@@ -1,18 +1,18 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 15:26:58
+ * @LastEditTime: 2020-07-15 15:37:55
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
- */ 
+ */
 import Taro from "@tarojs/taro";
 import * as userApi from "./service";
 
 export default {
   namespace: "user",
   state: {
+    user: null,
     token: null,
-    refresh: null,
     isLogin: false,
   },
 
@@ -24,19 +24,18 @@ export default {
      */
     *login({ payload }, { call, put }) {
       const res = yield call(userApi.login, payload.data);
-      console.log(res)
-      return res
-        // yield put({
-        //   type: "save",
-        //   payload: {
-        //     token: res.data.access,
-        //     refresh: res.data.refresh,
-        //     isLogin: true
-        //   }
-        // });
+      yield put({
+        type: "save",
+        payload: {
+          token: res.data.token,
+          user: res.data.user,
+          isLogin: true
+        }
+      });
+      return true
     },
-    
-    *getCaptcha({_}, {call,put}){
+
+    *getCaptcha({ _ }, { call, put }) {
       const res = yield call(userApi.getCaptcha)
       return res
     },

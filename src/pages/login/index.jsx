@@ -64,12 +64,12 @@ export default class Index extends Component {
    * 登录
    */
   handleLoginClick() {
-    this.canLogin((canLogin, params) => {
+    this.validateFields((canLogin, params) => {
       if (canLogin) {
         this.props.dispatch({
           type: "user/login",
           payload: { data: params },
-        }).then(res => {
+        }).then(() => {
           Taro.redirectTo({
             url: "/pages/index/index"
           });
@@ -86,7 +86,7 @@ export default class Index extends Component {
   /**
    * 验证字段
    */
-  canLogin(callback) {
+  validateFields(callback) {
     if (this.state.codeNumber == null || this.state.codeNumber == "") {
       callback(false, { message: "学号不能为空" });
       return;
@@ -151,10 +151,8 @@ export default class Index extends Component {
                     <Image mode='aspectFit' src={captchaObj.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)} />
                   </FormBox>
                   <AtButton
-                    openType='getUserInfo'
                     loading={isLoginLoading}
                     className='authorize-btn c-btn-linergradient-blue'
-                    onGetUserInfo={this.handleLoginClick.bind(this)}
                     onClick={() => {
                       this.handleLoginClick();
                     }}
