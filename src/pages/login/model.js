@@ -5,7 +5,6 @@
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
  */
-import Taro from "@tarojs/taro";
 import * as userApi from "./service";
 
 export default {
@@ -13,7 +12,7 @@ export default {
   state: {
     user: null,
     token: null,
-    isLogin: true,
+    isLogin: true
   },
 
   effects: {
@@ -32,13 +31,13 @@ export default {
           isLogin: true
         }
       });
-      return true
+      return true;
     },
 
-    *getCaptcha({ _ }, { call, put }) {
-      const res = yield call(userApi.getCaptcha)
-      return res
-    },
+    *getCaptcha({}, { call }) {
+      const res = yield call(userApi.getCaptcha);
+      return res;
+    }
   },
 
   reducers: {
