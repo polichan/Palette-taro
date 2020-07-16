@@ -73,6 +73,7 @@ class App extends Component {
       'pages/steps/convolution/index',
       'pages/steps/block/index',
       'pages/steps/workflow/index',
+      'pages/steps/characteristic/index',
       'pages/license/index',
       'pages/about/index',
     ],
