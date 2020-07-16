@@ -40,7 +40,7 @@ sQueue.add(
 sQueue.add(
   new Step({
     navigationTitle: "特征向量和特征值",
-    buttonTitle: "好的",
+    buttonTitle: "查看题目",
     pagePath: "/pages/steps/characteristic/index"
   })
 );
@@ -48,9 +48,6 @@ sQueue.add(
 
 
 export default class StepPage extends Component {
-  state = {
-    stepQueue: sQueue
-  };
 
   static defaultProps = {
     onNext: () => {},
@@ -58,6 +55,11 @@ export default class StepPage extends Component {
     nextButtonLoading: false,
     backButtonLoading: false
   }
+
+  state = {
+    stepQueue: sQueue
+  };
+
   componentWillMount() {
     this.setSteps();
   }
