@@ -45,21 +45,45 @@ sQueue.add(
   })
 );
 
-sQueue.add(new Step({
-  navigationTitle:"特征值可视化",
-  buttonTitle: "下一步",
-  pagePath: "/pages/steps/characteristic_visual/index"
-}))
+sQueue.add(
+  new Step({
+    navigationTitle: "特征值可视化",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/characteristic_visual/index"
+  })
+);
 
+sQueue.add(
+  new Step({
+    navigationTitle: "选择 filter",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/filter/index"
+  })
+);
+
+sQueue.add(
+  new Step({
+    navigationTitle: "选择卷积层数",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/convolution/index"
+  })
+);
+
+sQueue.add(
+  new Step({
+    navigationTitle: "二值化",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/binarization/index"
+  })
+);
 
 export default class StepPage extends Component {
-
   static defaultProps = {
     onNext: () => {},
     onBack: () => {},
     nextButtonLoading: false,
     backButtonLoading: false
-  }
+  };
 
   state = {
     stepQueue: sQueue
@@ -93,7 +117,6 @@ export default class StepPage extends Component {
     }
   }
 
-
   handleBackClick() {
     if (_isFunction(this.props.onBack)) {
       this.props.onBack();
@@ -111,7 +134,7 @@ export default class StepPage extends Component {
 
   render() {
     const { stepQueue } = this.state;
-    const {nextButtonLoading} = this.props
+    const { nextButtonLoading } = this.props;
     return (
       <View>
         <NavBar

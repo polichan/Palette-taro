@@ -7,9 +7,12 @@ import "./index.scss";
 export default class CharacteristicVisual extends Component {
   state = {};
 
+  handleNextClick(callback) {
+    callback(true);
+  }
   render() {
     return (
-      <StepPage>
+      <StepPage onNext={this.handleNextClick.bind(this)}>
         <View className='visual-container'>
           <View className='flex flex-center flex-direction-column'>
             <View className='header flex flex-center flex-direction-column'>
@@ -28,7 +31,7 @@ export default class CharacteristicVisual extends Component {
             </View>
             <View className='bottom flex flex-center flex-direction-column'>
               <Text className='bottom-text'>
-              将特征值降序排列，对应的特征向量构成的图片如下所示从特征向量的可视化我们可以看出，前面的特征向量是低频信号，能量占比很大，而与越靠近后面能量占比越小，信号越趋于高频（噪声）。
+                将特征值降序排列，对应的特征向量构成的图片如下所示从特征向量的可视化我们可以看出，前面的特征向量是低频信号，能量占比很大，而与越靠近后面能量占比越小，信号越趋于高频（噪声）。
               </Text>
             </View>
             <Image src={EnergyImg}></Image>

@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View , Text} from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { AtFloatLayout } from "taro-ui";
 import "./index.scss";
 import * as Explain from "./../../constants/explain";
@@ -56,7 +56,7 @@ export default class FloatLayout extends Component {
 
   static options = {
     addGlobalClass: true
-  }
+  };
 
   /**
    * close 浮动层
@@ -77,6 +77,7 @@ export default class FloatLayout extends Component {
       >
         <View>
           <Text className='content-text'>{content}</Text>
+          <View className='children-content'>{this.props.children}</View>
         </View>
       </AtFloatLayout>
     );
