@@ -1,30 +1,32 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
+import 'taro-parse/dist/style/main.scss';
+import TaroParser from "taro-parse";
 import "./index.scss";
 
 export default class Question extends Component {
   static defaultProps = {
-    title: "",
-    subTitle: "",
-    sections: ""
+    content: ""
   };
   state = {};
 
+  options = {
+    addGlobalClass: true
+  }
+
   render() {
-    const { title, subTitle, sections } = this.props;
-    const section = sections.map((item, index) => {
-      return (
-        <View className='at-article__p' key={index}>
-          {item}
-        </View>
-      );
-    });
+    const { content } = this.props;
     return (
       <View className='question'>
-        <View className='at-article__h1'>{title}</View>
-        <View className='at-article__info'>{subTitle}</View>
         <View className='at-article__content'>
-          <View className='at-article__section'>{section}</View>
+          <View className='parser'>
+            <TaroParser
+              type='markdown'
+              theme='light'
+              latexApi='https://md.werfei.com/?tex'
+              content={content}
+            />
+          </View>
         </View>
       </View>
     );

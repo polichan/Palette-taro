@@ -13,9 +13,8 @@ import request from "@/utils/request/request";
  * 获取题目
  * @param   {object}  data  参数
  */
-export const getQuestion = data => {
-  // todo
-  return request.get("/base/login", data);
+export const getQuestionById = data => {
+  return request.get(`/crmProblems/findCrmProblems`, data);
 };
 
 /**

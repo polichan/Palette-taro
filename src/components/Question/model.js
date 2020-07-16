@@ -14,8 +14,8 @@ export default {
   },
 
   effects: {
-    *getQuestion({payload}, { call }) {
-      const res = yield call(questionApi.getQuestion, payload.data)
+    *getQuestionById({payload}, { call }) {
+      const res = yield call(questionApi.getQuestionById, payload.data)
       return res;
     },
     

@@ -9,6 +9,7 @@
 import Taro from '@tarojs/taro'
 import * as Utils from "../utils"
 import interceptors from './interceptors'
+import * as CONSTANTS from "../../constants/index"
 
 interceptors.forEach(interceptorItem => Taro.addInterceptor(interceptorItem));
 
@@ -20,7 +21,7 @@ class request {
     let contentType = "application/json";
     contentType = params.contentType || contentType;
     let header = {'content_type': contentType};
-    const token = Taro.getStorageSync('token');
+    const token = Taro.getStorageSync(CONSTANTS.STORAGE_TOKEN_KEY);
     const user = Taro.getStorageSync('user')
     if (token) {
       header = Object.assign(header, {'x-token': token, 'x-user-id': user.id})

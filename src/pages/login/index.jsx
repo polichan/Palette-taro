@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Input, Image } from "@tarojs/components";
-import { AtForm, AtInput, AtButton } from "taro-ui";
+import {AtButton } from "taro-ui";
 import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
 import FormBox from "@/components/FormBox";
@@ -113,7 +113,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { captcha } = this.state
+    const { captchaObj } = this.state
     const isLoginLoading = this.props.loading.effects["login/login"];
     return (
       <View className='container'>
@@ -133,7 +133,7 @@ export default class Index extends Component {
                       onInput={this.handleCodeNumberChange.bind(this)}
                       className='input_name'
                       maxLength='10'
-                      placeholder="请输入学号"
+                      placeholder='请输入学号'
                       value={this.state.codeNumber}
                     ></Input>
                   </FormBox>
@@ -143,7 +143,7 @@ export default class Index extends Component {
                       className='input_name'
                       maxLength='16'
                       type='password'
-                      placeholder="请输入密码"
+                      placeholder='请输入密码'
                       value={this.state.password}
                     ></Input>
                   </FormBox>
@@ -152,7 +152,7 @@ export default class Index extends Component {
                       onInput={this.handleCaptchaChange.bind(this)}
                       className='input_name input_captcha'
                       maxLength='16'
-                      placeholder="请输入验证码"
+                      placeholder='请输入验证码'
                       value={this.state.captcha}
                     ></Input>
                     <Image mode='aspectFit' src={captchaObj.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)} onError={this.handleCaptchaError.bind(this)} />
