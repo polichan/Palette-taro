@@ -1,8 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { ATButton, AtRadio } from "taro-ui";
-import Panel from "./../../../components/Panel/index";
-import FloatLayout from "./../../../components/FloatLayout/index";
+import { AtRadio } from "taro-ui";
+import Panel from "@/components/Panel/index";
+import FloatLayout from "@/components/FloatLayout/index";
+import StepPage from "@/components/StepPage";
 import "./index.scss";
 
 export default class Index extends Component {
@@ -21,7 +22,7 @@ export default class Index extends Component {
 
   handleBlockChange(value) {
     this.setState({
-        blockValue: value
+      blockValue: value
     });
   }
 
@@ -41,43 +42,43 @@ export default class Index extends Component {
     });
   }
 
+  handleNextClick(callback) {
+    callback(true);
+  }
+
   render() {
     const { helpFloatLayoutOpened } = this.state;
     return (
-      <View className='step-container'>
-        <Panel title='请选择卷积层数' onHelp={this.handleHelpClick.bind(this)}>
-          <AtRadio
-            options={[
-              {
-                label: "5 * 5",
-                value: "1"
-              },
-              {
-                label: "7 * 7",
-                value: "2"
-              }
-            ]}
-            value={this.state.blockValue}
-            onClick={this.handleBlockChange.bind(this)}
-          />
-          <ATButton
-            type='primary'
-            className='confirm-btn'
-            onClick={() => {
-              this.handleConfimClick();
-            }}
+      <StepPage onNext={this.handleNextClick.bind(this)}>
+        <View className='step-container'>
+          <Panel
+            title='请选择卷积层数'
+            onHelp={this.handleHelpClick.bind(this)}
           >
-            确认
-          </ATButton>
-        </Panel>
-        <FloatLayout
-          isOpened={helpFloatLayoutOpened}
-          onClose={() => {
-            this.handeCloseHelpFloatLayoutClick();
-          }}
-          type='block'
-        ></FloatLayout>
-      </View>
+            <AtRadio
+              options={[
+                {
+                  label: "5 * 5",
+                  value: "1"
+                },
+                {
+                  label: "7 * 7",
+                  value: "2"
+                }
+              ]}
+              value={this.state.blockValue}
+              onClick={this.handleBlockChange.bind(this)}
+            />
+          </Panel>
+          <FloatLayout
+            isOpened={helpFloatLayoutOpened}
+            onClose={() => {
+              this.handeCloseHelpFloatLayoutClick();
+            }}
+            type='block'
+          ></FloatLayout>
+        </View>
+      </StepPage>
     );
   }
 }
