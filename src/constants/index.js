@@ -4,3 +4,4 @@ export const LICENSE_TYPE = {
 };
 
 export const FIRST_LAUNCH_KEY = "first_launch"
+

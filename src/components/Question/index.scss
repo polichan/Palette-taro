@@ -1,3 +1,9 @@
+$TEXT_CENTER: center !important;
+
 .at-article__info {
-  text-align: center !important;
+  text-align: $TEXT_CENTER
+}
+
+.at-article__h1{
+  text-align: $TEXT_CENTER
 }

@@ -40,11 +40,16 @@ sQueue.add(
 sQueue.add(
   new Step({
     navigationTitle: "特征向量和特征值",
-    buttonTitle: "查看题目",
+    buttonTitle: "提交解答",
     pagePath: "/pages/steps/characteristic/index"
   })
 );
 
+sQueue.add(new Step({
+  navigationTitle:"特征值可视化",
+  buttonTitle: "下一步",
+  pagePath: "/pages/steps/characteristic_visual/index"
+}))
 
 
 export default class StepPage extends Component {

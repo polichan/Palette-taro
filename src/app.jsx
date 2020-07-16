@@ -74,6 +74,7 @@ class App extends Component {
       'pages/steps/block/index',
       'pages/steps/workflow/index',
       'pages/steps/characteristic/index',
+      'pages/steps/characteristic_visual/index',
       'pages/license/index',
       'pages/about/index',
     ],
