@@ -1,0 +1,51 @@
+.ns_container_none {
+  display: none;
+}
+
+.ns_container {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ns_left {
+  width: 16%;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: antiquewhite;
+}
+
+.ns_round {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: hotpink;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.ns_round_text {
+  font-size: 22px;
+  color: white;
+}
+
+.ns_right {
+  width: 84%;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: antiquewhite;
+}
+
+.ns_right_text {
+  font-size: 22px;
+  color: gray;
+}

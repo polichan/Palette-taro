@@ -3,7 +3,8 @@ import * as faceApi from "./service";
 export default {
   namespace: "face",
   state: {
-    faceList: []
+    faceList: [],
+    faceCategoryList: []
   },
 
   effects: {
@@ -18,6 +19,19 @@ export default {
         type:'save',
         payload:{
           faceList: res.data
+        }
+      })
+      return res
+    },
+    *getFaceCategoryList({}, {call, put}){
+      const res = yield call(faceApi.getFaceCategoryList)
+      const list = res.data.List.map(item=>{
+        return {title: item.name, id: item.ID}
+      })
+      yield put({
+        type: 'save',
+        payload:{
+          faceCategoryList: list
         }
       })
       return res

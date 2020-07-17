@@ -5,6 +5,7 @@ import { connect } from "@tarojs/redux";
 import { getSrc } from "@/utils/utils";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import EmptyData from "@/components/EmptyData";
+import Divider from "@/components/Divider";
 import "./index.scss";
 
 @connect(({ face, loading }) => ({
@@ -14,20 +15,26 @@ import "./index.scss";
 export default class Face extends Component {
   state = {
     current: 0,
-    tabList: [{ title: "吴彦祖" }, { title: "陈鹏宇" }]
   };
   componentWillMount() {
     this.props
       .dispatch({
-        type: "face/getFaceList",
-        payload: {
-          data: {
-            page: 1,
-            pageSize: 10
-          }
-        }
+        type: "face/getFaceCategoryList",
       })
-      .then();
+      .then(res => {
+        console.log(res)
+        this.props
+          .dispatch({
+            type: "face/getFaceList",
+            payload: {
+              data: {
+                page: 1,
+                pageSize: 10
+              }
+            }
+          })
+          .then();
+      });
   }
 
   handleNextClick(callback) {
@@ -41,15 +48,11 @@ export default class Face extends Component {
   }
 
   render() {
-    const { faceList } = this.props.face;
-    const { current, tabList } = this.state;
+    const { faceList, faceCategoryList } = this.props.face;
+    const { current } = this.state;
     let faces = null;
     if (faceList.list == null || faceList.list.length == 0) {
-      faces = (
-        <EmptyData
-          nothingText='这里空空如也'
-        ></EmptyData>
-      );
+      faces = <EmptyData nothingText='这里空空如也~'></EmptyData>;
     } else {
       faces = faceList.list.map(item => {
         return (
@@ -63,13 +66,14 @@ export default class Face extends Component {
     return (
       <View>
         <StepPage onNext={this.handleNextClick.bind(this)}>
+          <Divider text='人脸列表'></Divider>
           <AtTabs
             current={current}
-            tabList={tabList}
+            tabList={faceCategoryList}
             scroll
             onClick={this.handleTabClick.bind(this)}
           >
-            {tabList.map((item, index) => {
+            {faceCategoryList.map((item, index) => {
               return (
                 <AtTabsPane current={current} index={index} key={item.title}>
                   <View className='face-container'>{faces}</View>
