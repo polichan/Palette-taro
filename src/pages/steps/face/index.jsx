@@ -14,15 +14,15 @@ import "./index.scss";
 }))
 export default class Face extends Component {
   state = {
-    current: 0,
+    current: 0
   };
   componentWillMount() {
     this.props
       .dispatch({
-        type: "face/getFaceCategoryList",
+        type: "face/getFaceCategoryList"
       })
       .then(res => {
-        console.log(res)
+        console.log(res);
         this.props
           .dispatch({
             type: "face/getFaceList",
@@ -50,23 +50,18 @@ export default class Face extends Component {
   render() {
     const { faceList, faceCategoryList } = this.props.face;
     const { current } = this.state;
-    let faces = null;
-    if (faceList.list == null || faceList.list.length == 0) {
-      faces = <EmptyData nothingText='这里空空如也~'></EmptyData>;
-    } else {
-      faces = faceList.list.map(item => {
-        return (
-          <View className='face-item' key={item.id}>
-            <Image src={getSrc(item.Media.cdnUrl)} className='face-img'></Image>
-          </View>
-        );
-      });
-    }
+
+    const faces = faceList.list && faceList.list.map(item => {
+      return (
+        <View className='face-item' key={item.id}>
+          <Image src={getSrc(item.Media.cdnUrl)} className='face-img'></Image>
+        </View>
+      );
+    });
 
     return (
       <View>
         <StepPage onNext={this.handleNextClick.bind(this)}>
-          <Divider text='人脸列表'></Divider>
           <AtTabs
             current={current}
             tabList={faceCategoryList}
@@ -76,7 +71,12 @@ export default class Face extends Component {
             {faceCategoryList.map((item, index) => {
               return (
                 <AtTabsPane current={current} index={index} key={item.title}>
-                  <View className='face-container'>{faces}</View>
+                  <View className='face-container'>
+                    {faceList.list == null || faceList.list.length == 0 ? (
+                      <EmptyData nothingText='这里空空如也~'></EmptyData>
+                    ) : null}
+                    <View className='face-list-container'>{faces}</View>
+                  </View>
                 </AtTabsPane>
               );
             })}
