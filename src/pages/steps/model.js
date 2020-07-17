@@ -4,15 +4,16 @@ import * as stepApi from "./service";
 export default {
   namespace: "step",
   state: {
+    steps: {}
   },
 
   effects: {
-    /**
-     * 登录
-     * @param {*} param0
-     * @param {*} param1
-     */
-    *login({ payload, onLoginSuccessfully }, { call, put }) {
+    *submitSteps({}, { call, select }) {
+      const res = yield call(
+        stepApi.submitSteps,
+        yield select(state => state.steps)
+      );
+      return res;
     }
   },
 

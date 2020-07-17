@@ -78,6 +78,7 @@ class App extends Component {
       'pages/steps/characteristic_visual/index',
       'pages/steps/binarization/index',
       'pages/steps/binarization_visual/index',
+      'pages/steps/histogram/index',
       'pages/license/index',
       'pages/about/index',
     ],

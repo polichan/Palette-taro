@@ -101,6 +101,14 @@ sQueue.add(
   })
 );
 
+sQueue.add(
+  new Step({
+    navigationTitle: "直方图",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/histogram/index"
+  })
+);
+
 export default class StepPage extends Component {
   static defaultProps = {
     onNext: () => {},

@@ -22,6 +22,6 @@ module.exports = {
     },
     HISTOGRAM_EXPLAIN:{
         name: '什么是直方图？',
-        content: '将每个分块后的图片对应的像素值和像素点进行绘制成直方图。'   
+        content: '对block里的每个像素值进行统计，绘制直方图，横轴表示像素值，纵轴表示block中该像素值的分布情况。'   
     }
 }
