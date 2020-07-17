@@ -1,18 +1,20 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import 'taro-parse/dist/style/main.scss';
+import "taro-parse/dist/style/main.scss";
 import TaroParser from "taro-parse";
 import "./index.scss";
 
 export default class Question extends Component {
   static defaultProps = {
-    content: ""
+    content: "",
+    options: [],
+    rightOptions: []
   };
   state = {};
 
   options = {
     addGlobalClass: true
-  }
+  };
 
   render() {
     const { content } = this.props;

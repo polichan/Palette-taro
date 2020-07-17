@@ -43,6 +43,14 @@ export default class Index extends Component {
   }
 
   handleNextClick(callback) {
+    if(this.state.blockValue == null)
+    {
+      Taro.showToast({
+        title: '请选择 Block 大小',
+        icon: 'none'
+      })
+      return
+    }
     callback(true);
   }
 

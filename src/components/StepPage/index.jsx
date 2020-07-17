@@ -77,6 +77,30 @@ sQueue.add(
   })
 );
 
+sQueue.add(
+  new Step({
+    navigationTitle: "二值化可视化",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/binarization_visual/index"
+  })
+);
+
+sQueue.add(
+  new Step({
+    navigationTitle: "选择 Block 大小",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/block/index"
+  })
+);
+
+sQueue.add(
+  new Step({
+    navigationTitle: "Block可视化",
+    buttonTitle: "下一步",
+    pagePath: "/pages/steps/block_visual/index"
+  })
+);
+
 export default class StepPage extends Component {
   static defaultProps = {
     onNext: () => {},
