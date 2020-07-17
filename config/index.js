@@ -33,6 +33,7 @@ const config = {
   },
   plugins: [
     '@tarojs/plugin-sass',
+    '@tarojs/plugin-uglify'
   ],
   alias: {
     '@/components': 'src/components',
