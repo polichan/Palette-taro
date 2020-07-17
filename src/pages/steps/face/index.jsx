@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image, Block } from "@tarojs/components";
+import { View, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import { connect } from "@tarojs/redux";
 import { getSrc } from "@/utils/utils";
@@ -47,29 +47,39 @@ export default class Face extends Component {
     });
   }
 
-  renderFacePanel()
-  {
+  handleFaceImageClick(face){
+    Taro.showModal({
+      title: "提示",
+      content: "是否选择此人脸为实验图片",
+      success: (res)=>{
+        if(res.confirm){
+          Taro.showToast({
+            title: '设置成功',
+            icon: 'none'
+          })
+        }
+      }
+    })
+  }
+
+  renderFacePanel() {
     const { current } = this.state;
-    const {face} = this.props
-    const {faceList, faceCategoryList} = face
-    
+    const { face } = this.props;
+    const { faceList, faceCategoryList } = face;
+
     const faces =
-    faceList.list &&
-    faceList.list.map(item => {
-      return (
-        <View className='face-item' key={item.id}>
-          <Image src={getSrc(item.Media.cdnUrl)} className='face-img'></Image>
-        </View>
-      );
-    });
+      faceList.list &&
+      faceList.list.map(item => {
+        return (
+          <View className='face-item' key={item.id}>
+            <Image src={getSrc(item.Media.cdnUrl)} className='face-img' onClick={this.handleFaceImageClick.bind(this, item)}></Image>
+          </View>
+        );
+      });
 
     return faceCategoryList.map((item, index) => {
       return (
-        <AtTabsPane
-          current={current}
-          index={index}
-          key={item.title}
-        >
+        <AtTabsPane current={current} index={index} key={item.title}>
           <View className='face-container'>
             {faceList.list == null || faceList.list.length == 0 ? (
               <EmptyData nothingText='这里空空如也~'></EmptyData>
@@ -78,7 +88,7 @@ export default class Face extends Component {
           </View>
         </AtTabsPane>
       );
-    })
+    });
   }
 
   render() {
@@ -88,7 +98,6 @@ export default class Face extends Component {
       "face/getFaceCategoryList"
     ];
     const faceLoading = this.props.loading.effects["face/getFaceList"];
-
 
     return (
       <View>
@@ -107,39 +116,17 @@ export default class Face extends Component {
               onClick={this.handleTabClick.bind(this)}
             >
               {faceLoading ? (
-                <Block>
+                <View className='column-skeleton'>
+                  <Skeleton type='column' avatar></Skeleton>
+                  <Skeleton type='column' avatar></Skeleton>
+                  <Skeleton type='column' avatar></Skeleton>
                   <Skeleton
                     type='column'
-                    title
-                    titleWidth='80%'
-                    avatar
-                  ></Skeleton>
-                  <Skeleton
-                    type='column'
-                    row={1}
-                    rowWidth='70%'
-                    avatar
-                  ></Skeleton>
-                  <Skeleton
-                    type='column'
-                    title
-                    titleWidth='60%'
-                    avatar
-                  ></Skeleton>
-                  <Skeleton
-                    type='column'
-                    title
-                    titleWidth='50%'
                     avatar
                     contentAlignStyle='right'
                   ></Skeleton>
-                  <Skeleton
-                    type='column'
-                    title
-                    titleWidth='100%'
-                    avatar
-                  ></Skeleton>
-                </Block>
+                  <Skeleton type='column' avatar></Skeleton>
+                </View>
               ) : (
                 this.renderFacePanel()
               )}
