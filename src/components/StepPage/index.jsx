@@ -7,6 +7,7 @@ import _isFunction from "lodash/isFunction";
 import { AtProgress } from "taro-ui";
 import Panel from "@/components/Panel";
 import NetStatusTip from "@/components/NetStatusTip";
+import {navigateTo} from "@/utils/utils";
 import "./index.scss";
 
 @connect(({ step, loading }) => ({
@@ -51,9 +52,7 @@ export default class StepPage extends Component {
             .next()
             .then(() => {
               this.setProgressPercent();
-              Taro.navigateTo({
-                url: this.props.step.stepQueue.getCurrent().getPagePath()
-              });
+              navigateTo(this.props.step.stepQueue.getCurrent().getPagePath());
             })
             .catch(() => {
               Taro.showToast({

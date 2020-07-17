@@ -1,5 +1,10 @@
 @import "../../app.scss";
 
-.tool-bar-wrapper{
-    padding: 20px 0;
+.tool-bar-wrapper {
+  padding: 20px 0;
+}
+.safe-area-block-container {
+  height: 100px;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: content-box;
 }

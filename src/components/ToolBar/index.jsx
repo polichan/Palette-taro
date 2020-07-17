@@ -30,6 +30,7 @@ export default class ToolBar extends Component {
             {title}
           </AtButton>
         </View>
+        <View className='safe-area-block-container'></View>
       </View>
     );
   }

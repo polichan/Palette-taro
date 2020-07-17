@@ -11,6 +11,9 @@ export default class Thanks extends Component {
 
   handleNextClick(callback) {
     callback(false);
+    Taro.redirectTo({
+      url: '/pages/index/index'
+    })
   }
 
   render() {

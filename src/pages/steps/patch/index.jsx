@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { ATButton, AtRadio } from "taro-ui";
+import {  AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
 import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
@@ -78,7 +78,7 @@ export default class Index extends Component {
         <View hidden={!showGuideTip}>
           <GuideTip onConfirm={this.handleGuideTipConfirmClick.bind(this)} />
         </View>
-        <View className='step-container'>
+        <View className='patch-container'>
           <Panel
             title='请选择 Patch 大小'
             onHelp={this.handleHelpClick.bind(this)}
@@ -88,17 +88,14 @@ export default class Index extends Component {
                 {
                   label: "31 * 31",
                   value: "1",
-                  desc: "Patch 大小为 31 x 31 像素"
                 },
                 {
                   label: "29 * 29",
                   value: "2",
-                  desc: "Patch 大小为 29 x 29 像素"
                 },
                 {
                   label: "27 * 27",
                   value: "3",
-                  desc: "Patch 大小为 27 x 27 像素"
                 }
               ]}
               value={this.state.value}

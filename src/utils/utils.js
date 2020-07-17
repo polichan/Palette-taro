@@ -50,3 +50,23 @@ export function getSrc(name, slash = true){
 export function getBaseApi(){
   return Config.BASE_API
 }
+
+/**
+ * 封装后的页面跳转，防止出现页面栈超出最大显示
+ * @param   {string}  url  路由地址
+ */
+export function navigateTo(url) {
+  console.log(Taro.getCurrentPages())
+  if (Taro.getCurrentPages().length >= 10) {
+    Taro.redirectTo({
+      url: url,
+      success: function () { },
+      fail: function () { },
+      complete: function () { },
+    })
+  } else {
+    Taro.navigateTo({
+      url: url,
+    })
+  }
+}
