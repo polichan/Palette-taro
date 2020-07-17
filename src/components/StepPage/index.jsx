@@ -19,7 +19,8 @@ export default class StepPage extends Component {
     onBack: () => {},
     nextButtonLoading: false,
     backButtonLoading: false,
-    showPanel: true
+    showPanel: true,
+    showProgressBar: true
   };
 
   componentWillMount() {
@@ -80,11 +81,15 @@ export default class StepPage extends Component {
     this.props.step.stepQueue.back().then(this.setProgressPercent(false));
   }
 
+  options = {
+    addGlobalClass: true
+  }
+
   render() {
     const { stepQueue, progressPercent } = this.props.step;
-    const { nextButtonLoading, showPanel } = this.props;
+    const { nextButtonLoading, showPanel, showProgressBar } = this.props;
     return (
-      <View>
+      <View className='step-page'>
         <NavBar
           background='#fff'
           back
@@ -92,16 +97,18 @@ export default class StepPage extends Component {
           onBack={this.handleBack.bind(this)}
         />
         <NetStatusTip />
-        <Panel title='当前实验进度：'>
-          <View className='container'>
-            <AtProgress
-              percent={progressPercent}
-              isHidePercent
-              color='#18a8f6'
-              className='progress-bar'
-            />
-          </View>
-        </Panel>
+        {showProgressBar ? (
+          <Panel title='当前实验进度：'>
+            <View className='progress-bar-container'>
+              <AtProgress
+                percent={progressPercent}
+                isHidePercent
+                color='#18a8f6'
+                className='progress-bar'
+              />
+            </View>
+          </Panel>
+        ) : null}
         <View className='main-content'>
           {showPanel ? (
             <Panel title={stepQueue.getCurrent().getNavigationTitle() + "："}>

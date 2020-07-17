@@ -81,6 +81,7 @@ class App extends Component {
       'pages/steps/histogram/index',
       'pages/license/index',
       'pages/about/index',
+      'pages/thanks/index',
     ],
     window: {
       backgroundTextStyle: 'light',

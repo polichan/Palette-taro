@@ -150,6 +150,14 @@ export default {
           pagePath: "/pages/steps/histogram/index"
         })
       );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "致谢",
+          buttonTitle: "返回首页",
+          pagePath: "/pages/thanks/index"
+        })
+      );
       yield put({
         type: 'save',
         payload:{

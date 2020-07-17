@@ -1,13 +1,25 @@
 @import "../../app.scss";
 
 .main-content {
-  width: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  .container{
+    height: 100% !important;
+  }
 }
+
 
 .footer-content {
-  width: 100%;
+  width: 100% !important;
 }
 
-.container {
-  padding: 0 20px;
+page {
+  height: 100% !important;
+}
+
+.step-page{
+  height: 80% !important;
+  .progress-bar-container{
+    padding: 0 20px;
+  }
 }

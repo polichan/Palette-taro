@@ -40,7 +40,7 @@ export default class Index extends Component {
   render() {
     return (
       <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
-        <View className='step-container'>
+        <View>
           <Panel
             title='请选择 Filter 个数'
           >

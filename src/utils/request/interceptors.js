@@ -21,7 +21,7 @@ const customInterceptor = chain => {
       })
       if (response.data.data && response.data.data.reload) {
         // todo 退出登录
-        store.commit('user/LoginOut')
+        // store.commit('user/LoginOut')
       }
       return Promise.reject(response.data.msg)
     }
