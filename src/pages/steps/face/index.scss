@@ -1,0 +1,19 @@
+.face-img {
+  height: 150px;
+  width: 150px;
+}
+
+.face-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.face-item {
+  width: calc(calc(100% / 5) - 10px);
+  height: 150px;
+  margin: 10px;
+  box-sizing: border-box;
+}

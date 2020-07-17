@@ -37,8 +37,11 @@ export function base64src(base64data, cb) {
  *
  * @return  {string}  资源地址
  */
-export function getSrc(name){
-    return Config.BASE_API + name
+export function getSrc(name, slash = true){
+  if(slash){
+    return Config.BASE_API + '/' + name
+  }
+  return Config.BASE_API + name
 }
 
 /**

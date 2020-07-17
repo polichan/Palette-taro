@@ -12,16 +12,15 @@ export default {
      * @param {*} param0
      * @param {*} param1
      */
-    *login({ payload }, { call, put }) {
+    *getFaceList({payload}, { call, put }) {
       const res = yield call(faceApi.getFaceList, payload.data);
-      if (res.status) {
-        yield put({
-          type: "save",
-          payload: {
-            faceList: res.data
-          }
-        });
-      }
+      yield put({
+        type:'save',
+        payload:{
+          faceList: res.data
+        }
+      })
+      return res
     }
   },
 

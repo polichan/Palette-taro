@@ -1,36 +1,50 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Button, Image } from "@tarojs/components";
+import { View, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
+import { connect } from "@tarojs/redux";
+import { getSrc } from "@/utils/utils";
+import "./index.scss";
 
-export default class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      facesList: []
-    };
+@connect(({ face, loading }) => ({
+  face,
+  loading
+}))
+export default class Face extends Component {
+  componentWillMount() {
+    this.props
+      .dispatch({
+        type: "face/getFaceList",
+        payload: {
+          data: {
+            page: 1,
+            pageSize: 10
+          }
+        }
+      })
+      .then(res => {});
   }
-
-  componentWillMount() {}
 
   handleCloseFloatLayout() {}
 
-  handleNextClick(callback)
-  {
-    callback(true)
+  handleNextClick(callback) {
+    callback(true);
   }
 
   render() {
+    const { faceList } = this.props.face;
     // 脸部
-    const faces = this.state.facesList.map(item => {
-      return (
-        <View className='at-col' key={item.id}>
-          <Image src={item.url}></Image>
-        </View>
-      );
-    });
+    const faces =
+      faceList.list &&
+      faceList.list.map(item => {
+        return (
+          <View className='face-item' key={item.id}>
+            <Image src={getSrc(item.Media.cdnUrl)} className='face-img'></Image>
+          </View>
+        );
+      });
     return (
       <StepPage onNext={this.handleNextClick.bind(this)}>
-        <View className='at-row'>{faces}</View>
+        <View className='face-container'>{faces}</View>
       </StepPage>
     );
   }

@@ -1,6 +1,8 @@
-import request from "../../utils/request/request";
+import request from "@/utils/request/request";
 
-// eslint-disable-next-line import/prefer-default-export
+/**
+ * 获取人脸列表
+ */
 export const getFaceList = params => {
-  return request.get("/crm/faces", params);
+  return request.get("/crmFace/getCrmFaceList", params);
 };
