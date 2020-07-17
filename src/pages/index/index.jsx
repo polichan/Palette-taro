@@ -5,6 +5,7 @@ import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
 import * as CONSTANTS from "@/constants/index";
 import SchoolLogo from "../../assets/imgs/school_logo.png";
+import NetStatusTip from "@/components/NetStatusTip";
 import "./index.scss";
 
 @connect(({ user }) => ({
@@ -45,6 +46,7 @@ export default class Index extends Component {
     return (
       <View className='index'>
         <NavBar background='#fff' />
+        <NetStatusTip></NetStatusTip>
         <View className='container'>
           <View className='at-row'>
             <View className='at-col at-col-24 at-col--wrap'>

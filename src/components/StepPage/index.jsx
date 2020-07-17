@@ -6,7 +6,6 @@ import { connect } from "@tarojs/redux";
 import _isFunction from "lodash/isFunction";
 import { AtProgress } from "taro-ui";
 import Panel from "@/components/Panel";
-import NetStatusTip from "@/components/NetStatusTip";
 import {navigateTo} from "@/utils/utils";
 import "./index.scss";
 
@@ -95,7 +94,6 @@ export default class StepPage extends Component {
           title={stepQueue.getCurrent().getNavigationTitle()}
           onBack={this.handleBack.bind(this)}
         />
-        <NetStatusTip />
         {showProgressBar ? (
           <Panel title='当前实验进度：'>
             <View className='progress-bar-container'>
