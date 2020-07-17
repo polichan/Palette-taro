@@ -101,7 +101,7 @@ export default class Face extends Component {
 
     return (
       <View>
-        <StepPage onNext={this.handleNextClick.bind(this)}>
+        <StepPage onNext={this.handleNextClick.bind(this)} nextButtonDisabled={faceCategoryLoading}>
           <Skeleton
             animateName='elastic'
             title

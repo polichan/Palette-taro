@@ -20,7 +20,8 @@ export default class StepPage extends Component {
     nextButtonLoading: false,
     backButtonLoading: false,
     showPanel: true,
-    showProgressBar: true
+    showProgressBar: true,
+    nextButtonDisabled: false
   };
 
   componentWillMount() {
@@ -85,7 +86,7 @@ export default class StepPage extends Component {
 
   render() {
     const { stepQueue, progressPercent } = this.props.step;
-    const { nextButtonLoading, showPanel, showProgressBar } = this.props;
+    const { nextButtonLoading, showPanel, showProgressBar, nextButtonDisabled } = this.props;
     return (
       <View className='step-page'>
         <NavBar
@@ -120,6 +121,7 @@ export default class StepPage extends Component {
             title={stepQueue.getCurrent().getButtonTitle()}
             onClick={this.handleNextStepClick.bind(this)}
             nextButtonLoading={nextButtonLoading}
+            nextButtonDisabled={nextButtonDisabled}
           />
         </View>
       </View>
