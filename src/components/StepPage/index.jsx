@@ -1,141 +1,56 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import ToolBar from "@/components/ToolBar";
 import NavBar from "@/components/NavBar";
-import StepQueue from "@/utils/steps/stepsQueue";
-import Step from "@/utils/steps/step";
+import { connect } from "@tarojs/redux";
 import _isFunction from "lodash/isFunction";
+import { AtProgress } from "taro-ui";
+import Panel from "@/components/Panel";
 import "./index.scss";
 
-let sQueue = new StepQueue();
-sQueue.add(
-  new Step({
-    navigationTitle: "实验流程图",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/workflow/index"
-  })
-);
-sQueue.add(
-  new Step({
-    navigationTitle: "选择人脸图像",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/face/index"
-  })
-);
-sQueue.add(
-  new Step({
-    navigationTitle: "选择 Patch",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/patch/index"
-  })
-);
-sQueue.add(
-  new Step({
-    navigationTitle: "Patch 可视化",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/patch_visual/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "特征向量和特征值",
-    buttonTitle: "提交解答",
-    pagePath: "/pages/steps/characteristic/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "特征值可视化",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/characteristic_visual/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "选择 filter",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/filter/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "选择卷积层数",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/convolution/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "二值化",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/binarization/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "二值化可视化",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/binarization_visual/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "选择 Block 大小",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/block/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "Block可视化",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/block_visual/index"
-  })
-);
-
-sQueue.add(
-  new Step({
-    navigationTitle: "直方图",
-    buttonTitle: "下一步",
-    pagePath: "/pages/steps/histogram/index"
-  })
-);
-
+@connect(({ step, loading }) => ({
+  step,
+  loading
+}))
 export default class StepPage extends Component {
   static defaultProps = {
     onNext: () => {},
     onBack: () => {},
     nextButtonLoading: false,
-    backButtonLoading: false
-  };
-
-  state = {
-    stepQueue: sQueue
+    backButtonLoading: false,
+    showPanel: true
   };
 
   componentWillMount() {
-    this.setSteps();
+    if (!this.props.step.hasBuiltStepQueue) {
+      this.props
+        .dispatch({
+          type: "step/buildStepQueue"
+        })
+        .then();
+    }
   }
 
-  setSteps() {}
+  setProgressPercent(add = true) {
+    const all = this.props.step.stepQueue.getAll().length;
+    this.props.dispatch({
+      type: add ? "step/addProgressPercent" : "step/minusProgressPercent",
+      payload: {
+        progressPercent: 100 / all
+      }
+    });
+  }
 
   handleNextStepClick() {
     if (_isFunction(this.props.onNext)) {
       this.props.onNext(canNext => {
         if (canNext) {
-          this.state.stepQueue
+          this.props.step.stepQueue
             .next()
             .then(() => {
+              this.setProgressPercent();
               Taro.navigateTo({
-                url: this.state.stepQueue.getCurrent().getPagePath()
+                url: this.props.step.stepQueue.getCurrent().getPagePath()
               });
             })
             .catch(() => {
@@ -161,12 +76,12 @@ export default class StepPage extends Component {
   }
 
   handleBack() {
-    this.state.stepQueue.back();
+    this.props.step.stepQueue.back().then(this.setProgressPercent(false));
   }
 
   render() {
-    const { stepQueue } = this.state;
-    const { nextButtonLoading } = this.props;
+    const { stepQueue, progressPercent } = this.props.step;
+    const { nextButtonLoading, showPanel } = this.props;
     return (
       <View>
         <NavBar
@@ -175,7 +90,25 @@ export default class StepPage extends Component {
           title={stepQueue.getCurrent().getNavigationTitle()}
           onBack={this.handleBack.bind(this)}
         />
-        <View className='main-content'>{this.props.children}</View>
+        <Panel title='当前实验进度：'>
+          <View className='container'>
+            <AtProgress
+              percent={progressPercent}
+              isHidePercent
+              color='#18a8f6'
+              className='progress-bar'
+            />
+          </View>
+        </Panel>
+        <View className='main-content'>
+          {showPanel ? (
+            <Panel title={stepQueue.getCurrent().getNavigationTitle() + "："}>
+              <View className='container'>{this.props.children}</View>
+            </Panel>
+          ) : (
+            <View className='container'>{this.props.children}</View>
+          )}
+        </View>
         <View className='footer-content flex flex-direction-column flex-center'>
           <ToolBar
             title={stepQueue.getCurrent().getButtonTitle()}

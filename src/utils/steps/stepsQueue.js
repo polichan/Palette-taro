@@ -8,10 +8,6 @@ export default class StepQueue {
     this.steps.push(step);
   }
 
-  removeAtIndex(index) {
-    //todo remove
-  }
-
   getAll() {
     return this.steps;
   }
@@ -26,7 +22,7 @@ export default class StepQueue {
         this.current ++ 
         success()
       }else{
-        fail()
+        fail("没有下一个元素")
       }
     })
 

@@ -74,7 +74,7 @@ export default class Index extends Component {
   render() {
     const { helpFloatLayoutOpened, showGuideTip } = this.state;
     return (
-      <StepPage onNext={this.handleOnNextClick.bind(this)}>
+      <StepPage onNext={this.handleOnNextClick.bind(this)} showPanel={false}>
         <View hidden={!showGuideTip}>
           <GuideTip onConfirm={this.handleGuideTipConfirmClick.bind(this)} />
         </View>

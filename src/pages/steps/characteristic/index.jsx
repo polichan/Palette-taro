@@ -67,7 +67,6 @@ export default class Characteristic extends Component {
           <View className='question-explain'>
             <Article title={data.title} sections={data.sections}></Article>
           </View>
-
           <AtAccordion
             open={exampleOpen}
             onClick={this.handleAccordionOpen.bind(this, "exampleOpen")}

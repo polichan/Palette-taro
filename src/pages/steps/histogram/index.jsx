@@ -30,7 +30,7 @@ export default class Histogram extends Component {
   render() {
     const { helpFloatLayoutOpened } = this.state;
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)}>
+      <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
         <Panel title='直方图及直方图可视化' onHelp={this.handleHelpClick.bind(this)}>
           <View className='histogram-container flex flex-center flex-direction-column'>
             <Image src={HistogramImg}></Image>
