@@ -27,9 +27,11 @@ export default {
 
   effects: {
     *submitSteps({}, { call, select }) {
+      const steps = yield select(state => state.step.steps)
+      console.log(steps)
       const res = yield call(
         stepApi.submitSteps,
-        yield select(state => state.steps)
+        steps
       );
       return res;
     }, 

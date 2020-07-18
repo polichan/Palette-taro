@@ -1,7 +1,7 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 14:59:37
+ * @LastEditTime: 2020-07-18 23:24:25
  * @LastEditors: 陈鹏宇
  * @Description: Request 请求封装
  * @FilePath: \Palette-taro\src\utils\request\request.js
@@ -22,9 +22,9 @@ class request {
     contentType = params.contentType || contentType;
     let header = {'content_type': contentType};
     const token = Taro.getStorageSync(CONSTANTS.STORAGE_TOKEN_KEY);
-    const user = Taro.getStorageSync('user')
-    if (token) {
-      header = Object.assign(header, {'x-token': token, 'x-user-id': user.id})
+    const user = Taro.getStorageSync(CONSTANTS.STORAGE_USER_KEY)
+    if (token && user) {
+      header = Object.assign(header, {'x-token': token, 'x-user-id': user.ID})
     }
     const option = {
       url: BASE_URL + url,

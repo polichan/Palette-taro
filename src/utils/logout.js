@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-18 22:53:13
- * @LastEditTime: 2020-07-18 23:21:26
+ * @LastEditTime: 2020-07-18 23:41:53
  * @LastEditors: 陈鹏宇
  * @Description: 请修改此处文件描述
  * @Version: 1.0
@@ -24,11 +24,23 @@ const logOut = () => {
             store.dispatch({
                type: 'user/logOut'
             }).then(() => {
-               Taro.redirectTo({
-                  url: '/pages/index/index'
-               })
+               redirectToIndex()
             })
          }
+      })
+   } else {
+      redirectToIndex()
+   }
+}
+
+const redirectToIndex = () => {
+   const indexPagePath = '/pages/index/index'
+   const pages = Taro.getCurrentPages()
+   const lastPage = pages[pages.length - 1]
+   if (lastPage.route != indexPagePath) {
+      // 已经在首页了
+      Taro.redirectTo({
+         url: indexPagePath
       })
    }
 }

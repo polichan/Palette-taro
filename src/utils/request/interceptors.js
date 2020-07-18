@@ -1,13 +1,15 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-18 23:21:34
+ * @LastEditTime: 2020-07-18 23:37:17
  * @LastEditors: 陈鹏宇
  * @Description: 请求结束拦截器
  * @Version: 1.0
  */
 import Taro from "@tarojs/taro";
 import logOut from "@/utils/logout";
+
+const toastWaitDuration = 2000
 
 const customInterceptor = chain => {
   const requestParams = chain.requestParams;
@@ -26,10 +28,12 @@ const customInterceptor = chain => {
       Taro.showToast({
         icon: 'none',
         message: response.data.msg,
-        duration: 2000
+        duration: toastWaitDuration,
       })
       if (response.data.data && response.data.data.reload) {
-        logOut()
+        setTimeout(() => {
+          logOut()
+        }, toastWaitDuration);
       }
       return Promise.reject(response.data.msg)
     }

@@ -5,8 +5,8 @@ import EmptyData from "@/components/EmptyData";
 import Skeleton from "taro-skeleton";
 import FormBox from "@/components/FormBox";
 import StepPage from "@/components/StepPage";
-import {getSrc} from "@/utils/utils";
-
+import { getSrc } from "@/utils/utils";
+import "./index.scss";
 
 @connect(({ step, loading }) => ({
   step,
@@ -15,6 +15,9 @@ import {getSrc} from "@/utils/utils";
 export default class Result extends Component {
 
   state = {
+    result: {
+
+    },
     resultImg: null
   }
 
@@ -23,6 +26,7 @@ export default class Result extends Component {
       type: 'step/submitSteps',
     }).then((res) => {
       this.setState({
+        result: res.data,
         resultImg: getSrc(res.data.media.cdnUrl)
       })
     })
@@ -33,10 +37,18 @@ export default class Result extends Component {
   }
 
 
+  handleResultImgClick() {
+    Taro.previewImage({
+      current: this.state.resultImg,
+      urls: [this.state.resultImg]
+    })
+  }
+
+
   render() {
     const { steps } = this.props.step
     const isResultLoading = this.props.loading.effects['step/submitSteps']
-    const { resultImg } = this.state
+    const { result, resultImg } = this.state
     return (
       <StepPage onNext={this.handleNextClick.bind(this)}>
         <Skeleton
@@ -58,7 +70,12 @@ export default class Result extends Component {
           <FormBox label="BlockSize">
             <Text className='form-box-text'>{steps.histBlockSize}</Text>
           </FormBox>
-          <Image src={resultImg}></Image>
+          <FormBox label="准确率">
+            <Text className='form-box-text'>{result.accuracy}</Text>
+          </FormBox>
+          <View className='result-container flex flex-center flex-direction-column'>
+            <Image src={resultImg} className='result-img' onClick={this.handleResultImgClick.bind(this)}></Image>
+          </View>
         </Skeleton>
       </StepPage>
     );
