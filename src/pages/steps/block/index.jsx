@@ -4,8 +4,13 @@ import { AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
 import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
+import { connect } from "@tarojs/redux";
 import "./index.scss";
 
+@connect(({ step, loading }) => ({
+  step,
+  loading
+}))
 export default class Index extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +19,7 @@ export default class Index extends Component {
       helpFloatLayoutOpened: false
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   config = {
     navigationBarTitleText: "选择 Block"
@@ -43,15 +48,24 @@ export default class Index extends Component {
   }
 
   handleNextClick(callback) {
-    if(this.state.blockValue == null)
-    {
+    const blockValue = this.state.blockValue
+    if (blockValue != null) {
+      this.props.dispatch({
+        type: 'step/saveStep',
+        payload: {
+          data:{
+            histBlockSize: blockValue
+          }
+        }
+      }).then(() => {
+        callback(true);
+      })
+    } else {
       Taro.showToast({
         title: '请选择 Block 大小',
         icon: 'none'
       })
-      return
     }
-    callback(true);
   }
 
   render() {
@@ -67,15 +81,15 @@ export default class Index extends Component {
               options={[
                 {
                   label: "8 * 8",
-                  value: "1"
+                  value: "8x8"
                 },
                 {
                   label: "16 * 16",
-                  value: "2"
+                  value: "16x16"
                 },
                 {
                   label: "32 * 32",
-                  value: "3"
+                  value: "32x32"
                 }
               ]}
               value={this.state.blockValue}

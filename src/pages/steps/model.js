@@ -28,6 +28,18 @@ export default {
       );
       return res;
     }, 
+
+    *saveStep({payload}, {put, select}){
+      const orig = yield select(state=>state.step.steps)
+      yield put({
+        type: 'save',
+        payload:{
+          steps: Object.assign(orig, {...payload.data})
+        }
+      })
+      return orig
+    },
+    
     *addProgressPercent({payload}, {select,  put}){
       const orig = yield select(state => state.step.progressPercent)
       yield put({

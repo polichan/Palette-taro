@@ -6,9 +6,13 @@ import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
 import { getSrc } from "@/utils/utils";
 import { CDN_IMAGE } from "../../../constants/index";
-
+import { connect } from "@tarojs/redux";
 import "./index.scss";
 
+@connect(({ step, loading }) => ({
+  step,
+  loading
+}))
 export default class Index extends Component {
   constructor(props) {
     super(props);
@@ -44,16 +48,26 @@ export default class Index extends Component {
     });
   }
 
+
   handleNextClick(callback) {
-    if (this.state.convolutionValue == null) {
+    const convolutionValue = this.state.convolutionValue
+    if (convolutionValue != null) {
+      this.props.dispatch({
+        type: 'step/saveStep',
+        payload: {
+          data: {
+            numStages: convolutionValue
+          }
+        }
+      }).then(() => {
+        callback(true);
+      })
+    } else {
       Taro.showToast({
         icon: 'none',
         title: '请选择卷积层数'
       })
-      callback(false)
-      return
     }
-    callback(true)
   }
 
   handleImageLoad() {
@@ -79,11 +93,11 @@ export default class Index extends Component {
               options={[
                 {
                   label: "一层",
-                  value: "1"
+                  value: "一层"
                 },
                 {
-                  label: "两层",
-                  value: "2"
+                  label: "二层",
+                  value: "二层"
                 }
               ]}
               value={this.state.convolutionValue}

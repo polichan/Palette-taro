@@ -4,8 +4,13 @@ import { AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
 import StepPage from "@/components/StepPage";
 import FloatLayout from "@/components/FloatLayout";
+import { connect } from "@tarojs/redux";
 import "./index.scss";
 
+@connect(({ step, loading }) => ({
+  step,
+  loading
+}))
 export default class Index extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +19,7 @@ export default class Index extends Component {
       helpFloatLayoutOpened: false
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   config = {
     navigationBarTitleText: "选择 Filter"
@@ -27,16 +32,24 @@ export default class Index extends Component {
   }
 
   handleNextClick(callback) {
-    if(this.state.filterValue == null)
-    {
+    const filterValue = this.state.filterValue
+    if (filterValue != null) {
+      this.props.dispatch({
+        type: 'step/saveStep',
+        payload: {
+          data: {
+            block: filterValue
+          }
+        }
+      }).then(() => {
+        callback(true);
+      })
+    } else {
       Taro.showToast({
         icon: 'none',
         title: '请选择 filter'
       })
-      callback(false)
-      return
     }
-    callback(true);
   }
 
   handeCloseHelpFloatLayoutClick() {
@@ -52,7 +65,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const {helpFloatLayoutOpened} = this.state
+    const { helpFloatLayoutOpened } = this.state
     return (
       <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
         <View>
@@ -81,12 +94,12 @@ export default class Index extends Component {
           </Panel>
         </View>
         <FloatLayout
-            isOpened={helpFloatLayoutOpened}
-            onClose={() => {
-              this.handeCloseHelpFloatLayoutClick();
-            }}
-            type='filter'
-          ></FloatLayout>
+          isOpened={helpFloatLayoutOpened}
+          onClose={() => {
+            this.handeCloseHelpFloatLayoutClick();
+          }}
+          type='filter'
+        ></FloatLayout>
       </StepPage>
     );
   }

@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-15 15:45:39
+ * @LastEditTime: 2020-07-18 19:29:48
  * @LastEditors: 陈鹏宇
  * @Description: 请求结束拦截器
  * @Version: 1.0
@@ -12,6 +12,13 @@ const customInterceptor = chain => {
   const requestParams = chain.requestParams;
 
   return chain.proceed(requestParams).then(response => {
+    if(response.statusCode == 404){
+      Taro.showToast({
+        title: '404',
+        icon: 'none'
+      })
+      return Promise.reject(response.data.msg)
+    }
     if (response.data.code == 0) {
       return response.data
     } else {

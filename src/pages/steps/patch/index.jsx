@@ -6,8 +6,13 @@ import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
 import GuideTip from "@/components/GuideTip";
 import * as CONSTANT from "@/constants/index";
+import { connect } from "@tarojs/redux";
 import "./index.scss";
 
+@connect(({ step, loading }) => ({
+  step,
+  loading
+}))
 export default class Index extends Component {
   constructor(props) {
     super(props);
@@ -47,15 +52,24 @@ export default class Index extends Component {
     });
   }
 
-  handleOnNextClick(callback) {
-    if (this.state.value == null) {
+  handleNextClick(callback) {
+    const value = this.state.value
+    if (value != null) {
+      this.props.dispatch({
+        type: 'step/saveStep',
+        payload: {
+          data: {
+            patchSize: value
+          }
+        }
+      }).then(() => {
+        callback(true);
+      })
+    } else {
       Taro.showToast({
         icon: 'none',
         title: '请选择 Patch 大小'
       })
-      callback(false)
-    } else {
-      callback(true)
     }
   }
 
@@ -74,7 +88,7 @@ export default class Index extends Component {
   render() {
     const { helpFloatLayoutOpened, showGuideTip } = this.state;
     return (
-      <StepPage onNext={this.handleOnNextClick.bind(this)} showPanel={false}>
+      <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
         <View hidden={!showGuideTip}>
           <GuideTip onConfirm={this.handleGuideTipConfirmClick.bind(this)} />
         </View>
@@ -87,15 +101,15 @@ export default class Index extends Component {
               options={[
                 {
                   label: "31 * 31",
-                  value: "1",
+                  value: "31x31",
                 },
                 {
                   label: "29 * 29",
-                  value: "2",
+                  value: "29x29",
                 },
                 {
                   label: "27 * 27",
-                  value: "3",
+                  value: "27x27",
                 }
               ]}
               value={this.state.value}
