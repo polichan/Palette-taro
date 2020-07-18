@@ -15,10 +15,10 @@ export default {
   namespace: "step",
   state: {
     steps: {
-      block: 8,
-      numStages: "二层",
-      patchSize: "7x7",
-      histBlockSize: "8x8"
+      block: null,
+      numStages: null,
+      patchSize: null,
+      histBlockSize: null
     },
     progressPercent: 0,
     stepQueue: s,

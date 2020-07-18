@@ -1,7 +1,7 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-18 23:14:31
+ * @LastEditTime: 2020-07-18 23:45:15
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
  */
@@ -14,7 +14,7 @@ export default {
   state: {
     user: null,
     token: null,
-    isLogin: true
+    isLogin: false
   },
 
   effects: {
