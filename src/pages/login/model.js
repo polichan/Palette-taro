@@ -1,7 +1,7 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-18 11:23:16
+ * @LastEditTime: 2020-07-18 23:14:31
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
  */
@@ -34,12 +34,30 @@ export default {
         }
       });
       Taro.setStorageSync(CONSTANTS.STORAGE_TOKEN_KEY, res.data.token)
+      Taro.setStorageSync(CONSTANTS.STORAGE_USER_KEY, res.data.user)
       return true;
     },
 
     *getCaptcha({}, { call }) {
       const res = yield call(userApi.getCaptcha);
       return res;
+    },
+
+    *joinInBlackList({}, {call}){
+      const res = yield call(userApi.joinInBlockList)
+      return res
+    },
+
+    *logOut({}, {put}){
+      yield put({
+        type: 'save',
+        payload:{
+          user: null,
+          token: null,
+          isLogin: false
+        }
+      })
+      Taro.clearStorageSync()
     }
   },
 

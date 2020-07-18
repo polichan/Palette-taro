@@ -31,10 +31,6 @@ export default class Index extends Component {
     });
   }
 
-  handleConfirmClick() {
-    console.log(this.state);
-  }
-
   handeCloseHelpFloatLayoutClick() {
     this.setState({
       helpFloatLayoutOpened: false

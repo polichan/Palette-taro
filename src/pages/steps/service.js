@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-18 19:30:17
+ * @LastEditTime: 2020-07-18 22:41:24
  * @LastEditors: 陈鹏宇
  * @Description: 接口
  * @Version: 1.0
@@ -13,6 +13,6 @@ import request from '@/utils/request/request';
  * @param   {Object}  data  表单
  */
 export const submitSteps = (data) => {
-    return request.post("/crmFaceRecognitionResult/findCrmFaceRecognitionResultByOptions", data)
+    return request.get("/crmFaceRecognitionResult/findCrmFaceRecognitionResultByOptions", data)
 }
 

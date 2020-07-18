@@ -23,3 +23,10 @@ export const login = (data) => {
 export const getCaptcha = () => {
   return request.post('/base/captcha')
 }
+
+/**
+ * JWT 加入黑名单
+ */
+export const joinInBlockList = () => {
+  return request.post("/jwt/jsonInBlacklist")
+}

@@ -14,7 +14,12 @@ s.add(
 export default {
   namespace: "step",
   state: {
-    steps: {},
+    steps: {
+      block: 8,
+      numStages: "二层",
+      patchSize: "7x7",
+      histBlockSize: "8x8"
+    },
     progressPercent: 0,
     stepQueue: s,
     hasBuiltStepQueue: false
