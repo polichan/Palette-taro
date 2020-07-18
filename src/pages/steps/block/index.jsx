@@ -60,18 +60,22 @@ export default class Index extends Component {
       <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
         <View className='step-container'>
           <Panel
-            title='请选择卷积层数'
+            title='请选择 Block 的大小'
             onHelp={this.handleHelpClick.bind(this)}
           >
             <AtRadio
               options={[
                 {
-                  label: "5 * 5",
+                  label: "8 * 8",
                   value: "1"
                 },
                 {
-                  label: "7 * 7",
+                  label: "16 * 16",
                   value: "2"
+                },
+                {
+                  label: "32 * 32",
+                  value: "3"
                 }
               ]}
               value={this.state.blockValue}

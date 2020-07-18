@@ -25,3 +25,9 @@ page {
     padding: 0 20px;
   }
 }
+
+.safe-area-block-container {
+  height: 100px;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
+  box-sizing: content-box;
+}

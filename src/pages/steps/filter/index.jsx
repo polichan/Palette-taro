@@ -3,6 +3,7 @@ import { View } from "@tarojs/components";
 import { AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
 import StepPage from "@/components/StepPage";
+import FloatLayout from "@/components/FloatLayout";
 import "./index.scss";
 
 export default class Index extends Component {
@@ -10,6 +11,7 @@ export default class Index extends Component {
     super(props);
     this.state = {
       filterValue: null,
+      helpFloatLayoutOpened: false
     };
   }
   componentDidMount() {}
@@ -37,12 +39,26 @@ export default class Index extends Component {
     callback(true);
   }
 
+  handeCloseHelpFloatLayoutClick() {
+    this.setState({
+      helpFloatLayoutOpened: false
+    });
+  }
+
+  handleHelpClick() {
+    this.setState({
+      helpFloatLayoutOpened: true
+    });
+  }
+
   render() {
+    const {helpFloatLayoutOpened} = this.state
     return (
       <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
         <View>
           <Panel
             title='请选择 Filter 个数'
+            onHelp={this.handleHelpClick.bind(this)}
           >
             <AtRadio
               options={[
@@ -64,6 +80,13 @@ export default class Index extends Component {
             />
           </Panel>
         </View>
+        <FloatLayout
+            isOpened={helpFloatLayoutOpened}
+            onClose={() => {
+              this.handeCloseHelpFloatLayoutClick();
+            }}
+            type='filter'
+          ></FloatLayout>
       </StepPage>
     );
   }

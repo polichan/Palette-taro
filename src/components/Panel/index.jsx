@@ -4,6 +4,9 @@ import _isFunction from "lodash/isFunction";
 import "./index.scss";
 
 export default class Index extends Component {
+  static defaultProps = {
+    title: "",
+  }
   state = {};
 
   componentDidMount() {}

@@ -49,6 +49,12 @@ export default class FloatLayout extends Component {
           title: Explain.HISTOGRAM_EXPLAIN.name,
           content: Explain.HISTOGRAM_EXPLAIN.content
         });
+        break;
+      case "filter":
+        this.setState({
+          title: Explain.FILTER_EXPLAIN.name,
+          content: Explain.FILTER_EXPLAIN.content
+        })
       default:
         break;
     }

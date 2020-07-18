@@ -115,6 +115,7 @@ export default class StepPage extends Component {
           ) : (
             <View className='container'>{this.props.children}</View>
           )}
+        <View className='safe-area-block-container'></View>
         </View>
         <View className='footer-content flex flex-direction-column flex-center'>
           <ToolBar

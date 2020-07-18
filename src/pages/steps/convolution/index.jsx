@@ -1,9 +1,12 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
-import { ATButton, AtRadio } from "taro-ui";
+import { View, Image } from "@tarojs/components";
+import { AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
 import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
+import { getSrc } from "@/utils/utils";
+import { CDN_IMAGE } from "../../../constants/index";
+
 import "./index.scss";
 
 export default class Index extends Component {
@@ -11,10 +14,13 @@ export default class Index extends Component {
     super(props);
     this.state = {
       convolutionValue: null,
-      helpFloatLayoutOpened: false
+      helpFloatLayoutOpened: false,
+      imgs: {
+        ConvolutionImg: getSrc(CDN_IMAGE.CONVOLUTION_VISUAL, false)
+      }
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   config = {
     navigationBarTitleText: "选择卷积层数"
@@ -38,9 +44,8 @@ export default class Index extends Component {
     });
   }
 
-  handleNextClick(callback){
-    if(this.state.convolutionValue == null)
-    {
+  handleNextClick(callback) {
+    if (this.state.convolutionValue == null) {
       Taro.showToast({
         icon: 'none',
         title: '请选择卷积层数'
@@ -49,6 +54,16 @@ export default class Index extends Component {
       return
     }
     callback(true)
+  }
+
+  handleImageLoad() {
+    const gifurl = this.state.imgs.ConvolutionImg;
+    const nowTime = + new Date();
+    setTimeout(() => {
+      this.setState({
+        patchVisualImg: gifurl + '?' + nowTime
+      })
+    }, 9000)
   }
 
   render() {
@@ -82,7 +97,7 @@ export default class Index extends Component {
             }}
             type='convolution'
           >
-            
+            <Image src={this.state.imgs.ConvolutionImg} lazyLoad className='convolution-img'></Image>
           </FloatLayout>
         </View>
       </StepPage>

@@ -3,12 +3,16 @@ import { View, Image, Text } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import Panel from "@/components/Panel";
 import FloatLayout from "@/components/FloatLayout";
-import HistogramImg from "../../../assets/imgs/histogram_visual.png";
+import { getSrc } from "@/utils/utils";
+import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
 export default class Histogram extends Component {
   state = {
-    helpFloatLayoutOpened: false
+    helpFloatLayoutOpened: false,
+    imgs:{
+      histogramVisualImg: getSrc(CDN_IMAGE.HISTOGRAM_VISUAL, false)
+    }
   };
 
   handeCloseHelpFloatLayoutClick() {
@@ -33,7 +37,7 @@ export default class Histogram extends Component {
       <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
         <Panel title='直方图及直方图可视化' onHelp={this.handleHelpClick.bind(this)}>
           <View className='histogram-container flex flex-center flex-direction-column'>
-            <Image src={HistogramImg}></Image>
+            <Image src={this.state.imgs.histogramVisualImg} className='histogram-img'></Image>
           </View>
         </Panel>
         <FloatLayout

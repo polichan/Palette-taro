@@ -1,10 +1,17 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
-import BlockVisualImg from "../../../assets/imgs/block_visual.jpg";
+import {getSrc} from "@/utils/utils";
+import {CDN_IMAGE} from "../../../constants/index";
 import "./index.scss";
 
 export default class BlockVisual extends Component {
+
+  state = {
+    imgs:{
+      blockVisualImg: getSrc(CDN_IMAGE.BLOCK_VISUAL, false)
+    }
+  }
   handleNextClick(callback) {
     callback(true);
   }
@@ -13,8 +20,8 @@ export default class BlockVisual extends Component {
     return (
       <StepPage onNext={this.handleNextClick.bind(this)}>
         <View className='block-visual-container flex flex-center flex-direction-column'>
-          <Text className='title'>Block的可视化（第一层）</Text>
-          <Image src={BlockVisualImg} className='block-img'></Image>
+          <Image src={this.state.imgs.blockVisualImg} className='block-img'></Image>
+          <Text className='title'>为了方便显示，这里展示的是 32x32 大小的 block</Text>
         </View>
       </StepPage>
     );

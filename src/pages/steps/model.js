@@ -113,6 +113,14 @@ export default {
       
       sQueue.add(
         new Step({
+          navigationTitle: "卷积结果可视化",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/convolution_visual/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
           navigationTitle: "二值化",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/binarization/index"
@@ -148,6 +156,14 @@ export default {
           navigationTitle: "直方图",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/histogram/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "测试结果",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/result/index"
         })
       );
 
