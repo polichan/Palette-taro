@@ -54,8 +54,8 @@ export default class Result extends Component {
         <Skeleton
           animateName='elastic'
           title
-          row={2}
-          rowWidth={["100%", "50%"]}
+          row={5}
+          rowWidth={["100%", "80%", "60%", "40%", "20%"]}
           loading={isResultLoading}
         >
           <FormBox label="卷积层数">
@@ -71,7 +71,7 @@ export default class Result extends Component {
             <Text className='form-box-text'>{steps.histBlockSize}</Text>
           </FormBox>
           <FormBox label="准确率">
-            <Text className='form-box-text'>{result.accuracy}</Text>
+            <Text className='form-box-text'>{result.accuracy ? result.accuracy : '未知'}</Text>
           </FormBox>
           <View className='result-container flex flex-center flex-direction-column'>
             <Image src={resultImg} className='result-img' onClick={this.handleResultImgClick.bind(this)}></Image>
