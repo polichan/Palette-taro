@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-18 22:53:13
- * @LastEditTime: 2020-07-18 23:41:53
+ * @LastEditTime: 2020-07-19 10:22:31
  * @LastEditors: 陈鹏宇
  * @Description: 请修改此处文件描述
  * @Version: 1.0
@@ -24,12 +24,20 @@ const logOut = () => {
             store.dispatch({
                type: 'user/logOut'
             }).then(() => {
-               redirectToIndex()
+               store.dispatch({
+                  type: 'step/setStepQueueToRebuild',
+               }).then(() => {
+                  redirectToIndex()
+               })
             })
          }
       })
    } else {
-      redirectToIndex()
+      store.dispatch({
+         type: 'step/setStepQueueToRebuild',
+      }).then(() => {
+         redirectToIndex()
+      })
    }
 }
 

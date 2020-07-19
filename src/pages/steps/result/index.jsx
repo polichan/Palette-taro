@@ -33,7 +33,7 @@ export default class Result extends Component {
   }
 
   handleNextClick(callback) {
-    callback(false)
+    callback(true)
   }
 
 

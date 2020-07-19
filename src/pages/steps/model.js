@@ -26,7 +26,7 @@ export default {
   },
 
   effects: {
-    *submitSteps({}, { call, select }) {
+    *submitSteps({ }, { call, select }) {
       const steps = yield select(state => state.step.steps)
       console.log(steps)
       const res = yield call(
@@ -34,40 +34,50 @@ export default {
         steps
       );
       return res;
-    }, 
+    },
 
-    *saveStep({payload}, {put, select}){
-      const orig = yield select(state=>state.step.steps)
+    *setStepQueueToRebuild({ }, { put }) {
       yield put({
         type: 'save',
-        payload:{
-          steps: Object.assign(orig, {...payload.data})
+        payload: {
+          hasBuiltStepQueue: false
+        }
+      })
+      return true
+    },
+
+    *saveStep({ payload }, { put, select }) {
+      const orig = yield select(state => state.step.steps)
+      yield put({
+        type: 'save',
+        payload: {
+          steps: Object.assign(orig, { ...payload.data })
         }
       })
       return orig
     },
-    
-    *addProgressPercent({payload}, {select,  put}){
+
+    *addProgressPercent({ payload }, { select, put }) {
       const orig = yield select(state => state.step.progressPercent)
       yield put({
         type: 'save',
-        payload:{
+        payload: {
           progressPercent: orig + payload.progressPercent
         }
       })
       return true
     },
-    *minusProgressPercent({payload}, {select, put}){
+    *minusProgressPercent({ payload }, { select, put }) {
       const orig = yield select(state => state.step.progressPercent)
       yield put({
         type: 'save',
-        payload:{
+        payload: {
           progressPercent: orig - payload.progressPercent
         }
       })
       return true
     },
-    *buildStepQueue({}, {put}){
+    *buildStepQueue({ }, { put }) {
       let sQueue = new StepQueue();
       sQueue.add(
         new Step({
@@ -97,7 +107,7 @@ export default {
           pagePath: "/pages/steps/patch_visual/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "特征向量和特征值",
@@ -105,7 +115,7 @@ export default {
           pagePath: "/pages/steps/characteristic/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "特征值可视化",
@@ -113,7 +123,7 @@ export default {
           pagePath: "/pages/steps/characteristic_visual/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "选择 filter",
@@ -121,7 +131,7 @@ export default {
           pagePath: "/pages/steps/filter/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "选择卷积层数",
@@ -129,7 +139,7 @@ export default {
           pagePath: "/pages/steps/convolution/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "卷积结果可视化",
@@ -145,7 +155,7 @@ export default {
           pagePath: "/pages/steps/binarization/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "二值化可视化",
@@ -153,7 +163,7 @@ export default {
           pagePath: "/pages/steps/binarization_visual/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "选择 Block 大小",
@@ -161,7 +171,7 @@ export default {
           pagePath: "/pages/steps/block/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "Block可视化",
@@ -169,7 +179,7 @@ export default {
           pagePath: "/pages/steps/block_visual/index"
         })
       );
-      
+
       sQueue.add(
         new Step({
           navigationTitle: "直方图",
@@ -195,7 +205,7 @@ export default {
       );
       yield put({
         type: 'save',
-        payload:{
+        payload: {
           stepQueue: sQueue,
           hasBuiltStepQueue: true
         }
