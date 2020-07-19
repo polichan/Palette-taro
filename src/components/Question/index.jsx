@@ -8,7 +8,7 @@ export default class Question extends Component {
   static defaultProps = {
     content: "",
     options: [],
-    rightOptions: []
+    rightOption: []
   };
 
   options = {
