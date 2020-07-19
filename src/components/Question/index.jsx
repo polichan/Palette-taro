@@ -10,11 +10,21 @@ export default class Question extends Component {
     options: [],
     rightOptions: []
   };
-  state = {};
 
   options = {
     addGlobalClass: true
   };
+
+  handleImgClick(src, imgList) {
+    Taro.previewImage({ urls: imgList, current: src })
+  }
+
+  handleLinkClick(href) {
+    Taro.setClipboardData({ data: href }).then(() => {
+      Taro.showToast({ title: '链接已复制' }).then(() => {
+      })
+    })
+  }
 
   render() {
     const { content } = this.props;
@@ -27,6 +37,8 @@ export default class Question extends Component {
               theme='light'
               latexApi='https://md.werfei.com/?tex'
               content={content}
+              onImgClick={this.handleImgClick.bind(this)}
+              onLinkClick={this.handleLinkClick.bind(this)}
             />
           </View>
         </View>

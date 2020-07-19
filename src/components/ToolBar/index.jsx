@@ -6,7 +6,7 @@ import "./index.scss";
 
 export default class ToolBar extends Component {
   static defaultProps = {
-    onClick: () => {},
+    onClick: () => { },
     title: "",
     nextButtonLoading: false,
     nextButtonDisabled: false
@@ -32,7 +32,6 @@ export default class ToolBar extends Component {
             {nextButtonDisabled ? "加载中.." : title}
           </AtButton>
         </View>
-        <View className='safe-area-block-container'></View>
       </View>
     );
   }
