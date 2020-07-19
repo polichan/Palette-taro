@@ -77,14 +77,24 @@ export default class Index extends Component {
           type: "user/login",
           payload: { data: params },
         }).then(() => {
-          Taro.redirectTo({
-            url: "/pages/index/index"
-          });
+          Taro.showToast({
+            icon: 'none',
+            title: '登录成功',
+            duration: 2000,
+            complete: () => {
+              setTimeout(() => {
+                Taro.redirectTo({
+                  url: "/pages/index/index"
+                });
+              }, 2000);
+            }
+          })
         })
       } else {
         Taro.showToast({
           icon: "none",
-          title: params.message
+          title: params.message,
+          duration: 2000
         });
       }
     });

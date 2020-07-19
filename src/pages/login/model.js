@@ -1,7 +1,7 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-18 23:45:15
+ * @LastEditTime: 2020-07-19 10:16:39
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
  */
@@ -58,6 +58,18 @@ export default {
         }
       })
       Taro.clearStorageSync()
+    },
+
+    *restoreLoginStatus({payload}, {put}){
+      yield put({
+        type: 'save',
+        payload:{
+          user: payload.data.user,
+          token: payload.data.token,
+          isLogin: true
+        }
+      })
+      return true
     }
   },
 

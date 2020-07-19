@@ -3,6 +3,7 @@ import { View, Text, Image } from "@tarojs/components";
 import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
+import * as Utils from "@/utils/utils";
 import * as CONSTANTS from "@/constants/index";
 import SchoolLogo from "../../assets/imgs/school_logo.png";
 import NetStatusTip from "@/components/NetStatusTip";
@@ -15,6 +16,10 @@ export default class Index extends Component {
   config = {
     navigationBarTitleText: "首页"
   };
+
+  componentWillMount() {
+    Utils.restoreLoginStatus()
+  }
 
   handleLoginClick() {
     Taro.navigateTo({
@@ -79,18 +84,18 @@ export default class Index extends Component {
                   进行实验
                 </AtButton>
               ) : (
-                <AtButton
-                  type='primary'
-                  className='login-btn c-btn-linergradient-blue'
-                  size='normal'
-                  openType='getUserInfo'
-                  onClick={() => {
-                    this.handleLoginClick();
-                  }}
-                >
-                  登录
-                </AtButton>
-              )}
+                  <AtButton
+                    type='primary'
+                    className='login-btn c-btn-linergradient-blue'
+                    size='normal'
+                    openType='getUserInfo'
+                    onClick={() => {
+                      this.handleLoginClick();
+                    }}
+                  >
+                    登录
+                  </AtButton>
+                )}
             </View>
           </View>
           <View className='about-box'>

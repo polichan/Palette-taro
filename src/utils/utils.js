@@ -1,5 +1,8 @@
 import Taro from "@tarojs/taro";
-import * as Config from "../config/config"
+import * as Config from "../config/config";
+import * as CONSTANTS from "../constants/index";
+import store from "./store/store";
+import _isFunction from "lodash/isFunction";
 
 const FILE_BASE_NAME = "local"
 /**
@@ -71,3 +74,24 @@ export function navigateTo(url) {
   }
 }
 
+
+export function restoreLoginStatus(callback){
+  const token = Taro.getStorageSync(CONSTANTS.STORAGE_TOKEN_KEY)
+  const user = Taro.getStorageSync(CONSTANTS.STORAGE_USER_KEY)
+
+  if((token != ''  && token !== null) && (user != '' && user != null)){
+    store.dispatch({
+      type: 'user/restoreLoginStatus',
+      payload:{
+        data:{
+          token: token,
+          user: user
+        }
+      }
+    }).then(()=>{
+      if(_isFunction(callback)){
+        callback()
+      }
+    })
+  }
+}
