@@ -28,7 +28,7 @@ export default class Index extends Component {
         <StepPage onNext={this.handleNextClick.bind(this)}>
           <Image
             lazyLoad
-            src={workFlowImg}
+            src={this.state.workFlowImg}
             mode='aspectFit'
             className='work-flow-img'
             onClick={this.handleImageClick.bind(this)}

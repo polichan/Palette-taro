@@ -34,6 +34,17 @@ export default class Characteristic extends Component {
   };
 
 
+
+  componentWillMount() {
+    Taro.nextTick(()=>{
+      this.getExampleQuestion().then(res => {
+        this.setState({
+          questions: Object.assign(this.state.questions, { example: res })
+        })
+      })
+    })
+  }
+
   handleTabClick(value) {
     if (this.state.hasLoadedTabList.indexOf(value) == -1) {
       this.setState({
@@ -54,19 +65,6 @@ export default class Characteristic extends Component {
       })
     }
   }
-
-
-  componentWillMount() {
-    Taro.nextTick(()=>{
-      this.getExampleQuestion().then(res => {
-        this.setState({
-          questions: Object.assign(this.state.questions, { example: res })
-        })
-      })
-    })
-
-  }
-
 
   getExampleQuestion() {
     return new Promise((resolve) => {
