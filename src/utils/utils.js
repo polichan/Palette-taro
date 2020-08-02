@@ -1,8 +1,8 @@
 import Taro from "@tarojs/taro";
+import _isFunction from "lodash/isFunction";
 import * as Config from "../config/config";
 import * as CONSTANTS from "../constants/index";
 import store from "./store/store";
-import _isFunction from "lodash/isFunction";
 
 const FILE_BASE_NAME = "local"
 /**
@@ -11,6 +11,11 @@ const FILE_BASE_NAME = "local"
  */
 export const createAction = type => payload => ({ type, payload });
 
+/**
+ * Base字符串转换为 Binary Src
+ * @param {*} base64data Base64字符串
+ * @param {*} cb 回调
+ */
 export function base64src(base64data, cb) {
   const [, format, bodyData] =
     /data:image\/(\w+);base64,(.*)/.exec(base64data) || [];
