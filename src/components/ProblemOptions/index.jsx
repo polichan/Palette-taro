@@ -16,7 +16,7 @@ export default class ProblemOptions extends Component {
   componentWillMount() {
     const temp = [];
     this.props.optionList.forEach(element => {
-      temp.push({ label: element.content, value: element.ID });
+      temp.push({ label: element.content, value: element.ID.toString() });
     });
     this.setState({
       list: temp
@@ -25,7 +25,7 @@ export default class ProblemOptions extends Component {
 
   handleChange(value) {
     this.setState({
-      value: value.toString()
+      value: value
     });
   }
 
