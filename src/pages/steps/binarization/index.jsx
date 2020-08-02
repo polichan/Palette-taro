@@ -5,7 +5,6 @@ import PROBLEM_CONSTANT from "../../../constants/problem";
 import "./index.scss";
 
 export default class Binarization extends Component {
-
   handleNextClick(callback) {
     callback(true);
   }
@@ -13,7 +12,11 @@ export default class Binarization extends Component {
   render() {
     return (
       <StepPage onNext={this.handleNextClick.bind(this)}>
-        <Problem data={PROBLEM_CONSTANT.BINARIZATION.DATA} questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}></Problem>
+        <Problem
+          data={PROBLEM_CONSTANT.BINARIZATION.DATA}
+          questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}
+          showRealQuestionTab={false}
+        ></Problem>
       </StepPage>
     );
   }

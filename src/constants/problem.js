@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-08-02 14:51:50
- * @LastEditTime: 2020-08-02 14:56:25
+ * @LastEditTime: 2020-08-02 15:01:47
  * @LastEditors: 陈鹏宇
  * @Description: 通用问题组件常量
  * @Version: 1.0
@@ -34,7 +34,7 @@
         },
         QUESTION_API:{
             example: {
-                ID: 1
+                ID: 2
             },
             real:{
                 ID: 3

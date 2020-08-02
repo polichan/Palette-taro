@@ -23,6 +23,7 @@ export default class Problem extends Component {
         "假设我们取到的是第i张图片，那么我们上一步进行了对图片分块（取patch）的过程，每一个patch对应一个矩阵，然后将矩阵变成列向量，减去对应每一列的均值，得到了一个X矩阵，然后求解X乘上X的转置。得出的矩阵的解就是我们要求的特征值和特征向量。我们可以从接下来的特征值和特征向量可视化中看出在前面的特征值和特征向量能量占比很大"
       ]
     },
+    showRealQuestionTab: true
   };
   state = {
     current: 0,
@@ -39,6 +40,12 @@ export default class Problem extends Component {
   };
 
   componentWillMount() {
+    // 是否显示实战解答选项卡
+    if (!this.props.showRealQuestionTab) {
+      this.setState({
+        tabList: [{ title: "题目举例" }]
+      });
+    }
     Taro.nextTick(() => {
       this.getExampleQuestion().then(res => {
         this.setState({
@@ -109,9 +116,9 @@ export default class Problem extends Component {
 
   render() {
     const isQuestionLoading = this.props.loading.effects[
-        "question/getQuestionById"
-      ];
-    const { data } = this.props;
+      "question/getQuestionById"
+    ];
+    const { data, showRealQuestionTab } = this.props;
     const { questions, tabList, current } = this.state;
     return (
       <View className='question-container'>
@@ -136,19 +143,21 @@ export default class Problem extends Component {
               </View>
             </Skeleton>
           </AtTabsPane>
-          <AtTabsPane current={current} index={1}>
-            <Skeleton
-              animateName='elastic'
-              title
-              row={2}
-              rowWidth={["100%", "50%"]}
-              loading={isQuestionLoading}
-            >
-              <View className='question-item-container'>
-                <Question content={questions.real.content}></Question>
-              </View>
-            </Skeleton>
-          </AtTabsPane>
+          {showRealQuestionTab ? (
+            <AtTabsPane current={current} index={1}>
+              <Skeleton
+                animateName='elastic'
+                title
+                row={2}
+                rowWidth={["100%", "50%"]}
+                loading={isQuestionLoading}
+              >
+                <View className='question-item-container'>
+                  <Question content={questions.real.content}></Question>
+                </View>
+              </Skeleton>
+            </AtTabsPane>
+          ) : null}
         </AtTabs>
       </View>
     );
