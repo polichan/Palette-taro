@@ -6,6 +6,7 @@ import { getSrc } from "@/utils/utils";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import EmptyData from "@/components/EmptyData";
 import Skeleton from "taro-skeleton";
+import SelectedImage from "../../../assets/imgs/selected.png";
 import "./index.scss";
 
 @connect(({ face, loading }) => ({
@@ -15,8 +16,10 @@ import "./index.scss";
 export default class Face extends Component {
   state = {
     current: 0,
-    hasLoadedTabList: [0]
+    hasLoadedTabList: [0],
+    selectedFaceID: null
   };
+
   componentWillMount() {
     this.props
       .dispatch({
@@ -29,7 +32,14 @@ export default class Face extends Component {
   }
 
   handleNextClick(callback) {
-    callback(true);
+    if (this.state.selectedFaceID == null) {
+      Taro.showToast({
+        icon: 'none',
+        title: "请先选择一张人脸图像"
+      })
+    } else {
+      callback(true);
+    }
   }
 
   handleTabClick(targetIndex) {
@@ -69,18 +79,17 @@ export default class Face extends Component {
   }
 
   handleFaceImageClick(face) {
-    Taro.showModal({
-      title: "提示",
-      content: "是否选择此人脸为实验图片",
-      success: (res) => {
-        if (res.confirm) {
-          Taro.showToast({
-            title: '设置成功',
-            icon: 'none'
-          })
-        }
-      }
-    })
+    const faceID = face.ID
+    if (this.state.selectedFaceID == faceID) {
+      // 反选
+      this.setState({
+        selectedFaceID: null
+      })
+    } else {
+      this.setState({
+        selectedFaceID: faceID
+      })
+    }
   }
 
   renderFacePanel() {
@@ -119,9 +128,13 @@ export default class Face extends Component {
   }
 
   renderFaces(itemList) {
+    const { selectedFaceID } = this.state
     return itemList.map(item => {
       return (
-        <View className='face-item' key={item.id}>
+        <View className={`${selectedFaceID == item.ID ? 'face-item face-mask' : 'face-itgem'}`} key={item.ID}>
+          {
+            selectedFaceID == item.ID ? (<Image src={SelectedImage} className='selected-img'></Image>) : null
+          }
           <Image src={getSrc(item.Media.cdnUrl)} className='face-img' onClick={this.handleFaceImageClick.bind(this, item)}></Image>
         </View>
       )
@@ -134,7 +147,6 @@ export default class Face extends Component {
     const faceCategoryLoading = this.props.loading.effects[
       "face/getFaceCategoryList"
     ];
-    const faceLoading = this.props.loading.effects["face/getFaceList"];
     return (
       <View>
         <StepPage onNext={this.handleNextClick.bind(this)} nextButtonDisabled={faceCategoryLoading}>

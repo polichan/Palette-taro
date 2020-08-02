@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .face-list-container {
@@ -40,4 +41,22 @@
   .skeleton {
     padding: 10px;
   }
+}
+
+
+.face-item.face-mask{
+  background-color: #999 !important;
+  z-index: 998;
+  opacity:0.5;
+}
+
+.selected-img{
+  top:50%;
+  left:50%;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  margin-top: -25px;
+  margin-left: -25px;
+  z-index: 999;
 }
