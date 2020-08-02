@@ -5,6 +5,7 @@ import Skeleton from "taro-skeleton";
 import Article from "@/components/Article";
 import Question from "@/components/Question";
 import { connect } from "@tarojs/redux";
+import ProblemOptions from "@/components/ProblemOptions";
 import "./index.scss";
 
 @connect(({ question, loading }) => ({
@@ -140,6 +141,11 @@ export default class Problem extends Component {
             >
               <View className='question-item-container'>
                 <Question content={questions.example.content}></Question>
+                {questions.example.options && questions.example.options.length > 0 ? (
+                  <ProblemOptions
+                    optionList={questions.example.options}
+                  ></ProblemOptions>
+                ) : null}
               </View>
             </Skeleton>
           </AtTabsPane>
