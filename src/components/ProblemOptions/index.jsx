@@ -1,19 +1,24 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
-import { AtRadio } from "taro-ui";
+import { View } from "@tarojs/components";
+import { AtCheckbox } from "taro-ui";
 import "./index.scss";
 
 export default class ProblemOptions extends Component {
   static defaultProps = {
-    optionList: []
+    optionList: [],
+    onSelect: (v)=>{v},
+    value: []
   };
 
   state = {
     list: [],
-    value: ""
   };
 
   componentWillMount() {
+    this.buildOptions()
+  }
+
+  buildOptions(){
     const temp = [];
     this.props.optionList.forEach(element => {
       temp.push({ label: element.content, value: element.ID.toString() });
@@ -24,20 +29,18 @@ export default class ProblemOptions extends Component {
   }
 
   handleChange(value) {
-    this.setState({
-      value: value
-    });
+    this.props.onSelect([value[value.length - 1]])
   }
 
   render() {
-    const { list, value } = this.state;
+    const { value } = this.props
+    const { list } = this.state;
     return (
       <View className='problem-options-container'>
-        <Text>请选择答案：</Text>
-        <AtRadio
+        <AtCheckbox
           options={list}
-          value={value}
-          onClick={this.handleChange.bind(this)}
+          selectedList={value}
+          onChange={this.handleChange.bind(this)}
         />
       </View>
     );

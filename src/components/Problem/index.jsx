@@ -26,18 +26,20 @@ export default class Problem extends Component {
     },
     showRealQuestionTab: true
   };
+
   state = {
     current: 0,
     tabList: [{ title: "题目举例" }, { title: "实战解答" }],
     hasLoadedTabList: [0],
     questions: {
       example: {
-        content: ""
+        data: ""
       },
       real: {
-        content: ""
+        data: ""
       }
-    }
+    },
+    selectedOption: []
   };
 
   componentWillMount() {
@@ -50,7 +52,9 @@ export default class Problem extends Component {
     Taro.nextTick(() => {
       this.getExampleQuestion().then(res => {
         this.setState({
-          questions: Object.assign(this.state.questions, { example: res })
+          questions: Object.assign(this.state.questions, {
+            example: { data: res }
+          })
         });
       });
     });
@@ -102,7 +106,9 @@ export default class Problem extends Component {
             //实战解答问题
             this.getRealQuestion().then(res => {
               this.setState({
-                questions: Object.assign(this.state.questions, { real: res })
+                questions: Object.assign(this.state.questions, {
+                  real: { data: res }
+                })
               });
             });
           }
@@ -115,12 +121,28 @@ export default class Problem extends Component {
     }
   }
 
+  handleProblemOptionSelect(option) {
+    this.setState({
+      selectedOption: option
+    });
+  }
+
+  isAnswerRight() {
+    // 会出现 answerId undefined 
+    const answerId =
+      this.state.questions.real.data.answer && 
+      this.state.questions.real.data.answer.ID.toString();
+    const optionId = this.state.selectedOption.pop();
+    console.log(answerId, optionId)
+    return answerId == optionId;
+  }
+
   render() {
     const isQuestionLoading = this.props.loading.effects[
       "question/getQuestionById"
     ];
     const { data, showRealQuestionTab } = this.props;
-    const { questions, tabList, current } = this.state;
+    const { questions, tabList, current, selectedOption } = this.state;
     return (
       <View className='question-container'>
         <View className='question-explain'>
@@ -140,10 +162,13 @@ export default class Problem extends Component {
               loading={isQuestionLoading}
             >
               <View className='question-item-container'>
-                <Question content={questions.example.content}></Question>
-                {questions.example.options && questions.example.options.length > 0 ? (
+                <Question content={questions.example.data.content}></Question>
+                {questions.example.data.options &&
+                questions.example.data.options.length > 0 ? (
                   <ProblemOptions
-                    optionList={questions.example.options}
+                    optionList={questions.example.data.options}
+                    onSelect={this.handleProblemOptionSelect.bind(this)}
+                    value={selectedOption}
                   ></ProblemOptions>
                 ) : null}
               </View>
@@ -159,7 +184,15 @@ export default class Problem extends Component {
                 loading={isQuestionLoading}
               >
                 <View className='question-item-container'>
-                  <Question content={questions.real.content}></Question>
+                  <Question content={questions.real.data.content}></Question>
+                  {questions.real.data.options &&
+                  questions.real.data.options.length > 0 ? (
+                    <ProblemOptions
+                      optionList={questions.real.data.options}
+                      onSelect={this.handleProblemOptionSelect.bind(this)}
+                      value={selectedOption}
+                    ></ProblemOptions>
+                  ) : null}
                 </View>
               </Skeleton>
             </AtTabsPane>

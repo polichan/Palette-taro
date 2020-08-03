@@ -6,8 +6,19 @@ import "./index.scss";
 
 export default class Binarization extends Component {
   handleNextClick(callback) {
-    callback(true);
+    if (this.problem.isAnswerRight()) {
+      callback(true);
+    } else {
+      Taro.showToast({
+        icon: "none",
+        title: "答案不正确"
+      });
+    }
   }
+
+  refProblem = node => {
+    this.problem = node;
+  };
 
   render() {
     return (
@@ -16,6 +27,7 @@ export default class Binarization extends Component {
           data={PROBLEM_CONSTANT.BINARIZATION.DATA}
           questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}
           showRealQuestionTab={false}
+          ref={this.refProblem}
         ></Problem>
       </StepPage>
     );
