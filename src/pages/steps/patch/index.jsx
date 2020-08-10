@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import {  AtRadio } from "taro-ui";
+import { AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
 import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
@@ -24,26 +24,26 @@ export default class Index extends Component {
   }
 
   componentWillMount() {
-    if (Taro.getStorageSync(CONSTANT.FIRST_LAUNCH_KEY)) {
+    if (!Taro.getStorageSync(CONSTANT.HAS_SHOWN_GUIDE_TIP)) {
       this.setState({
         showGuideTip: true
-      })
+      });
     }
   }
-
-
-  componentDidMount() { }
 
   config = {
     navigationBarTitleText: "选择 Patch"
   };
 
   handleGuideTipConfirmClick() {
-    this.setState({
-      showGuideTip: false
-    }, () => {
-      Taro.setStorageSync(CONSTANT.FIRST_LAUNCH_KEY, false)
-    })
+    this.setState(
+      {
+        showGuideTip: false
+      },
+      () => {
+        Taro.setStorageSync(CONSTANT.HAS_SHOWN_GUIDE_TIP, true);
+      }
+    );
   }
 
   handlePatchChange(value) {
@@ -53,23 +53,25 @@ export default class Index extends Component {
   }
 
   handleNextClick(callback) {
-    const value = this.state.value
+    const value = this.state.value;
     if (value != null) {
-      this.props.dispatch({
-        type: 'step/saveStep',
-        payload: {
-          data: {
-            patchSize: value
+      this.props
+        .dispatch({
+          type: "step/saveStep",
+          payload: {
+            data: {
+              patchSize: value
+            }
           }
-        }
-      }).then(() => {
-        callback(true);
-      })
+        })
+        .then(() => {
+          callback(true);
+        });
     } else {
       Taro.showToast({
-        icon: 'none',
-        title: '请选择 Patch 大小'
-      })
+        icon: "none",
+        title: "请选择 Patch 大小"
+      });
     }
   }
 
@@ -101,15 +103,15 @@ export default class Index extends Component {
               options={[
                 {
                   label: "31 * 31",
-                  value: "31x31",
+                  value: "31x31"
                 },
                 {
                   label: "29 * 29",
-                  value: "29x29",
+                  value: "29x29"
                 },
                 {
                   label: "27 * 27",
-                  value: "27x27",
+                  value: "27x27"
                 }
               ]}
               value={this.state.value}

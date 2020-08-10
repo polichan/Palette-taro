@@ -4,7 +4,7 @@ export const LICENSE_TYPE = {
 };
 
 export const FIRST_LAUNCH_KEY = "first_launch"
-
+export const HAS_SHOWN_GUIDE_TIP = "has_show_guide_tip"
 export const STORAGE_TOKEN_KEY = "token"
 export const STORAGE_USER_KEY = "user"
 
