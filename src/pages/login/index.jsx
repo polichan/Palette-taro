@@ -4,6 +4,7 @@ import { AtButton } from "taro-ui";
 import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
 import FormBox from "@/components/FormBox";
+import * as CONSTANTS from "@/constants/index";
 import "./index.scss";
 
 @connect(({ user, loading }) => ({
@@ -101,9 +102,9 @@ export default class Index extends Component {
               });
             } else {
               Taro.showToast({
-                icon: 'none',
+                icon: "none",
                 title: res.msg
-              })
+              });
               this.getCaptchaCode();
             }
           });
@@ -136,6 +137,12 @@ export default class Index extends Component {
       password: this.state.password,
       captcha: this.state.captcha,
       captchaId: this.state.captchaObj.captchaId
+    });
+  }
+
+  handleUserLicenseTextClick() {
+    Taro.navigateTo({
+      url: `/pages/license/index?type=${CONSTANTS.LICENSE_TYPE.USER_LICENSE}`
     });
   }
 
@@ -202,7 +209,13 @@ export default class Index extends Component {
                 </View>
               </View>
             </View>
-            <Text className='authorize-tips'>登录即代表同意用户使用协议</Text>
+            <Text
+              className='authorize-tips'
+              onClick={this.handleUserLicenseTextClick.bind(this)}
+            >
+              登录即代表您已同意
+              <Text className='user-license'>《用户使用协议》</Text>
+            </Text>
           </View>
         </View>
       </View>
