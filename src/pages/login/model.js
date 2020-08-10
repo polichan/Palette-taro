@@ -1,7 +1,7 @@
 /*
  * @Author: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-19 10:16:39
+ * @LastEditTime: 2020-08-10 13:30:41
  * @Description: 用户登录
  * @FilePath: \Palette-taro\src\pages\login\model.js
  */
@@ -24,34 +24,42 @@ export default {
      * @param {*} param1
      */
     *login({ payload }, { call, put }) {
-      const res = yield call(userApi.login, payload.data);
-      yield put({
-        type: "save",
-        payload: {
-          token: res.data.token,
-          user: res.data.user,
-          isLogin: true
-        }
-      });
-      Taro.setStorageSync(CONSTANTS.STORAGE_TOKEN_KEY, res.data.token)
-      Taro.setStorageSync(CONSTANTS.STORAGE_USER_KEY, res.data.user)
-      return true;
+      try {
+        const res = yield call(userApi.login, payload.data);
+        yield put({
+          type: "save",
+          payload: {
+            token: res.data.token,
+            user: res.data.user,
+            isLogin: true
+          }
+        });
+        Taro.setStorageSync(CONSTANTS.STORAGE_TOKEN_KEY, res.data.token)
+        Taro.setStorageSync(CONSTANTS.STORAGE_USER_KEY, res.data.user)
+        return {msg: "", success: true}
+      } catch (error) {
+        return {msg: error, success: false}
+      }
     },
 
-    *getCaptcha({}, { call }) {
-      const res = yield call(userApi.getCaptcha);
-      return res;
+    *getCaptcha({ }, { call }) {
+      try {
+        const res = yield call(userApi.getCaptcha);
+        return res;
+      } catch (e) {
+        return false
+      }
     },
 
-    *joinInBlackList({}, {call}){
+    *joinInBlackList({ }, { call }) {
       const res = yield call(userApi.joinInBlockList)
       return res
     },
 
-    *logOut({}, {put}){
+    *logOut({ }, { put }) {
       yield put({
         type: 'save',
-        payload:{
+        payload: {
           user: null,
           token: null,
           isLogin: false
@@ -60,10 +68,10 @@ export default {
       Taro.clearStorageSync()
     },
 
-    *restoreLoginStatus({payload}, {put}){
+    *restoreLoginStatus({ payload }, { put }) {
       yield put({
         type: 'save',
-        payload:{
+        payload: {
           user: payload.data.user,
           token: payload.data.token,
           isLogin: true

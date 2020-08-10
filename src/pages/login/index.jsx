@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Input, Image } from "@tarojs/components";
-import {AtButton } from "taro-ui";
+import { AtButton } from "taro-ui";
 import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";
 import FormBox from "@/components/FormBox";
@@ -19,10 +19,8 @@ export default class Index extends Component {
   };
 
   componentWillMount() {
-    this.getCaptchaCode()
+    this.getCaptchaCode();
   }
-
-  componentDidMount() { }
 
   config = {
     navigationBarTitleText: "登录"
@@ -47,24 +45,33 @@ export default class Index extends Component {
   }
 
   handleCaptchaClick() {
-    this.getCaptchaCode()
+    this.getCaptchaCode();
   }
 
   getCaptchaCode() {
-    this.props.dispatch({
-      type: 'user/getCaptcha'
-    }).then(res => {
-      this.setState({
-        captchaObj: res.data
+    this.props
+      .dispatch({
+        type: "user/getCaptcha"
       })
-    })
+      .then(res => {
+        if (res) {
+          this.setState({
+            captchaObj: res.data
+          });
+        } else {
+          Taro.showToast({
+            icon: "none",
+            title: "验证码获取失败"
+          });
+        }
+      });
   }
 
   handleCaptchaError() {
     Taro.showToast({
-      icon: 'none',
-      title: '验证码加载失败'
-    })
+      icon: "none",
+      title: "验证码加载失败"
+    });
   }
 
   /**
@@ -73,23 +80,33 @@ export default class Index extends Component {
   handleLoginClick() {
     this.validateFields((canLogin, params) => {
       if (canLogin) {
-        this.props.dispatch({
-          type: "user/login",
-          payload: { data: params },
-        }).then(() => {
-          Taro.showToast({
-            icon: 'none',
-            title: '登录成功',
-            duration: 2000,
-            complete: () => {
-              setTimeout(() => {
-                Taro.redirectTo({
-                  url: "/pages/index/index"
-                });
-              }, 2000);
-            }
+        this.props
+          .dispatch({
+            type: "user/login",
+            payload: { data: params }
           })
-        })
+          .then(res => {
+            if (res.success) {
+              Taro.showToast({
+                icon: "none",
+                title: "登录成功",
+                duration: 2000,
+                complete: () => {
+                  setTimeout(() => {
+                    Taro.redirectTo({
+                      url: "/pages/index/index"
+                    });
+                  }, 2000);
+                }
+              });
+            } else {
+              Taro.showToast({
+                icon: 'none',
+                title: res.msg
+              })
+              this.getCaptchaCode();
+            }
+          });
       } else {
         Taro.showToast({
           icon: "none",
@@ -111,8 +128,8 @@ export default class Index extends Component {
       callback(false, { message: "密码不能为空" });
       return;
     } else if (this.state.captcha == null || this.state.captcha == "") {
-      callback(false, { message: "验证码不能为空" })
-      return
+      callback(false, { message: "验证码不能为空" });
+      return;
     }
     callback(true, {
       username: this.state.codeNumber,
@@ -123,7 +140,7 @@ export default class Index extends Component {
   }
 
   render() {
-    const { captchaObj } = this.state
+    const { captchaObj } = this.state;
     const isLoginLoading = this.props.loading.effects["login/login"];
     return (
       <View className='container'>
@@ -165,7 +182,13 @@ export default class Index extends Component {
                       placeholder='请输入验证码'
                       value={this.state.captcha}
                     ></Input>
-                    <Image mode='aspectFit' src={captchaObj.picPath} className='captcha-img' onClick={this.handleCaptchaClick.bind(this)} onError={this.handleCaptchaError.bind(this)} />
+                    <Image
+                      mode='aspectFit'
+                      src={captchaObj.picPath}
+                      className='captcha-img'
+                      onClick={this.handleCaptchaClick.bind(this)}
+                      onError={this.handleCaptchaError.bind(this)}
+                    />
                   </FormBox>
                   <AtButton
                     loading={isLoginLoading}

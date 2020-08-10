@@ -15,7 +15,8 @@ import "./index.scss";
 export default class Result extends Component {
   state = {
     result: {},
-    resultImg: null
+    resultImg: null,
+    noResultData: false
   };
 
   componentWillMount() {
@@ -24,10 +25,16 @@ export default class Result extends Component {
         type: "step/submitSteps"
       })
       .then(res => {
-        this.setState({
-          result: res.data,
-          resultImg: getSrc(res.data.media.cdnUrl)
-        });
+        if (res) {
+          this.setState({
+            result: res.data,
+            resultImg: getSrc(res.data.media.cdnUrl)
+          });
+        } else {
+          this.setState({
+            noResultData: true
+          });
+        }
       });
   }
 
@@ -45,7 +52,7 @@ export default class Result extends Component {
   render() {
     const { steps } = this.props.step;
     const isResultLoading = this.props.loading.effects["step/submitSteps"];
-    const { result, resultImg } = this.state;
+    const { result, resultImg, noResultData } = this.state;
     return (
       <StepPage onNext={this.handleNextClick.bind(this)}>
         <Skeleton
@@ -73,11 +80,15 @@ export default class Result extends Component {
             </Text>
           </FormBox>
           <View className='result-container flex flex-center flex-direction-column'>
-            <Image
-              src={resultImg}
-              className='result-img'
-              onClick={this.handleResultImgClick.bind(this)}
-            ></Image>
+            {noResultData ? (
+              <EmptyData></EmptyData>
+            ) : (
+              <Image
+                src={resultImg}
+                className='result-img'
+                onClick={this.handleResultImgClick.bind(this)}
+              ></Image>
+            )}
           </View>
         </Skeleton>
       </StepPage>

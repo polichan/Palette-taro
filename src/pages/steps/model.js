@@ -27,13 +27,20 @@ export default {
 
   effects: {
     *submitSteps({ }, { call, select }) {
-      const steps = yield select(state => state.step.steps)
-      console.log(steps)
-      const res = yield call(
-        stepApi.submitSteps,
-        steps
-      );
-      return res;
+      try {
+        const steps = yield select(state => state.step.steps)
+        const res = yield call(
+          stepApi.submitSteps,
+          steps
+        );
+        return res;
+      } catch (error) {
+        Taro.showToast({
+          icon: 'none',
+          title: '暂无符合条件结果'
+        })
+        return false
+      }
     },
 
     *setStepQueueToRebuild({ }, { put }) {
@@ -67,6 +74,7 @@ export default {
       })
       return true
     },
+
     *minusProgressPercent({ payload }, { select, put }) {
       const orig = yield select(state => state.step.progressPercent)
       yield put({
@@ -77,6 +85,7 @@ export default {
       })
       return true
     },
+
     *buildStepQueue({ }, { put }) {
       let sQueue = new StepQueue();
       sQueue.add(
