@@ -22,7 +22,7 @@ export default class Index extends Component {
   };
 
   handleLoginClick() {
-    Utils.navigateTo("/pages/login/index")
+    Utils.navigateTo("/pages/login/index");
   }
 
   handleBegin() {
@@ -30,7 +30,7 @@ export default class Index extends Component {
   }
 
   beginWorkflow() {
-    Utils.navigateTo("/pages/steps/workflow/index")
+    Utils.navigateTo("/pages/steps/workflow/index");
   }
 
   /**
@@ -46,15 +46,33 @@ export default class Index extends Component {
     });
   }
 
+  handleLongPress() {
+    Taro.clearStorageSync();
+    Taro.showToast({
+      icon: "none",
+      title: "DEBUG模式已启动",
+      duration: 3000,
+      success: () => {
+        setTimeout(() => {
+          Taro.reLaunch({
+            url: "/pages/index/index"
+          });
+        }, 3000);
+      }
+    });
+  }
+
   render() {
     const { isLogin } = this.props.user;
     return (
       <View className='index'>
         <NavBar background='#fff' />
-        <NetStatusTip></NetStatusTip>
         <View className='container'>
           <View className='at-row'>
-            <View className='at-col at-col-24 at-col--wrap'>
+            <View
+              className='at-col at-col-24 at-col--wrap'
+              onLongPress={this.handleLongPress.bind(this)}
+            >
               <Image src={SchoolLogo} className='logo'></Image>
             </View>
           </View>
