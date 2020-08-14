@@ -84,7 +84,7 @@ export default class Index extends Component {
     const { helpFloatLayoutOpened } = this.state;
     return (
       <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
-        <View className='step-container'>
+        <View>
           <Panel
             title='请选择卷积层数'
             onHelp={this.handleHelpClick.bind(this)}
