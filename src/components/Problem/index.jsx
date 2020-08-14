@@ -1,12 +1,11 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image, Text, Block } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import Skeleton from "taro-skeleton";
 import Article from "@/components/Article";
 import Question from "@/components/Question";
 import { connect } from "@tarojs/redux";
 import ProblemOptions from "@/components/ProblemOptions";
-import ProblemImg from "../../assets/imgs/question.png";
 import "./index.scss";
 
 @connect(({ question, loading }) => ({

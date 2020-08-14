@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
+import { navigateTo } from "@/utils/utils";
 import { connect } from "@tarojs/redux";
 import SuccessImg from "../../assets/imgs/success.png";
 import "./index.scss";
@@ -21,9 +22,7 @@ export default class Thanks extends Component {
         type: "step/resetStepProgressCount"
       })
       .then(() => {
-        Taro.redirectTo({
-          url: "/pages/index/index"
-        });
+        navigateTo("/pages/index/index");
       });
   }
 

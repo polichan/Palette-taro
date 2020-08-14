@@ -1,4 +1,13 @@
-export default class StepQueue {
+/*
+ * @Autor: 陈鹏宇
+ * @Date: 2020-07-15 14:11:53
+ * @LastEditTime: 2020-08-14 20:11:51
+ * @LastEditors: 陈鹏宇
+ * @Description: 页面列表队列
+ * @Version: 1.0
+ */
+
+ export default class StepQueue {
   constructor() {
     this.steps = [];
     this.current = 0;
@@ -19,17 +28,16 @@ export default class StepQueue {
   next() {
     return new Promise((success, fail) => {
       if (this.canNext()) {
-        this.current ++ 
+        this.current++
         success()
-      }else{
+      } else {
         fail("没有下一个元素")
       }
     })
 
   }
 
-  canNext()
-  {
+  canNext() {
     return this.current + 1 <= this.steps.length - 1
   }
 
@@ -38,14 +46,13 @@ export default class StepQueue {
       if (this.canBack()) {
         this.current--;
         success()
-      }else{
+      } else {
         fail()
       }
     })
   }
 
-  canBack()
-  {
+  canBack() {
     return this.current !== 0
   }
 

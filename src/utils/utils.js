@@ -45,8 +45,8 @@ export function base64src(base64data, cb) {
  *
  * @return  {string}  资源地址
  */
-export function getSrc(name, slash = true){
-  if(slash){
+export function getSrc(name, slash = true) {
+  if (slash) {
     return Config.BASE_API + '/' + name
   }
   return Config.BASE_API + name
@@ -55,7 +55,7 @@ export function getSrc(name, slash = true){
 /**
  * 获取请求地址
  */
-export function getBaseApi(){
+export function getBaseApi() {
   return Config.BASE_API
 }
 
@@ -64,7 +64,6 @@ export function getBaseApi(){
  * @param   {string}  url  路由地址
  */
 export function navigateTo(url) {
-  console.log(Taro.getCurrentPages())
   if (Taro.getCurrentPages().length >= 10) {
     Taro.redirectTo({
       url: url,
@@ -79,24 +78,43 @@ export function navigateTo(url) {
   }
 }
 
-
-export function restoreLoginStatus(callback){
+/**
+ * 从本地存储中恢复登录信息
+ * @param {*} callback 
+ */
+export function restoreLoginStatus(callback) {
   const token = Taro.getStorageSync(CONSTANTS.STORAGE_TOKEN_KEY)
   const user = Taro.getStorageSync(CONSTANTS.STORAGE_USER_KEY)
 
-  if((token != ''  && token !== null) && (user != '' && user != null)){
+  if ((token != '' && token !== null) && (user != '' && user != null)) {
     store.dispatch({
       type: 'user/restoreLoginStatus',
-      payload:{
-        data:{
+      payload: {
+        data: {
           token: token,
           user: user
         }
       }
-    }).then(()=>{
-      if(_isFunction(callback)){
+    }).then(() => {
+      if (_isFunction(callback)) {
         callback()
       }
     })
   }
+}
+
+/**
+ * stepProgressBar 减少
+ * @param {*} callback 
+ */
+export function minusStepProgress(callback) {
+  const all = store.getState().step.stepQueue.getAll().length;
+  store.dispatch({
+    type: "step/minusProgressPercent",
+    payload: {
+      progressPercent: 100 / all
+    }
+  }).then(() => {
+    callback()
+  });
 }

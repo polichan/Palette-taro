@@ -16,7 +16,8 @@ export default class Index extends Component {
     captchaObj: {},
     codeNumber: null,
     password: null,
-    captcha: null
+    captcha: null,
+    inputAdjustPosition: 0
   };
 
   componentWillMount() {
@@ -26,6 +27,8 @@ export default class Index extends Component {
   config = {
     navigationBarTitleText: "登录"
   };
+
+  input
 
   handlePasswordChange(e) {
     this.setState({
@@ -188,6 +191,7 @@ export default class Index extends Component {
                       maxLength='16'
                       placeholder='请输入验证码'
                       value={this.state.captcha}
+                      adjustPosition
                     ></Input>
                     <Image
                       mode='aspectFit'

@@ -22,9 +22,7 @@ export default class Index extends Component {
   };
 
   handleLoginClick() {
-    Taro.navigateTo({
-      url: "/pages/login/index"
-    });
+    Utils.navigateTo("/pages/login/index")
   }
 
   handleBegin() {
@@ -32,9 +30,7 @@ export default class Index extends Component {
   }
 
   beginWorkflow() {
-    Taro.navigateTo({
-      url: "/pages/steps/workflow/index"
-    });
+    Utils.navigateTo("/pages/steps/workflow/index")
   }
 
   /**
