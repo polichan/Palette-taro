@@ -4,7 +4,7 @@
   "description": "虚拟仿真实验",
   "appid": "wx90ca8df679e5c3a9",
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": false,
     "postcss": false,
     "minified": false
