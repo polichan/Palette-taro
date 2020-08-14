@@ -43,6 +43,16 @@ export default {
       }
     },
 
+    *resetStepProgressCount({}, {put}){
+      yield put({
+        type: 'save',
+        payload:{
+          progressPercent: 0
+        }
+      })
+      return true
+    },
+    
     *setStepQueueToRebuild({ }, { put }) {
       yield put({
         type: 'save',

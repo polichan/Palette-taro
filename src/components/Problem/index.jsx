@@ -133,7 +133,7 @@ export default class Problem extends Component {
     const answerId =
       this.state.questions.real.data.answer &&
       this.state.questions.real.data.answer.ID.toString();
-    const optionId = this.state.selectedOption.pop();
+    const optionId = this.state.selectedOption;
     console.log(answerId, optionId);
     return answerId == optionId;
   }

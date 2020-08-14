@@ -1,9 +1,14 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
+import { connect } from "@tarojs/redux";
 import SuccessImg from "../../assets/imgs/success.png";
 import "./index.scss";
 
+@connect(({ step, loading }) => ({
+  step,
+  loading
+}))
 export default class Thanks extends Component {
   config = {
     navigationBarTitleText: "感谢测试"
@@ -11,9 +16,15 @@ export default class Thanks extends Component {
 
   handleNextClick(callback) {
     callback(false);
-    Taro.redirectTo({
-      url: '/pages/index/index'
-    })
+    this.props
+      .dispatch({
+        type: "step/resetStepProgressCount"
+      })
+      .then(() => {
+        Taro.redirectTo({
+          url: "/pages/index/index"
+        });
+      });
   }
 
   render() {

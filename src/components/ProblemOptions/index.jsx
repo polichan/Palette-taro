@@ -43,7 +43,6 @@ export default class ProblemOptions extends Component {
   }
 
   render() {
-    const { value } = this.props;
     const { list, selectedValue } = this.state;
     return (
       <View className='problem-options-container'>
