@@ -1,11 +1,12 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Image, Text, Block } from "@tarojs/components";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import Skeleton from "taro-skeleton";
 import Article from "@/components/Article";
 import Question from "@/components/Question";
 import { connect } from "@tarojs/redux";
 import ProblemOptions from "@/components/ProblemOptions";
+import ProblemImg from "../../assets/imgs/question.png";
 import "./index.scss";
 
 @connect(({ question, loading }) => ({
@@ -128,12 +129,12 @@ export default class Problem extends Component {
   }
 
   isAnswerRight() {
-    // 会出现 answerId undefined 
+    // 会出现 answerId undefined
     const answerId =
-      this.state.questions.real.data.answer && 
+      this.state.questions.real.data.answer &&
       this.state.questions.real.data.answer.ID.toString();
     const optionId = this.state.selectedOption.pop();
-    console.log(answerId, optionId)
+    console.log(answerId, optionId);
     return answerId == optionId;
   }
 
@@ -162,14 +163,22 @@ export default class Problem extends Component {
               loading={isQuestionLoading}
             >
               <View className='question-item-container'>
+                <View className='question-box'>
+                  <Text className='problem-text'>题目：</Text>
+                </View>
                 <Question content={questions.example.data.content}></Question>
                 {questions.example.data.options &&
                 questions.example.data.options.length > 0 ? (
-                  <ProblemOptions
-                    optionList={questions.example.data.options}
-                    onSelect={this.handleProblemOptionSelect.bind(this)}
-                    value={selectedOption}
-                  ></ProblemOptions>
+                  <View className='problem-options-container'>
+                    <View className='question-box'>
+                      <Text className='problem-text'>请选择答案：</Text>
+                    </View>
+                    <ProblemOptions
+                      optionList={questions.example.data.options}
+                      onSelect={this.handleProblemOptionSelect.bind(this)}
+                      value={selectedOption}
+                    ></ProblemOptions>
+                  </View>
                 ) : null}
               </View>
             </Skeleton>

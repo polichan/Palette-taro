@@ -10,3 +10,27 @@
   .question-item-container{
     padding: 20px;
   }
+
+  .problem-icon{
+    margin-left: 10px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .question-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .problem-text{
+    color: #B3B3B3;
+    font-weight: 500;
+  }
+
+  .problem-options-container{
+    margin-top: 20px;
+  }

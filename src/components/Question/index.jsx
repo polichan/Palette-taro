@@ -2,6 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import "taro-parse/dist/style/main.scss";
 import TaroParser from "taro-parse";
+import {MD_RENDER_API} from "../../config/config";
 import "./index.scss";
 
 export default class Question extends Component {
@@ -35,7 +36,7 @@ export default class Question extends Component {
             <TaroParser
               type='markdown'
               theme='light'
-              latexApi='https://md.werfei.com/?tex'
+              latexApi={MD_RENDER_API}
               content={content}
               onImgClick={this.handleImgClick.bind(this)}
               onLinkClick={this.handleLinkClick.bind(this)}

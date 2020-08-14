@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import StepPage from "@/components/StepPage";
 import { connect } from "@tarojs/redux";
 import Problem from "@/components/Problem";
-import PROBLEM_CONSTANT from "../../../constants/problem";
+import PROBLEM_CONSTANT from "@/constants/problem";
 import "./index.scss";
 
 @connect(({ question, loading }) => ({

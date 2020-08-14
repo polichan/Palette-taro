@@ -8,3 +8,5 @@
  */ 
 
 export const BASE_API = "http://127.0.0.1:8888"
+
+export const MD_RENDER_API = "https://md.werfei.com/?tex"
