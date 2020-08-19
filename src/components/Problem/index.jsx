@@ -39,7 +39,8 @@ export default class Problem extends Component {
         data: ""
       }
     },
-    selectedOption: []
+    selectedOption: [],
+    shouldShowProblemOptionTip: false
   };
 
   componentWillMount() {
@@ -128,16 +129,16 @@ export default class Problem extends Component {
   }
 
   isAnswerRight() {
-    // 会出现 answerId undefined
+    let res = false
     const answerId =
       this.state.questions.real.data.answer &&
       this.state.questions.real.data.answer.ID.toString();
-    if(answerId == undefined){
-      return true
-    }
     const optionId = this.state.selectedOption;
-    console.log(answerId, optionId);
-    return answerId == optionId;
+    res =  answerId == optionId;
+    this.setState({
+      shouldShowProblemOptionTip: !res
+    })
+    return res
   }
 
   render() {
@@ -145,7 +146,7 @@ export default class Problem extends Component {
       "question/getQuestionById"
     ];
     const { data, showRealQuestionTab } = this.props;
-    const { questions, tabList, current, selectedOption } = this.state;
+    const { questions, tabList, current, selectedOption, shouldShowProblemOptionTip } = this.state;
     return (
       <View className='question-container'>
         <View className='question-explain'>
@@ -179,6 +180,7 @@ export default class Problem extends Component {
                       optionList={questions.example.data.options}
                       onSelect={this.handleProblemOptionSelect.bind(this)}
                       value={selectedOption}
+                      showTip={shouldShowProblemOptionTip}
                     ></ProblemOptions>
                   </View>
                 ) : null}

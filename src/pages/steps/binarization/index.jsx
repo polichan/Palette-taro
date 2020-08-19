@@ -11,7 +11,7 @@ export default class Binarization extends Component {
     } else {
       Taro.showToast({
         icon: "none",
-        title: "答案不正确"
+        title: "答案不正确！"
       });
     }
   }
