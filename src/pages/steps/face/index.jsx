@@ -38,7 +38,13 @@ export default class Face extends Component {
         title: "请先选择一张人脸图像"
       })
     } else {
-      callback(true);
+      Taro.showModal({
+        title: '提示',
+        content: '为简化步骤，实验过程中均采用「傅园慧」人脸进行实验展示。',
+        success: ()=>{
+          callback(true);
+        }
+      })
     }
   }
 
