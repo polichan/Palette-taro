@@ -17,3 +17,19 @@
     padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
     box-sizing: content-box;
 }
+
+.loading-container{
+    margin-top: 200px;
+}
+
+.cache-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+page{
+    height: 100%;
+}

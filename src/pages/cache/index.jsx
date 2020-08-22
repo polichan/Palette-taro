@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Button } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import NavBar from "@/components/NavBar";
 import WaveLoading from "@/components/WaveLoading";
 import * as Utils from "@/utils/utils";
@@ -11,7 +11,8 @@ import "./index.scss";
 export default class Cache extends Component {
   state = {
     totalFileNum: 0,
-    queue: new Queue()
+    queue: new Queue(),
+    loadingPercentage: 0
   };
 
   componentDidMount() {
@@ -20,6 +21,7 @@ export default class Cache extends Component {
 
   startCachingFile() {
     this.generateQueueForCache(() => {
+      const addPercentage = Math.trunc(100 / this.state.queue.size());
       this.setState({
         totalFileNum: this.state.queue.size()
       });
@@ -32,7 +34,10 @@ export default class Cache extends Component {
           success: res => {
             if (res.statusCode == 200) {
               this.setState(prevState => {
-                return { totalFileNum: prevState.totalFileNum - 1 };
+                return {
+                  totalFileNum: prevState.totalFileNum - 1,
+                  loadingPercentage: prevState.loadingPercentage + addPercentage
+                };
               });
               console.log("图片下载成功", res.filePath);
             }
@@ -74,11 +79,13 @@ export default class Cache extends Component {
   }
 
   render() {
-    const { totalFileNum } = this.state;
+    const { totalFileNum, loadingPercentage } = this.state;
     return (
-      <View>
+      <View className='cache-container'>
         <NavBar background='#fff' title='资源包加载' />
-        <WaveLoading></WaveLoading>
+        <View className='loading-container'>
+          <WaveLoading percentage={loadingPercentage}></WaveLoading>
+        </View>
         <View className='cache-footer'>
           <Text className='cache-tip'>
             正在努力下载资源文件，剩余 {totalFileNum} 个文件...
