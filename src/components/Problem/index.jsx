@@ -134,7 +134,11 @@ export default class Problem extends Component {
       this.state.questions.real.data.answer &&
       this.state.questions.real.data.answer.ID.toString();
     const optionId = this.state.selectedOption;
-    res =  answerId == optionId;
+    if (answerId == undefined) {
+      res = true
+    }else{
+      res =  answerId == optionId;
+    }
     this.setState({
       shouldShowProblemOptionTip: !res
     })
