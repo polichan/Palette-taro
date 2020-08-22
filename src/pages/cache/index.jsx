@@ -38,11 +38,10 @@ export default class Cache extends Component {
       this.setState({
         totalFileNum: this.state.queue.size()
       });
-      // while for caching files
-        while (!this.state.queue.isEmpty()) {
-          const element = this.state.queue.pop();
-          this.cacheFile(element);
-        }
+      while (!this.state.queue.isEmpty()) {
+        const element = this.state.queue.pop();
+        this.cacheFile(element);
+      }
     });
   }
 
@@ -55,7 +54,8 @@ export default class Cache extends Component {
           this.setState(prevState => {
             return {
               totalFileNum: prevState.totalFileNum - 1,
-              loadingPercentage: prevState.loadingPercentage + this.state.addPercentage
+              loadingPercentage:
+                prevState.loadingPercentage + this.state.addPercentage
             };
           });
         } else {
@@ -79,8 +79,8 @@ export default class Cache extends Component {
       }
     }
     this.setState({
-        addPercentage: Math.trunc(100 / this.state.queue.size())
-    })
+      addPercentage: Math.trunc(100 / this.state.queue.size())
+    });
     if (_isFunction(callback)) {
       callback();
     }
