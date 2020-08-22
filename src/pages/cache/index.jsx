@@ -10,28 +10,51 @@ import "./index.scss";
 
 export default class Cache extends Component {
   state = {
+    totalFileNum: 0,
     queue: new Queue()
   };
 
   componentDidMount() {
+    this.startCachingFile();
+  }
+
+  startCachingFile() {
     this.generateQueueForCache(() => {
-      this.state.queue.list.forEach(element => {
+      this.setState({
+        totalFileNum: this.state.queue.size()
+      });
+      // while for caching files
+      while (!this.state.queue.isEmpty()) {
+        const element = this.state.queue.pop();
         Taro.downloadFile({
           url: element.url,
           filePath: `${Taro.env.USER_DATA_PATH}/${element.fileName}`,
           success: res => {
             if (res.statusCode == 200) {
+              this.setState(prevState => {
+                return { totalFileNum: prevState.totalFileNum - 1 };
+              });
               console.log("图片下载成功", res.filePath);
             }
           },
           fail: () => {
-            Taro.showToast({
-                icon: 'none',
-                title: '下载异常，即将重试。'
-            })
+            this.state.queue.push(element);
           }
         });
-      });
+      }
+      //   // when downloading task has finished
+      //   Taro.showToast({
+      //     icon: "none",
+      //     title: "资源下载完毕，即将进行实验。",
+      //     duration: 1500,
+      //     success: () => {
+      //       setTimeout(() => {
+      //         Taro.navigateTo({
+      //           url: "/pages/steps/workflow/index"
+      //         });
+      //       }, 1500);
+      //     }
+      //   });
     });
   }
 
@@ -51,11 +74,17 @@ export default class Cache extends Component {
   }
 
   render() {
+    const { totalFileNum } = this.state;
     return (
       <View>
-        <NavBar background='#fff' title='首次加载' />
+        <NavBar background='#fff' title='资源包加载' />
         <WaveLoading></WaveLoading>
-        <Text>正在努力下载资源文件...</Text>
+        <View className='cache-footer'>
+          <Text className='cache-tip'>
+            正在努力下载资源文件，剩余 {totalFileNum} 个文件...
+          </Text>
+        </View>
+        <View className='safe-area-block-container'></View>
       </View>
     );
   }

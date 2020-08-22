@@ -1,0 +1,19 @@
+.cache-footer{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .cache-tip{
+        color: #666;
+    }
+}
+
+.safe-area-block-container {
+    height: 100px;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
+    box-sizing: content-box;
+}
