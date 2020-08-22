@@ -65,6 +65,7 @@ class App extends Component {
   config = {
     pages: [
       'pages/index/index',
+      'pages/cache/index',
       'pages/login/index',
       'pages/steps/face/index',
       'pages/steps/patch/index',
