@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
+import '@tarojs/async-await'
 import 'taro-ui/dist/style/index.scss'
 import Index from './pages/index'
 import store from './utils/store/store'

@@ -30,6 +30,7 @@
 	"author": "",
 	"license": "MIT",
 	"dependencies": {
+		"@tarojs/async-await": "^2.2.10",
 		"@tarojs/components": "2.2.10",
 		"@tarojs/components-qa": "2.2.10",
 		"@tarojs/plugin-sass": "2.2.10",
