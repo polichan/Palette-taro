@@ -1,14 +1,14 @@
 import Taro, { Component } from '@tarojs/taro';
 import { View, Image } from '@tarojs/components';
 import StepPage from '@/components/StepPage'
-import { getSrc } from "@/utils/utils";
+import {getLocalCacheImageSrc} from "@/utils/utils";
 import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
 export default class PatchVisual extends Component {
 
   state = {
-    patchVisualImg: getSrc(CDN_IMAGE.PATCH_VISUAL, false)
+    patchVisualImg: getLocalCacheImageSrc(CDN_IMAGE.PATCH_VISUAL)
   }
 
   handleNextClick(callback) {

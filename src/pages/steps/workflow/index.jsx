@@ -1,13 +1,13 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
-import {getSrc} from "@/utils/utils";
+import {getLocalCacheImageSrc} from "@/utils/utils";
 import {CDN_IMAGE} from "../../../constants/index";
 import "./index.scss";
 
 export default class Index extends Component {
   state = {
-    workFlowImg: getSrc(CDN_IMAGE.WORKFLOW, false)
+    workFlowImg: getLocalCacheImageSrc(CDN_IMAGE.WORKFLOW)
   }
   componentDidMount() {}
 

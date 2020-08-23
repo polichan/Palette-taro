@@ -4,7 +4,7 @@ import { AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
 import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
-import { getSrc } from "@/utils/utils";
+import { getLocalCacheImageSrc } from "@/utils/utils";
 import { CDN_IMAGE } from "../../../constants/index";
 import { connect } from "@tarojs/redux";
 import "./index.scss";
@@ -20,7 +20,7 @@ export default class Index extends Component {
       convolutionValue: null,
       helpFloatLayoutOpened: false,
       imgs: {
-        ConvolutionImg: getSrc(CDN_IMAGE.CONVOLUTION_VISUAL, false)
+        ConvolutionImg: getLocalCacheImageSrc(CDN_IMAGE.CONVOLUTION_VISUAL)
       }
     };
   }

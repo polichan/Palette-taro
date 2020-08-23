@@ -53,6 +53,16 @@ export function getSrc(name, slash = true) {
 }
 
 /**
+ * 获取缓存资源包中的图片文件
+ * @param {*} name 
+ */
+export function getLocalCacheImageSrc(name){
+  const userPath = Taro.env.USER_DATA_PATH
+  const n = name.split('/')
+  return `${userPath}/${n[n.length - 1]}`
+}
+
+/**
  * 获取请求地址
  */
 export function getBaseApi() {

@@ -3,7 +3,7 @@ import { View, Image, Text } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import Panel from "@/components/Panel";
 import FloatLayout from "@/components/FloatLayout";
-import { getSrc } from "@/utils/utils";
+import { getLocalCacheImageSrc } from "@/utils/utils";
 import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
@@ -11,7 +11,7 @@ export default class Histogram extends Component {
   state = {
     helpFloatLayoutOpened: false,
     imgs:{
-      histogramVisualImg: getSrc(CDN_IMAGE.HISTOGRAM_VISUAL, false)
+      histogramVisualImg: getLocalCacheImageSrc(CDN_IMAGE.HISTOGRAM_VISUAL)
     }
   };
 

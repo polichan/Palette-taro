@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
-import {getSrc} from "@/utils/utils";
+import {getLocalCacheImageSrc} from "@/utils/utils";
 import {CDN_IMAGE} from "../../../constants/index";
 import "./index.scss";
 
@@ -9,7 +9,7 @@ export default class BlockVisual extends Component {
 
   state = {
     imgs:{
-      blockVisualImg: getSrc(CDN_IMAGE.BLOCK_VISUAL, false)
+      blockVisualImg: getLocalCacheImageSrc(CDN_IMAGE.BLOCK_VISUAL)
     }
   }
   handleNextClick(callback) {

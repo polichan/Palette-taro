@@ -1,21 +1,16 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text, Button } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 import StepPage from "@/components/StepPage";
-import { getSrc } from "@/utils/utils";
+import { getLocalCacheImageSrc } from "@/utils/utils";
 import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
 export default class ConvolutionVisual extends Component {
 
-    config = {
-        navigationBarTitleText: ''
-    }
-
     state = {
         imgs: {
-            convolutionVisualFirst: getSrc(CDN_IMAGE.CONVOLUTION_VISUAL_FIRST, false),
-            convolutionVisualSecond: getSrc(CDN_IMAGE.CONVOLUTION_VISUAL_SECOND, false),
-
+            convolutionVisualFirst: getLocalCacheImageSrc(CDN_IMAGE.CONVOLUTION_VISUAL_FIRST),
+            convolutionVisualSecond: getLocalCacheImageSrc(CDN_IMAGE.CONVOLUTION_VISUAL_SECOND),
         }
     }
 

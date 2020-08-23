@@ -1,16 +1,16 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Button, Image } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
-import {getSrc} from "@/utils/utils";
+import {getLocalCacheImageSrc} from "@/utils/utils";
 import {CDN_IMAGE} from "../../../constants/index";
 import "./index.scss";
 
 export default class CharacteristicVisual extends Component {
   state = {
     imgs:{
-      energyVisualImg: getSrc(CDN_IMAGE.ENERGY_VISUAL, false),
-      characteristicVisual: getSrc(CDN_IMAGE.CHARACTERISTIC_VISUAL, false),
-      characteristicVisualSecond: getSrc(CDN_IMAGE.CHARACTERISTIC_VISUAL_SECOND, false)
+      energyVisualImg: getLocalCacheImageSrc(CDN_IMAGE.ENERGY_VISUAL),
+      characteristicVisual: getLocalCacheImageSrc(CDN_IMAGE.CHARACTERISTIC_VISUAL),
+      characteristicVisualSecond: getLocalCacheImageSrc(CDN_IMAGE.CHARACTERISTIC_VISUAL_SECOND)
     }
   };
 

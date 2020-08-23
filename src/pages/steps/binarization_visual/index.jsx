@@ -1,14 +1,14 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
-import {getSrc} from "@/utils/utils";
+import {getLocalCacheImageSrc} from "@/utils/utils";
 import {CDN_IMAGE} from "../../../constants/index";
 import "./index.scss";
 
 export default class BinarizationVisual extends Component {
   state = {
     imgs:{
-      binaryVisualImg: getSrc(CDN_IMAGE.BINARY_VISUAL, false)
+      binaryVisualImg: getLocalCacheImageSrc(CDN_IMAGE.BINARY_VISUAL)
     }
   }
   handleNextClick(callback) {
