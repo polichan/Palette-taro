@@ -30,30 +30,43 @@ export default class Index extends Component {
   }
 
   beginWorkflow() {
-    const cacheObject = CONSTANTS.CDN_IMAGE;
-    const fileManager = Taro.getFileSystemManager();
-    let hasCacheFiles = true;
-    for (const key in cacheObject) {
-      if (cacheObject.hasOwnProperty(key)) {
-        const element = cacheObject[key];
-        if (!fileManager.readFileSync(Utils.getLocalCacheImageSrc(element))) {
-          hasCacheFiles = false;
-        }
-      }
-    }
-    if (hasCacheFiles) {
-      Utils.navigateTo("/pages/steps/workflow/index");
-    } else {
-      Taro.showModal({
-        title: "提示",
-        content: "首次运行需要加载资源包，是否继续？",
-        success: res => {
-          if (res.confirm) {
-            Utils.navigateTo("/pages/cache/index");
+    Taro.showLoading({
+      title: '检测资源文件中...'
+    })
+    this.checkCacheFiles()
+      .then(() => {
+        Taro.hideLoading()
+        Utils.navigateTo("/pages/steps/workflow/index");
+      })
+      .catch(() => {
+        Taro.hideLoading()
+        Taro.showModal({
+          title: "提示",
+          content: "首次运行需要加载资源包，是否继续？",
+          success: res => {
+            if (res.confirm) {
+              Utils.navigateTo("/pages/cache/index");
+            }
+          }
+        });
+      });
+  }
+
+  checkCacheFiles() {
+    return new Promise((resolve, reject) => {
+      const cacheObject = CONSTANTS.CDN_IMAGE;
+      const fileManager = Taro.getFileSystemManager();
+      let hasCacheFiles = true;
+      for (const key in cacheObject) {
+        if (cacheObject.hasOwnProperty(key)) {
+          const element = cacheObject[key];
+          if (!fileManager.readFileSync(Utils.getLocalCacheImageSrc(element))) {
+            hasCacheFiles = false;
           }
         }
-      });
-    }
+      }
+      hasCacheFiles ? resolve() : reject();
+    });
   }
 
   /**
