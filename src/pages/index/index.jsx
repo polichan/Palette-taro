@@ -30,7 +30,30 @@ export default class Index extends Component {
   }
 
   beginWorkflow() {
-    Utils.navigateTo("/pages/steps/workflow/index");
+    const cacheObject = CONSTANTS.CDN_IMAGE;
+    const fileManager = Taro.getFileSystemManager();
+    let hasCacheFiles = true;
+    for (const key in cacheObject) {
+      if (cacheObject.hasOwnProperty(key)) {
+        const element = cacheObject[key];
+        if (!fileManager.readFileSync(Utils.getLocalCacheImageSrc(element))) {
+          hasCacheFiles = false;
+        }
+      }
+    }
+    if (hasCacheFiles) {
+      Utils.navigateTo("/pages/steps/workflow/index");
+    } else {
+      Taro.showModal({
+        title: "提示",
+        content: "首次运行需要加载资源包，是否继续？",
+        success: res => {
+          if (res.confirm) {
+            Utils.navigateTo("/pages/cache/index");
+          }
+        }
+      });
+    }
   }
 
   /**
@@ -67,6 +90,7 @@ export default class Index extends Component {
     return (
       <View className='index'>
         <NavBar background='#fff' />
+        <NetStatusTip></NetStatusTip>
         <View className='container'>
           <View className='at-row'>
             <View

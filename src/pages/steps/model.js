@@ -222,6 +222,7 @@ export default {
           pagePath: "/pages/thanks/index"
         })
       );
+
       yield put({
         type: 'save',
         payload: {
@@ -229,6 +230,8 @@ export default {
           hasBuiltStepQueue: true
         }
       })
+
+      Taro.setStorageSync('steps', sQueue)
       return sQueue
     },
   },

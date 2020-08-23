@@ -17,9 +17,8 @@ class netstatus extends Component {
   }
 
   componentWillMount() {
-    let _this = this;
     Taro.getNetworkType({
-      success: function(res) {
+      success: res => {
         let msg = "";
         let weak = false;
         if (res.networkType === "2g" || res.networkType === "3g") {
@@ -36,7 +35,7 @@ class netstatus extends Component {
           weak = true;
           msg = "网络已断开,请检查网络连接";
         }
-        _this.setState({
+        this.setState({
           weak: weak,
           msg: msg
         });
@@ -45,31 +44,31 @@ class netstatus extends Component {
   }
 
   componentDidMount() {
-    let _this = this;
-    Taro.onNetworkStatusChange(function(res) {
-      let msg = "";
-      let weak = false;
-      if (res.isConnected) {
-        if (res.networkType === "2g" || res.networkType === "3g") {
+    Taro.onNetworkStatusChange(
+      res => {
+        let msg = "";
+        let weak = false;
+        if (res.isConnected) {
+          if (res.networkType === "2g" || res.networkType === "3g") {
+            weak = true;
+            msg = "网络信号比较弱，请检查网络连接";
+          } else if (
+            res.networkType === "4g" ||
+            res.networkType === "5g" ||
+            res.networkType === "wifi"
+          ) {
+            weak = false;
+            msg = "网络信号强";
+          }
+        } else {
           weak = true;
-          msg = "网络信号比较弱，请检查网络连接";
-        } else if (
-          res.networkType === "4g" ||
-          res.networkType === "5g" ||
-          res.networkType === "wifi"
-        ) {
-          weak = false;
-          msg = "网络信号强";
+          msg = "网络已断开,请检查网络连接";
         }
-      } else {
-        weak = true;
-        msg = "网络已断开,请检查网络连接";
-      }
-      _this.setState({
-        weak: weak,
-        msg: msg
+        this.setState({
+          weak: weak,
+          msg: msg
+        });
       });
-    });
   }
 
   componentWillUnmount() {
