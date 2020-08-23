@@ -12,24 +12,26 @@ export default class Cache extends Component {
     totalFileNum: 0,
     queue: new Queue(),
     loadingPercentage: 0,
-    addPercentage: 0
+    addPercentage: 0,
+    downloadError: false,
+    loading: true,
+    errorTip: null
   };
 
   async componentDidMount() {
     await this.startCachingTask();
-    this.finishCachingTask();
   }
 
   finishCachingTask() {
     // when downloading task has finished
     Taro.showToast({
       icon: "none",
-      title: "资源下载完毕，即将进行实验。",
+      title: "资源下载完毕，即将返回首页。",
       duration: 1500,
       success: () => {
         setTimeout(() => {
-          Taro.navigateTo({
-            url: "/pages/steps/workflow/index"
+          Taro.reLaunch({
+            url: "/pages/index/index"
           });
         }, 1500);
       }
@@ -41,27 +43,47 @@ export default class Cache extends Component {
     this.setState({
       totalFileNum: this.state.queue.size()
     });
-    while (!this.state.queue.isEmpty()) {
-      const element = this.state.queue.pop();
-      await this.cacheFile(element);
+    try {
+      while (!this.state.queue.isEmpty()) {
+        const element = this.state.queue.pop();
+        await this.generateDownLoadFilePromise(
+          element.url,
+          `${Taro.env.USER_DATA_PATH}/${element.fileName}`
+        )
+          .then(res => {
+            if (res.statusCode == 200) {
+              this.addPercentageAndMinusTotalFileNum();
+            }
+          })
+          .catch(e => {
+            throw e;
+          });
+      }
+      this.finishCachingTask();
+    } catch (e) {
+      Taro.showToast({
+        icon: "none",
+        title: "下载失败，请重试。"
+      });
+      this.setState({
+        downloadError: true
+      });
     }
   }
 
-  async cacheFile(element) {
-    await Taro.downloadFile({
-      url: element.url,
-      filePath: `${Taro.env.USER_DATA_PATH}/${element.fileName}`
-    })
-      .then(res => {
-        if (res.statusCode == 200) {
-          this.addPercentageAndMinusTotalFileNum();
-        } else {
-          this.state.queue.push(element);
-        }
+  async generateDownLoadFilePromise(url, filePath) {
+    return new Promise((resolve, reject) => {
+      return Taro.downloadFile({
+        url: url,
+        filePath: filePath
       })
-      .catch(() => {
-        this.state.queue.push(element);
-      });
+        .then(res => {
+          resolve(res);
+        })
+        .catch(() => {
+          reject(new Error("Download Failed"));
+        });
+    });
   }
 
   addPercentageAndMinusTotalFileNum() {
@@ -75,6 +97,7 @@ export default class Cache extends Component {
   }
 
   generateQueueForCache() {
+    this.state.queue.clearAll()
     const cacheObject = CDN_IMAGE;
     for (const key in cacheObject) {
       if (cacheObject.hasOwnProperty(key)) {
@@ -89,13 +112,49 @@ export default class Cache extends Component {
     });
   }
 
+  handleLoadingRetry() {
+    this.setState(
+      {
+        downloadError: false
+      },
+      () => {
+        this.startCachingTask();
+      }
+    );
+  }
+
   render() {
-    const { totalFileNum, loadingPercentage } = this.state;
+    const {
+      totalFileNum,
+      loadingPercentage,
+      downloadError,
+      loading,
+      errorTip
+    } = this.state;
+    if (downloadError) {
+      this.setState({
+        loadingPercentage: 0,
+        totalFileNum: 0,
+        addPercentage: 0,
+        loading: false,
+        errorTip: "重试"
+      });
+    } else {
+      this.setState({
+        loading: true,
+        errorTip: null
+      });
+    }
     return (
       <View className='cache-container'>
         <NavBar background='#fff' title='资源包加载' />
         <View className='loading-container'>
-          <WaveLoading percentage={loadingPercentage}></WaveLoading>
+          <WaveLoading
+            percentage={loadingPercentage}
+            onRetry={this.handleLoadingRetry.bind(this)}
+            animate={loading}
+            errorTip={errorTip}
+          ></WaveLoading>
         </View>
         <View className='cache-footer'>
           <Text className='cache-tip'>

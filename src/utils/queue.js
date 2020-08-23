@@ -27,6 +27,10 @@ class Queue {
         return this.list.length == 0
     }
 
+    clearAll(){
+        this.list = []
+    }
+
 }
 
 export default Queue
