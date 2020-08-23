@@ -4,7 +4,6 @@ import NavBar from "@/components/NavBar";
 import WaveLoading from "@/components/WaveLoading";
 import * as Utils from "@/utils/utils";
 import Queue from "@/utils/queue";
-import _isFunction from "lodash/isFunction";
 import { CDN_IMAGE } from "../../constants/index";
 import "./index.scss";
 
@@ -17,58 +16,65 @@ export default class Cache extends Component {
   };
 
   async componentDidMount() {
-    await this.startCachingFile();
-    // when downloading task has finished
-    // Taro.showToast({
-    //   icon: "none",
-    //   title: "资源下载完毕，即将进行实验。",
-    //   duration: 1500,
-    //   success: () => {
-    //     setTimeout(() => {
-    //       Taro.navigateTo({
-    //         url: "/pages/steps/workflow/index"
-    //       });
-    //     }, 1500);
-    //   }
-    // });
+    await this.startCachingTask();
+    this.finishCachingTask();
   }
 
-  async startCachingFile() {
-    this.generateQueueForCache(() => {
-      this.setState({
-        totalFileNum: this.state.queue.size()
-      });
-      while (!this.state.queue.isEmpty()) {
-        const element = this.state.queue.pop();
-        this.cacheFile(element);
+  finishCachingTask() {
+    // when downloading task has finished
+    Taro.showToast({
+      icon: "none",
+      title: "资源下载完毕，即将进行实验。",
+      duration: 1500,
+      success: () => {
+        setTimeout(() => {
+          Taro.navigateTo({
+            url: "/pages/steps/workflow/index"
+          });
+        }, 1500);
       }
     });
+  }
+
+  async startCachingTask() {
+    this.generateQueueForCache();
+    this.setState({
+      totalFileNum: this.state.queue.size()
+    });
+    while (!this.state.queue.isEmpty()) {
+      const element = this.state.queue.pop();
+      await this.cacheFile(element);
+    }
   }
 
   async cacheFile(element) {
     await Taro.downloadFile({
       url: element.url,
-      filePath: `${Taro.env.USER_DATA_PATH}/${element.fileName}`,
-      success: res => {
+      filePath: `${Taro.env.USER_DATA_PATH}/${element.fileName}`
+    })
+      .then(res => {
         if (res.statusCode == 200) {
-          this.setState(prevState => {
-            return {
-              totalFileNum: prevState.totalFileNum - 1,
-              loadingPercentage:
-                prevState.loadingPercentage + this.state.addPercentage
-            };
-          });
+          this.addPercentageAndMinusTotalFileNum();
         } else {
           this.state.queue.push(element);
         }
-      },
-      fail: () => {
+      })
+      .catch(() => {
         this.state.queue.push(element);
-      }
+      });
+  }
+
+  addPercentageAndMinusTotalFileNum() {
+    this.setState(prevState => {
+      return {
+        totalFileNum: prevState.totalFileNum - 1,
+        loadingPercentage:
+          prevState.loadingPercentage + this.state.addPercentage
+      };
     });
   }
 
-  generateQueueForCache(callback) {
+  generateQueueForCache() {
     const cacheObject = CDN_IMAGE;
     for (const key in cacheObject) {
       if (cacheObject.hasOwnProperty(key)) {
@@ -81,9 +87,6 @@ export default class Cache extends Component {
     this.setState({
       addPercentage: Math.trunc(100 / this.state.queue.size())
     });
-    if (_isFunction(callback)) {
-      callback();
-    }
   }
 
   render() {
