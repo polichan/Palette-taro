@@ -19,7 +19,7 @@ export default class Thanks extends Component {
     callback(false);
     this.props
       .dispatch({
-        type: "step/resetStepProgressCount"
+        type: "step/resetStep"
       })
       .then(() => {
         navigateTo("/pages/index/index");

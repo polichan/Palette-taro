@@ -73,4 +73,8 @@
   isEmpty() {
     return !this.steps.length;
   }
+
+  clearAll(){
+    this.steps = []
+  }
 }

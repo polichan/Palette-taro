@@ -11,6 +11,7 @@ s.add(
     pagePath: "/pages/steps/workflow/index"
   })
 );
+
 export default {
   namespace: "step",
   state: {
@@ -43,16 +44,28 @@ export default {
       }
     },
 
-    *resetStepProgressCount({}, {put}){
+    *resetStepProgressCount({ }, { put }) {
       yield put({
         type: 'save',
-        payload:{
+        payload: {
           progressPercent: 0
         }
       })
       return true
     },
-    
+
+
+    *resetStep({ }, { put }) {
+      yield put({
+        type: 'save',
+        payload: {
+          progressPercent: 0,
+          stepQueue: s.clearAll(),
+          hasBuiltStepQueue: false
+        }
+      })
+    },
+
     *setStepQueueToRebuild({ }, { put }) {
       yield put({
         type: 'save',
