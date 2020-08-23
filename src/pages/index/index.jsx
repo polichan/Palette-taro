@@ -83,19 +83,21 @@ export default class Index extends Component {
   }
 
   handleLongPress() {
-    Taro.clearStorageSync();
-    Taro.showToast({
-      icon: "none",
-      title: "DEBUG模式已启动",
-      duration: 3000,
-      success: () => {
-        setTimeout(() => {
-          Taro.reLaunch({
-            url: "/pages/index/index"
-          });
-        }, 3000);
-      }
-    });
+    if(process.env.NODE_ENV == 'development'){
+      Taro.clearStorageSync();
+      Taro.showToast({
+        icon: "none",
+        title: "DEBUG模式已启动",
+        duration: 3000,
+        success: () => {
+          setTimeout(() => {
+            Taro.reLaunch({
+              url: "/pages/index/index"
+            });
+          }, 3000);
+        }
+      });
+    }
   }
 
   render() {
