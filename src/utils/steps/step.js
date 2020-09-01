@@ -62,11 +62,13 @@ export default class Step {
     }
 
     /**
-     * error
+     * 设置错误信息
      * @param {string} err 
+     * @return {bool} isSuccess
      */
     setError(err) {
         this.error = err
+        return this.error == err
     }
 
 }

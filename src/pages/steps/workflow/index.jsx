@@ -10,10 +10,6 @@ export default class Index extends Component {
     workFlowImg: getLocalCacheImageSrc(CDN_IMAGE.WORKFLOW)
   };
 
-  componentDidMount() {
-    this.stepPage.reportErrorToCurrentStep();
-  }
-
   handleImageClick() {
     Taro.previewImage({
       current: this.state.workFlowImg,
@@ -25,16 +21,11 @@ export default class Index extends Component {
     callback(true);
   }
 
-  refStepPage = node => {
-    this.stepPage = node;
-  };
-
   render() {
     return (
       <View className='workflow-page'>
         <StepPage
           onNext={this.handleNextClick.bind(this)}
-          ref={this.refStepPage}
         >
           <Image
             lazyLoad

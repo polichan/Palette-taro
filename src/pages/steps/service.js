@@ -9,10 +9,17 @@
 import request from '@/utils/request/request';
 
 /**
- * step 表单提交
+ * step 表单提交获取实验结果
  * @param   {Object}  data  表单
  */
-export const submitSteps = (data) => {
+export const getExperimentResult = (data) => {
     return request.get("/crmFaceRecognitionResult/findCrmFaceRecognitionResultByOptions", data)
 }
 
+/**
+ * 记录实验
+ * @param {Object} data 
+ */
+export const createExperimentLog = (data) => {
+    return request.post("", data)
+}

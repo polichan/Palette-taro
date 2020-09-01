@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
+import { View, Text, Image } from '@tarojs/components';
 import StepPage from "@/components/StepPage";
 import { getLocalCacheImageSrc } from "@/utils/utils";
 import { CDN_IMAGE } from "../../../constants/index";

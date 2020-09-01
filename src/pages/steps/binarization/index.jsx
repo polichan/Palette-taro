@@ -9,9 +9,11 @@ export default class Binarization extends Component {
     if (this.problem.isAnswerRight()) {
       callback(true);
     } else {
-      Taro.showToast({
-        icon: "none",
-        title: "答案不正确！"
+      this.stepPage.reportErrorToCurrentStep("答案选择不正确").then(() => {
+        Taro.showToast({
+          icon: "none",
+          title: "答案不正确！"
+        });
       });
     }
   }
@@ -20,9 +22,13 @@ export default class Binarization extends Component {
     this.problem = node;
   };
 
+  refStepPage = node => {
+    this.stepPage = node;
+  };
+
   render() {
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)}>
+      <StepPage onNext={this.handleNextClick.bind(this)} ref={this.refStepPage}>
         <Problem
           data={PROBLEM_CONSTANT.BINARIZATION.DATA}
           questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}

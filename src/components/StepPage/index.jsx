@@ -89,7 +89,13 @@ export default class StepPage extends Component {
   }
 
   reportErrorToCurrentStep(err) {
-    this.props.step.stepQueue.getCurrent().setError(err);
+    return new Promise((resolve, reject) => {
+      if (this.props.step.stepQueue.getCurrent().setError(err)) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
   }
 
   saveCurrentStepQueue() {

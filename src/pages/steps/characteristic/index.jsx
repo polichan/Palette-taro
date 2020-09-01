@@ -10,18 +10,34 @@ import "./index.scss";
   loading
 }))
 export default class Characteristic extends Component {
-
   handleNextClick(callback) {
-    callback(true);
+    if (this.problem.isAnswerRight()) {
+      callback(true);
+    } else {
+      this.stepPage.reportErrorToCurrentStep("答案选择不正确").then(() => {
+        Taro.showToast({
+          icon: "none",
+          title: "答案不正确！"
+        });
+      });
+    }
   }
 
-  render() {
+  refStepPage = node => {
+    this.stepPage = node;
+  };
 
+  refProblem = node => {
+    this.problem = node;
+  };
+
+  render() {
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)}>
+      <StepPage onNext={this.handleNextClick.bind(this)} ref={this.refStepPage}>
         <Problem
           data={PROBLEM_CONSTANT.CHARACTERISTIC.DATA}
           questionApi={PROBLEM_CONSTANT.CHARACTERISTIC.QUESTION_API}
+          ref={this.refProblem}
         ></Problem>
       </StepPage>
     );

@@ -27,11 +27,11 @@ export default {
   },
 
   effects: {
-    *submitSteps({ }, { call, select }) {
+    *getExperimentResult({ }, { call, select }) {
       try {
         const steps = yield select(state => state.step.steps)
         const res = yield call(
-          stepApi.submitSteps,
+          stepApi.getExperimentResult,
           steps
         );
         return res;
@@ -41,6 +41,17 @@ export default {
           title: '暂无符合条件结果'
         })
         return false
+      }
+    },
+
+    *saveExperimentLog({ payload }, { call }) {
+      try {
+        yield call(stepApi.createExperimentLog, payload.params)
+      } catch (error) {
+        Taro.showToast({
+          icon: 'none',
+          title: '提交实验记录失败'
+        })
       }
     },
 

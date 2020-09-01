@@ -20,9 +20,17 @@ export default class Result extends Component {
   };
 
   componentWillMount() {
+    this.getExperimentResult();
+  }
+
+  componentDidMount() {
+    this.saveExperimentLog();
+  }
+
+  getExperimentResult() {
     this.props
       .dispatch({
-        type: "step/submitSteps"
+        type: "step/getExperimentResult"
       })
       .then(res => {
         if (res) {
@@ -35,6 +43,24 @@ export default class Result extends Component {
             noResultData: true
           });
         }
+      });
+  }
+
+  saveExperimentLog() {
+    this.props
+      .dispatch({
+        type: "step/saveExperimentLog",
+        payload: {
+          params: {
+            log: this.props.step.stepQueue.exportAll()
+          }
+        }
+      })
+      .then(() => {
+        Taro.showToast({
+          icon: "none",
+          title: "提交试验记录成功"
+        });
       });
   }
 
@@ -51,10 +77,18 @@ export default class Result extends Component {
 
   render() {
     const { steps } = this.props.step;
-    const isResultLoading = this.props.loading.effects["step/submitSteps"];
+    const isResultLoading = this.props.loading.effects[
+      "step/getExperimentResult"
+    ];
+    const isSaveExperimentLogLoading = this.props.loading.effects[
+      "step/saveExperimentLog"
+    ];
     const { result, resultImg, noResultData } = this.state;
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)}>
+      <StepPage
+        onNext={this.handleNextClick.bind(this)}
+        nextButtonLoading={isSaveExperimentLogLoading}
+      >
         <Skeleton
           animateName='elastic'
           title
