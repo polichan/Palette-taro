@@ -243,8 +243,6 @@ export default {
           hasBuiltStepQueue: true
         }
       })
-
-      Taro.setStorageSync('steps', sQueue)
       return sQueue
     },
   },

@@ -6,7 +6,8 @@ import { connect } from "@tarojs/redux";
 import _isFunction from "lodash/isFunction";
 import { AtProgress } from "taro-ui";
 import Panel from "@/components/Panel";
-import {navigateTo} from "@/utils/utils";
+import { navigateTo } from "@/utils/utils";
+import { STORAGE_STEP_QUEUE_KEY } from "@/constants";
 import "./index.scss";
 
 @connect(({ step, loading }) => ({
@@ -34,6 +35,10 @@ export default class StepPage extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.step.stepQueue.getCurrent().setBeginTime();
+  }
+
   setProgressPercent(add = true) {
     const all = this.props.step.stepQueue.getAll().length;
     this.props.dispatch({
@@ -51,7 +56,10 @@ export default class StepPage extends Component {
           this.props.step.stepQueue
             .next()
             .then(() => {
+              // 进度条增加
               this.setProgressPercent();
+              // 缓存到本地
+              this.saveCurrentStepQueue();
               navigateTo(this.props.step.stepQueue.getCurrent().getPagePath());
             })
             .catch(() => {
@@ -80,13 +88,33 @@ export default class StepPage extends Component {
     this.props.step.stepQueue.back().then(this.setProgressPercent(false));
   }
 
+  reportErrorToCurrentStep(err) {
+    this.props.step.stepQueue.getCurrent().setError(err);
+  }
+
+  saveCurrentStepQueue() {
+    try {
+      Taro.setStorageSync(STORAGE_STEP_QUEUE_KEY, this.props.step.stepQueue);
+    } catch (error) {
+      Taro.showToast({
+        icon: "none",
+        title: "缓存进度失败"
+      });
+    }
+  }
+
   options = {
     addGlobalClass: true
-  }
+  };
 
   render() {
     const { stepQueue, progressPercent } = this.props.step;
-    const { nextButtonLoading, showPanel, showProgressBar, nextButtonDisabled } = this.props;
+    const {
+      nextButtonLoading,
+      showPanel,
+      showProgressBar,
+      nextButtonDisabled
+    } = this.props;
     return (
       <View className='step-page'>
         <NavBar
@@ -115,7 +143,7 @@ export default class StepPage extends Component {
           ) : (
             <View className='container'>{this.props.children}</View>
           )}
-        <View className='safe-area-block-container'></View>
+          <View className='safe-area-block-container'></View>
         </View>
         <View className='footer-content flex flex-direction-column flex-center'>
           <ToolBar

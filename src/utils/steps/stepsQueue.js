@@ -1,13 +1,13 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-15 14:11:53
- * @LastEditTime: 2020-08-14 20:11:51
+ * @LastEditTime: 2020-09-02 02:20:36
  * @LastEditors: 陈鹏宇
  * @Description: 页面列表队列
  * @Version: 1.0
  */
 
- export default class StepQueue {
+export default class StepQueue {
   constructor() {
     this.steps = [];
     this.current = 0;
@@ -74,7 +74,12 @@
     return !this.steps.length;
   }
 
-  clearAll(){
+  clearAll() {
     this.steps = []
   }
+
+  exportAll() {
+    return this.steps
+  }
+
 }

@@ -8,6 +8,9 @@ export const HAS_SHOWN_GUIDE_TIP = "has_show_guide_tip"
 export const HAS_AGREED_USER_LICENSE  = "has_agree_user_license"
 export const STORAGE_TOKEN_KEY = "token"
 export const STORAGE_USER_KEY = "user"
+export const STORAGE_STEP_QUEUE_KEY = 'step_queue'
+
+export const DEFAULT_TIME_FORMAT = 'YYYY-MM-DD hh:mm:ss'
 
 
 export const CDN_IMAGE = {
