@@ -2,6 +2,8 @@ import Taro from "@tarojs/taro";
 import Step from "@/utils/steps/step";
 import StepQueue from "@/utils/steps/stepsQueue";
 import * as stepApi from "./service";
+import moment from "moment";
+import { DEFAULT_TIME_FORMAT } from "@/constants";
 
 let s = new StepQueue();
 s.add(
@@ -23,7 +25,14 @@ export default {
     },
     progressPercent: 0,
     stepQueue: s,
-    hasBuiltStepQueue: false
+    hasBuiltStepQueue: false,
+    userExperiment: {
+      log: null,
+      experimentId: 1,
+      finishedAt: null,
+      isFinished: false,
+      userId: null
+    }
   },
 
   effects: {
@@ -45,14 +54,32 @@ export default {
     },
 
     *saveExperimentLog({ payload }, { call }) {
-      try {
-        yield call(stepApi.createExperimentLog, payload.params)
-      } catch (error) {
-        Taro.showToast({
-          icon: 'none',
-          title: '提交实验记录失败'
-        })
-      }
+      yield call(stepApi.createUsersExperiments, payload.params)
+    },
+
+    *endExperiment({ }, { put, select }) {
+      const user = yield select(state => state.user)
+      const stepQueue = yield select(state => state.step.stepQueue)
+      const ue = yield select(state => state.step.userExperiment)
+      console.log(user, stepQueue, ue)
+      yield put({
+        type: 'save',
+        payload: {
+          userExperiment: Object.assign({ log: stepQueue.exportAll(), finishedAt: moment().format(DEFAULT_TIME_FORMAT), isFinished: true, userId: user.ID }, ue)
+        }
+      })
+    },
+
+    *startExperiment({ }, { put, select }) {
+      const ue = yield select(state => state.step.userExperiment)
+      yield put({
+        type: 'save',
+        payload: {
+          userExperiment: Object.assign({
+            createdAt: moment().format(DEFAULT_TIME_FORMAT)
+          }, ue)
+        }
+      })
     },
 
     *resetStepProgressCount({ }, { put }) {

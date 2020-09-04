@@ -24,7 +24,21 @@ export default class Result extends Component {
   }
 
   componentDidMount() {
-    this.saveExperimentLog();
+    this.endExperiment();
+  }
+
+  endExperiment() {
+    this.props
+      .dispatch({
+        type: "step/endExperiment"
+      })
+      .then(() => {
+        this.saveExperimentLog();
+        Taro.showToast({
+          icon: "none",
+          title: "恭喜你，仿真实验已结束"
+        });
+      });
   }
 
   getExperimentResult() {
@@ -47,13 +61,12 @@ export default class Result extends Component {
   }
 
   saveExperimentLog() {
+    console.log(this.props.step.userExperiment);
     this.props
       .dispatch({
         type: "step/saveExperimentLog",
         payload: {
-          params: {
-            log: this.props.step.stepQueue.exportAll()
-          }
+          params: this.props.step.userExperiment
         }
       })
       .then(() => {

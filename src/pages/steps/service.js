@@ -20,6 +20,6 @@ export const getExperimentResult = (data) => {
  * 记录实验
  * @param {Object} data 
  */
-export const createExperimentLog = (data) => {
-    return request.post("", data)
+export const createUsersExperiments = (data) => {
+    return request.post("/crmUsersExperiments/createCrmUsersExperiments", data)
 }
