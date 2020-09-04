@@ -37,7 +37,10 @@ export default {
         const steps = yield select(state => state.step.steps)
         const res = yield call(
           stepApi.getExperimentResult,
-          steps
+          {
+            patchSize: steps.patchSize,
+            histBlockSize: steps.histBlockSize
+          }
         );
         return res;
       } catch (error) {
