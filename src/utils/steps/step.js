@@ -27,6 +27,12 @@ export default class Step {
             this.beginAt = null
         }
 
+        if (config.hasOwnProperty('endAt')) {
+            this.endAt = config.endAt
+        } else {
+            this.endAt = null
+        }
+
     }
 
     getNavigationTitle() {
@@ -44,6 +50,10 @@ export default class Step {
 
     getBeginTime() {
         return this.beginAt
+    }
+
+    getEndTime() {
+        return this.endAt
     }
 
     getError() {
@@ -69,6 +79,14 @@ export default class Step {
     setError(err) {
         this.error = err
         return this.error == err
+    }
+
+    setEndTime(time = null) {
+        if (time == null) {
+            this.endAt = moment().format(DEFAULT_TIME_FORMAT)
+        } else {
+            this.endAt = time
+        }
     }
 
 }
