@@ -6,9 +6,12 @@ import Skeleton from "taro-skeleton";
 import FormBox from "@/components/FormBox";
 import StepPage from "@/components/StepPage";
 import { getSrc } from "@/utils/utils";
+import moment from "moment";
+import { DEFAULT_TIME_FORMAT } from "@/constants";
 import "./index.scss";
 
-@connect(({ step, loading }) => ({
+@connect(({ user, step, loading }) => ({
+  user,
   step,
   loading
 }))
@@ -23,26 +26,27 @@ export default class Result extends Component {
     this.getExperimentResult();
   }
 
-  componentDidMount() {
-    this.endExperiment();
+  async componentDidMount() {
+    await this.endExperiment();
+    console.log("后", this.props.step.userExperiment);
+    await this.saveExperimentLog();
   }
 
-  endExperiment() {
-    this.props
+  async endExperiment() {
+    await this.props
       .dispatch({
-        type: "step/endExperiment"
+        type: "step/endExperiment",
+        payload: {
+          userExperiment: Object.assign(this.props.step.userExperiment, {
+            log: JSON.stringify(this.props.step.stepQueue.exportAll())
+          })
+        }
       })
-      .then(() => {
-        this.saveExperimentLog();
-        Taro.showToast({
-          icon: "none",
-          title: "恭喜你，仿真实验已结束"
-        });
-      });
+      .then(() => {});
   }
 
-  getExperimentResult() {
-    this.props
+  async getExperimentResult() {
+    await this.props
       .dispatch({
         type: "step/getExperimentResult"
       })

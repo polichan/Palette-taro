@@ -28,10 +28,6 @@ export default {
     hasBuiltStepQueue: false,
     userExperiment: {
       log: null,
-      experimentId: 1,
-      finishedAt: null,
-      isFinished: false,
-      userId: null
     }
   },
 
@@ -57,15 +53,11 @@ export default {
       yield call(stepApi.createUsersExperiments, payload.params)
     },
 
-    *endExperiment({ }, { put, select }) {
-      const user = yield select(state => state.user)
-      const stepQueue = yield select(state => state.step.stepQueue)
-      const ue = yield select(state => state.step.userExperiment)
-      console.log(user, stepQueue, ue)
+    *endExperiment({ payload }, { put }) {
       yield put({
         type: 'save',
         payload: {
-          userExperiment: Object.assign({ log: stepQueue.exportAll(), finishedAt: moment().format(DEFAULT_TIME_FORMAT), isFinished: true, userId: user.ID }, ue)
+          userExperiment: payload.userExperiment
         }
       })
     },
@@ -288,6 +280,10 @@ export default {
   reducers: {
     save(state, { payload }) {
       return { ...state, ...payload };
+    },
+    saveUserExperiment(state, { payload }) {
+      state.userExperiment = Object.assign(payload.userExperiment, state.userExperiment)
+      return state
     }
   }
 };

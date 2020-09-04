@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-11 19:15:18
- * @LastEditTime: 2020-07-18 22:41:24
+ * @LastEditTime: 2020-09-04 20:18:20
  * @LastEditors: 陈鹏宇
  * @Description: 接口
  * @Version: 1.0
@@ -21,5 +21,5 @@ export const getExperimentResult = (data) => {
  * @param {Object} data 
  */
 export const createUsersExperiments = (data) => {
-    return request.post("/crmUsersExperiments/createCrmUsersExperiments", data)
+    return request.post("/crmUsersExperiments/createCrmUsersExperimentsFromUser", data)
 }
