@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Image, Text } from "@tarojs/components";
 import _isFunction from "lodash/isFunction";
 import fingerPng from "../../assets/imgs/finger.png";
-import closePng from "../../assets/imgs/close2.png";
+import closePng from "../../assets/imgs/close.png";
 import "./index.scss";
 
 export default class GuideTip extends Component {
