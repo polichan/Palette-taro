@@ -6,7 +6,7 @@ import { AtTabs, AtTabsPane } from "taro-ui";
 import EmptyData from "@/components/EmptyData";
 import Skeleton from "taro-skeleton";
 import { getSrc, getLocalCacheImageSrc } from "@/utils/utils";
-import { SELECTED_ICON } from "@/constants/index";
+import { CDN_IMAGE } from "@/constants/index";
 import "./index.scss";
 
 @connect(({ face, loading }) => ({
@@ -139,7 +139,7 @@ export default class Face extends Component {
       return (
         <View className={`${selectedFaceID == item.ID ? 'face-item face-mask' : 'face-itgem'}`} key={item.ID}>
           {
-            selectedFaceID == item.ID ? (<Image src={getLocalCacheImageSrc(SELECTED_ICON)} className='selected-img'></Image>) : null
+            selectedFaceID == item.ID ? (<Image src={getLocalCacheImageSrc(CDN_IMAGE.SELECTED_ICON)} className='selected-img'></Image>) : null
           }
           <Image src={getSrc(item.Media.cdnUrl)} className='face-img' onClick={this.handleFaceImageClick.bind(this, item)}></Image>
         </View>

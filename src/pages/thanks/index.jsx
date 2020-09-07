@@ -3,7 +3,7 @@ import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import { navigateTo , getLocalCacheImageSrc } from "@/utils/utils";
 import { connect } from "@tarojs/redux";
-import { SMILE_ICON } from "@/constants/index";
+import { CDN_IMAGE } from "@/constants/index";
 import "./index.scss";
 
 @connect(({ step, loading }) => ({
@@ -35,7 +35,7 @@ export default class Thanks extends Component {
       >
         <View className='success-container flex flex-center flex-direction-column'>
           <Image
-            src={getLocalCacheImageSrc(SMILE_ICON)}
+            src={getLocalCacheImageSrc(CDN_IMAGE.SMILE_ICON)}
             className='thanks-img'
           ></Image>
           <Text className='thanks-text'>实验结束，感谢测试</Text>

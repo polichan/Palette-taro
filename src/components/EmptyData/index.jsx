@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import PropTypes from "prop-types";
 import { getLocalCacheImageSrc } from "@/utils/utils";
-import { EMPTY_DATA_ICON } from "@/constants/index";
+import { CDN_IMAGE } from "@/constants/index";
 import "./index.scss";
 
 /**
@@ -16,7 +16,7 @@ class Nothing extends Component {
       <View className='nothing_container'>
         <Image
           className='nothing_icon'
-          src={getLocalCacheImageSrc(EMPTY_DATA_ICON)}
+          src={getLocalCacheImageSrc(CDN_IMAGE.EMPTY_DATA_ICON)}
         ></Image> 
         <Text className='nothing_text'>{nothingText}</Text>
         {hasGuideBtn && (
