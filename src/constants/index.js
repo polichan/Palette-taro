@@ -1,3 +1,11 @@
+/*
+ * @Autor: 陈鹏宇
+ * @Date: 2020-07-15 14:11:53
+ * @LastEditTime: 2020-09-07 11:36:39
+ * @LastEditors: 陈鹏宇
+ * @Description: 常量定义入口
+ * @Version: 1.0
+ */
 export const LICENSE_TYPE = {
     USER_LICENSE: "用户使用协议",
     OPEN_SOURCE_LICENSE: "开源许可协议"
@@ -5,7 +13,7 @@ export const LICENSE_TYPE = {
 
 export const FIRST_LAUNCH_KEY = "first_launch"
 export const HAS_SHOWN_GUIDE_TIP = "has_show_guide_tip"
-export const HAS_AGREED_USER_LICENSE  = "has_agree_user_license"
+export const HAS_AGREED_USER_LICENSE = "has_agree_user_license"
 export const STORAGE_TOKEN_KEY = "token"
 export const STORAGE_USER_KEY = "user"
 export const STORAGE_STEP_QUEUE_KEY = 'step_queue'
@@ -24,5 +32,13 @@ export const CDN_IMAGE = {
     CONVOLUTION_VISUAL_SECOND: "/media/img/cc96e87ba1452a064cd3e8c76b7025cc.jpg",
     BINARY_VISUAL: "/media/img/f4ce5813322a65bd64e59b2a31872183.jpg",
     BLOCK_VISUAL: "/media/img/ca50105dac7423d9623e55470a88a4f7.jpg",
-    HISTOGRAM_VISUAL: "/media/img/0f37cd36092ff1c0a867cf7b44327dc8.jpg"
+    HISTOGRAM_VISUAL: "/media/img/0f37cd36092ff1c0a867cf7b44327dc8.jpg",
+    OPTIONS_ICON: "/media/file/93da65a9fd0004d9477aeac024e08e15_20200907112611.png",
+    SMILE_ICON: "/media/file/260ca9dd8a4577fc00b7bd5810298076_20200907112530.png",
+    CLOSE_ICON: "/media/file/716f6b30598ba30945d84485e61c1027_20200907112635.png",
+    EMPTY_DATA_ICON: "/media/file/2350a55333283bc687e772b786a8e426_20200907112619.png",
+    QUESTION_ICON: "/media/file/5494af1f14a8c19939968c3e9e2d4f79_20200907112604.png",
+    SOLUTION_ICON: "/media/file/550237b8fbcdf3741bb1127d0fc7f6bf_20200907112539.png",
+    FINGER_ICON: "/media/file/e7efda40b1c94805070cd9bf9638ae27_20200907112628.png",
+    SUCCESS_ICON: "/media/file/ef7de3f485174ff47f061ad27d83d0ee_20200907112547.png"
 }
