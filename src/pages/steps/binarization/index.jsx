@@ -9,12 +9,16 @@ export default class Binarization extends Component {
     if (this.problem.isAnswerRight()) {
       callback(true);
     } else {
-      this.stepPage.reportErrorToCurrentStep("答案选择不正确").then(() => {
-        Taro.showToast({
-          icon: "none",
-          title: "答案不正确！"
+      this.stepPage
+        .reportErrorToCurrentStep(
+          `【实战解答】答案选择错误，正确答案：${this.problem.getRightAnswer()}，用户选择答案：${this.problem.getSelectedAnswer()}`
+        )
+        .then(() => {
+          Taro.showToast({
+            icon: "none",
+            title: "答案不正确！"
+          });
         });
-      });
     }
   }
 

@@ -145,6 +145,24 @@ export default class Problem extends Component {
     return res;
   }
 
+  /**
+   * 供外部调用的获取正确答案
+   */
+  getRightAnswer() {
+    return (
+      this.state.questions.real.data.answer &&
+      this.state.questions.real.data.answer.content.toString()
+    );
+  }
+
+  /**
+   * 供外部调用的获取用户选择的答案
+   */
+  getSelectedAnswer() {
+    const res =  this.state.questions.real.data.options && this.state.questions.real.data.options.filter(item => item.ID == parseInt(this.state.selectedOption));
+    return res[res.length - 1].content.toString()
+  }
+
   render() {
     const isQuestionLoading = this.props.loading.effects[
       "question/getQuestionById"
@@ -176,8 +194,7 @@ export default class Problem extends Component {
               loading={isQuestionLoading}
             >
               <View className='question-item-container'>
-                <View className='question-box'>
-                </View>
+                <View className='question-box'></View>
                 <Question content={questions.example.data.content}></Question>
               </View>
             </Skeleton>
@@ -192,8 +209,7 @@ export default class Problem extends Component {
                 loading={isQuestionLoading}
               >
                 <View className='question-item-container'>
-                  <View className='question-box'>
-                  </View>
+                  <View className='question-box'></View>
                   <Question content={questions.real.data.content}></Question>
                   {questions.real.data.options &&
                   questions.real.data.options.length > 0 ? (
