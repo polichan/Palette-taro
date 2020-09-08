@@ -1,3 +1,5 @@
+$SELECTED_COLOR: #3d84ff !important;
+
 .problem-options-container{
     display: flex;
     flex-direction: column;
@@ -12,23 +14,28 @@
     justify-content: flex-start;
     align-items: center;
     .option-order{
-        height: 50px;
-        width: 50px;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-content: center;
         align-items: center;
-        border-radius: 25px;
-        background-color: #C0C0C0;
-        color: white;
+        .checkbox-img{
+            margin-right: 15px !important;
+            height: 32px;
+            width: 32px;
+        }
+        .order-num{
+            margin-right: 5px;
+        }
     }
 
     .option-order.option-order-selected{
-        background-color: #18bff6 !important;
+        color: $SELECTED_COLOR;
     }
     .option-container{
         margin-left: 10px;
+        .option-text-selected{
+            color: $SELECTED_COLOR;
+        }
     }
 }
 

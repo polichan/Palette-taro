@@ -1,5 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
+import CheckBoxUnselected from "../../assets/imgs/checkbox_unselected.png";
+import CheckBoxSelected from "../../assets/imgs/checkbox_selected.png";
 import "./index.scss";
 
 export default class ProblemOptions extends Component {
@@ -67,7 +69,6 @@ export default class ProblemOptions extends Component {
     const { list, selectedValue } = this.state;
     return (
       <View className='problem-options-container'>
-        {this.renderTip()}
         {list.map(item => {
           return (
             <View
@@ -82,9 +83,30 @@ export default class ProblemOptions extends Component {
                     : "option-order"
                 }`}
               >
-                {item.order}
+                {item.value == selectedValue ? (
+                  <Image
+                    src={CheckBoxSelected}
+                    className='checkbox-img'
+                  ></Image>
+                ) : (
+                  <Image
+                    src={CheckBoxUnselected}
+                    className='checkbox-img'
+                  ></Image>
+                )}
+                <Text className='order-num'>{item.order}.</Text>
               </View>
-              <View className='option-container'>{item.label}</View>
+              <View className='option-container'>
+                <Text
+                  className={`${
+                    item.value == selectedValue
+                      ? "option-text option-text-selected"
+                      : "option-text"
+                  }`}
+                >
+                  {item.label}
+                </Text>
+              </View>
             </View>
           );
         })}
