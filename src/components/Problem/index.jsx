@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View, Block } from "@tarojs/components";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import Skeleton from "taro-skeleton";
 import Article from "@/components/Article";
@@ -24,13 +24,16 @@ export default class Problem extends Component {
         "假设我们取到的是第i张图片，那么我们上一步进行了对图片分块（取patch）的过程，每一个patch对应一个矩阵，然后将矩阵变成列向量，减去对应每一列的均值，得到了一个X矩阵，然后求解X乘上X的转置。得出的矩阵的解就是我们要求的特征值和特征向量。我们可以从接下来的特征值和特征向量可视化中看出在前面的特征值和特征向量能量占比很大"
       ]
     },
-    showRealQuestionTab: true
+    showExampleQuestionTab: true
   };
 
   state = {
     current: 0,
-    tabList: [{ title: "题目举例" }, { title: "实战解答" }],
-    hasLoadedTabList: [0],
+    tabList: [
+      { title: "题目举例", key: 0 },
+      { title: "实战解答", key: 1 }
+    ],
+    hasLoadedTabList: [],
     questions: {
       example: {
         data: ""
@@ -44,21 +47,35 @@ export default class Problem extends Component {
   };
 
   componentWillMount() {
-    // 是否显示实战解答选项卡
-    if (!this.props.showRealQuestionTab) {
+    // 是否显示示例选项卡
+    if (!this.props.showExampleQuestionTab) {
       this.setState({
-        tabList: [{ title: "题目举例" }]
+        tabList: [{ title: "实战解答", key: 1 }]
       });
-    }
-    Taro.nextTick(() => {
-      this.getExampleQuestion().then(res => {
-        this.setState({
-          questions: Object.assign(this.state.questions, {
-            example: { data: res }
-          })
+      Taro.nextTick(() => {
+        this.getRealQuestion().then(res => {
+          this.setState(prevState => {
+            return {
+              questions: Object.assign(prevState.questions, {
+                real: { data: res }
+              })
+            };
+          });
         });
       });
-    });
+    } else {
+      Taro.nextTick(() => {
+        this.getExampleQuestion().then(res => {
+          this.setState(prevState => {
+            return {
+              questions: Object.assign(prevState.questions, {
+                example: { data: res }
+              })
+            };
+          });
+        });
+      });
+    }
   }
 
   getExampleQuestion() {
@@ -159,15 +176,19 @@ export default class Problem extends Component {
    * 供外部调用的获取用户选择的答案
    */
   getSelectedAnswer() {
-    const res =  this.state.questions.real.data.options && this.state.questions.real.data.options.filter(item => item.ID == parseInt(this.state.selectedOption));
-    return res[res.length - 1].content.toString()
+    const res =
+      this.state.questions.real.data.options &&
+      this.state.questions.real.data.options.filter(
+        item => item.ID == parseInt(this.state.selectedOption)
+      );
+    return res[res.length - 1].content.toString();
   }
 
   render() {
     const isQuestionLoading = this.props.loading.effects[
       "question/getQuestionById"
     ];
-    const { data, showRealQuestionTab } = this.props;
+    const { data } = this.props;
     const {
       questions,
       tabList,
@@ -185,48 +206,48 @@ export default class Problem extends Component {
           tabList={tabList}
           onClick={this.handleTabClick.bind(this)}
         >
-          <AtTabsPane current={current} index={0}>
-            <Skeleton
-              animateName='elastic'
-              title
-              row={2}
-              rowWidth={["100%", "50%"]}
-              loading={isQuestionLoading}
-            >
-              <View className='question-item-container'>
-                <View className='question-box'></View>
-                <Question content={questions.example.data.content}></Question>
-              </View>
-            </Skeleton>
-          </AtTabsPane>
-          {showRealQuestionTab ? (
-            <AtTabsPane current={current} index={1}>
-              <Skeleton
-                animateName='elastic'
-                title
-                row={2}
-                rowWidth={["100%", "50%"]}
-                loading={isQuestionLoading}
-              >
-                <View className='question-item-container'>
-                  <View className='question-box'></View>
-                  <Question content={questions.real.data.content}></Question>
-                  {questions.real.data.options &&
-                  questions.real.data.options.length > 0 ? (
-                    <View className='problem-options-container'>
-                      <View className='question-box'></View>
-                      <ProblemOptions
-                        optionList={questions.real.data.options}
-                        onSelect={this.handleProblemOptionSelect.bind(this)}
-                        value={selectedOption}
-                        showTip={shouldShowProblemOptionTip}
-                      ></ProblemOptions>
-                    </View>
-                  ) : null}
-                </View>
-              </Skeleton>
-            </AtTabsPane>
-          ) : null}
+          {tabList.map((item, index) => {
+            return (
+              <AtTabsPane current={current} key={item.index} index={index}>
+                <Skeleton
+                  animateName='elastic'
+                  title
+                  row={2}
+                  rowWidth={["100%", "50%"]}
+                  loading={isQuestionLoading}
+                >
+                  <View className='question-item-container'>
+                    <View className='question-box'></View>
+                    {item.key == 0 ? (
+                      <Question
+                        content={questions.example.data.content}
+                      ></Question>
+                    ) : (
+                      <Block>
+                        <Question
+                          content={questions.real.data.content}
+                        ></Question>
+                        {questions.real.data.options &&
+                        questions.real.data.options.length > 0 ? (
+                          <View className='problem-options-container'>
+                            <View className='question-box'></View>
+                            <ProblemOptions
+                              optionList={questions.real.data.options}
+                              onSelect={this.handleProblemOptionSelect.bind(
+                                this
+                              )}
+                              value={selectedOption}
+                              showTip={shouldShowProblemOptionTip}
+                            ></ProblemOptions>
+                          </View>
+                        ) : null}
+                      </Block>
+                    )}
+                  </View>
+                </Skeleton>
+              </AtTabsPane>
+            );
+          })}
         </AtTabs>
       </View>
     );

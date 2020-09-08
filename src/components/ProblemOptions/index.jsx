@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
+import RichTextParser from "@/components/RichTextParser";
 import CheckBoxUnselected from "../../assets/imgs/checkbox_unselected.png";
 import CheckBoxSelected from "../../assets/imgs/checkbox_selected.png";
 import "./index.scss";
@@ -104,7 +105,7 @@ export default class ProblemOptions extends Component {
                       : "option-text"
                   }`}
                 >
-                  {item.label}
+                  <RichTextParser content={item.label}></RichTextParser>
                 </Text>
               </View>
             </View>

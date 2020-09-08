@@ -1,7 +1,7 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-15 14:11:53
- * @LastEditTime: 2020-09-08 09:51:24
+ * @LastEditTime: 2020-09-08 11:37:25
  * @LastEditors: 陈鹏宇
  * @Description: Step 对象，保存标题，按钮标题，页面路径，进入该页面的时间、以及当前页面用户进行操作时候出现的实验错误
  * @Version: 1.0
@@ -77,7 +77,6 @@ export default class Step {
      * @return {bool} isSuccess
      */
     setError(err) {
-        console.log(this.error)
         if (this.error == null) {
             this.error = err
         } else {
