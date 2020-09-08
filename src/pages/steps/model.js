@@ -2,6 +2,8 @@ import Taro from "@tarojs/taro";
 import Step from "@/utils/steps/step";
 import StepQueue from "@/utils/steps/stepsQueue";
 import * as stepApi from "./service";
+import moment from "moment";
+import { DEFAULT_TIME_FORMAT } from "@/constants";
 
 let s = new StepQueue();
 s.add(
@@ -23,16 +25,22 @@ export default {
     },
     progressPercent: 0,
     stepQueue: s,
-    hasBuiltStepQueue: false
+    hasBuiltStepQueue: false,
+    userExperiment: {
+      log: null,
+    }
   },
 
   effects: {
-    *submitSteps({ }, { call, select }) {
+    *getExperimentResult({ }, { call, select }) {
       try {
         const steps = yield select(state => state.step.steps)
         const res = yield call(
-          stepApi.submitSteps,
-          steps
+          stepApi.getExperimentResult,
+          {
+            patchSize: steps.patchSize,
+            histBlockSize: steps.histBlockSize
+          }
         );
         return res;
       } catch (error) {
@@ -42,6 +50,31 @@ export default {
         })
         return false
       }
+    },
+
+    *saveExperimentLog({ payload }, { call }) {
+      yield call(stepApi.createUsersExperiments, payload.params)
+    },
+
+    *endExperiment({ payload }, { put }) {
+      yield put({
+        type: 'save',
+        payload: {
+          userExperiment: payload.userExperiment
+        }
+      })
+    },
+
+    *startExperiment({ }, { put, select }) {
+      const ue = yield select(state => state.step.userExperiment)
+      yield put({
+        type: 'save',
+        payload: {
+          userExperiment: Object.assign({
+            createdAt: moment().format(DEFAULT_TIME_FORMAT)
+          }, ue)
+        }
+      })
     },
 
     *resetStepProgressCount({ }, { put }) {
@@ -250,6 +283,10 @@ export default {
   reducers: {
     save(state, { payload }) {
       return { ...state, ...payload };
+    },
+    saveUserExperiment(state, { payload }) {
+      state.userExperiment = Object.assign(payload.userExperiment, state.userExperiment)
+      return state
     }
   }
 };

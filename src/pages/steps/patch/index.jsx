@@ -102,16 +102,16 @@ export default class Index extends Component {
             <AtRadio
               options={[
                 {
-                  label: "31 * 31",
-                  value: "31x31"
+                  label: "3 * 3",
+                  value: "3x3"
                 },
                 {
-                  label: "29 * 29",
-                  value: "29x29"
+                  label: "5 * 5",
+                  value: "5x5"
                 },
                 {
-                  label: "27 * 27",
-                  value: "27x27"
+                  label: "7 * 7",
+                  value: "7x7"
                 }
               ]}
               value={this.state.value}

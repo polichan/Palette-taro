@@ -75,6 +75,7 @@ export default class Index extends Component {
     const nowTime = + new Date();
     setTimeout(() => {
       this.setState({
+        // eslint-disable-next-line react/no-unused-state
         patchVisualImg: gifurl + '?' + nowTime
       })
     }, 9000)

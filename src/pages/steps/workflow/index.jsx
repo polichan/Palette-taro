@@ -2,16 +2,30 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import { getLocalCacheImageSrc } from "@/utils/utils";
+import { connect } from "@tarojs/redux";
 import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
+@connect(({ step, loading }) => ({
+  step,
+  loading
+}))
 export default class Index extends Component {
   state = {
     workFlowImg: getLocalCacheImageSrc(CDN_IMAGE.WORKFLOW)
   };
 
   componentDidMount() {
-    this.stepPage.reportErrorToCurrentStep();
+    this.props
+      .dispatch({
+        type: "step/startExperiment"
+      })
+      .then(() => {
+        Taro.showToast({
+          icon: "none",
+          title: "仿真实验正式开始~"
+        });
+      });
   }
 
   handleImageClick() {
@@ -25,17 +39,10 @@ export default class Index extends Component {
     callback(true);
   }
 
-  refStepPage = node => {
-    this.stepPage = node;
-  };
-
   render() {
     return (
       <View className='workflow-page'>
-        <StepPage
-          onNext={this.handleNextClick.bind(this)}
-          ref={this.refStepPage}
-        >
+        <StepPage onNext={this.handleNextClick.bind(this)}>
           <Image
             lazyLoad
             src={this.state.workFlowImg}

@@ -6,9 +6,12 @@ import Skeleton from "taro-skeleton";
 import FormBox from "@/components/FormBox";
 import StepPage from "@/components/StepPage";
 import { getSrc } from "@/utils/utils";
+import moment from "moment";
+import { DEFAULT_TIME_FORMAT } from "@/constants";
 import "./index.scss";
 
-@connect(({ step, loading }) => ({
+@connect(({ user, step, loading }) => ({
+  user,
   step,
   loading
 }))
@@ -20,9 +23,32 @@ export default class Result extends Component {
   };
 
   componentWillMount() {
-    this.props
+    this.getExperimentResult();
+  }
+
+  async componentDidMount() {
+    await this.endExperiment();
+    console.log("后", this.props.step.userExperiment);
+    await this.saveExperimentLog();
+  }
+
+  async endExperiment() {
+    await this.props
       .dispatch({
-        type: "step/submitSteps"
+        type: "step/endExperiment",
+        payload: {
+          userExperiment: Object.assign(this.props.step.userExperiment, {
+            log: JSON.stringify(this.props.step.stepQueue.exportAll())
+          })
+        }
+      })
+      .then(() => {});
+  }
+
+  async getExperimentResult() {
+    await this.props
+      .dispatch({
+        type: "step/getExperimentResult"
       })
       .then(res => {
         if (res) {
@@ -35,6 +61,23 @@ export default class Result extends Component {
             noResultData: true
           });
         }
+      });
+  }
+
+  saveExperimentLog() {
+    console.log(this.props.step.userExperiment);
+    this.props
+      .dispatch({
+        type: "step/saveExperimentLog",
+        payload: {
+          params: this.props.step.userExperiment
+        }
+      })
+      .then(() => {
+        Taro.showToast({
+          icon: "none",
+          title: "提交试验记录成功"
+        });
       });
   }
 
@@ -51,10 +94,18 @@ export default class Result extends Component {
 
   render() {
     const { steps } = this.props.step;
-    const isResultLoading = this.props.loading.effects["step/submitSteps"];
+    const isResultLoading = this.props.loading.effects[
+      "step/getExperimentResult"
+    ];
+    const isSaveExperimentLogLoading = this.props.loading.effects[
+      "step/saveExperimentLog"
+    ];
     const { result, resultImg, noResultData } = this.state;
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)}>
+      <StepPage
+        onNext={this.handleNextClick.bind(this)}
+        nextButtonLoading={isSaveExperimentLogLoading}
+      >
         <Skeleton
           animateName='elastic'
           title

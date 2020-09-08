@@ -2,11 +2,11 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import { connect } from "@tarojs/redux";
-import { getSrc } from "@/utils/utils";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import EmptyData from "@/components/EmptyData";
 import Skeleton from "taro-skeleton";
-import SelectedImage from "../../../assets/imgs/selected.png";
+import { getSrc, getLocalCacheImageSrc } from "@/utils/utils";
+import { CDN_IMAGE } from "@/constants/index";
 import "./index.scss";
 
 @connect(({ face, loading }) => ({
@@ -139,7 +139,7 @@ export default class Face extends Component {
       return (
         <View className={`${selectedFaceID == item.ID ? 'face-item face-mask' : 'face-itgem'}`} key={item.ID}>
           {
-            selectedFaceID == item.ID ? (<Image src={SelectedImage} className='selected-img'></Image>) : null
+            selectedFaceID == item.ID ? (<Image src={getLocalCacheImageSrc(CDN_IMAGE.SELECTED_ICON)} className='selected-img'></Image>) : null
           }
           <Image src={getSrc(item.Media.cdnUrl)} className='face-img' onClick={this.handleFaceImageClick.bind(this, item)}></Image>
         </View>

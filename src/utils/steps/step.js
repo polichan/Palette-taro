@@ -27,6 +27,12 @@ export default class Step {
             this.beginAt = null
         }
 
+        if (config.hasOwnProperty('endAt')) {
+            this.endAt = config.endAt
+        } else {
+            this.endAt = null
+        }
+
     }
 
     getNavigationTitle() {
@@ -46,6 +52,10 @@ export default class Step {
         return this.beginAt
     }
 
+    getEndTime() {
+        return this.endAt
+    }
+
     getError() {
         return this.error
     }
@@ -62,11 +72,21 @@ export default class Step {
     }
 
     /**
-     * error
+     * 设置错误信息
      * @param {string} err 
+     * @return {bool} isSuccess
      */
     setError(err) {
         this.error = err
+        return this.error == err
+    }
+
+    setEndTime(time = null) {
+        if (time == null) {
+            this.endAt = moment().format(DEFAULT_TIME_FORMAT)
+        } else {
+            this.endAt = time
+        }
     }
 
 }

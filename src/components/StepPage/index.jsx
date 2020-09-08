@@ -39,6 +39,8 @@ export default class StepPage extends Component {
     this.props.step.stepQueue.getCurrent().setBeginTime();
   }
 
+  componentWillUnmount() {}
+
   setProgressPercent(add = true) {
     const all = this.props.step.stepQueue.getAll().length;
     this.props.dispatch({
@@ -51,6 +53,7 @@ export default class StepPage extends Component {
 
   handleNextStepClick() {
     if (_isFunction(this.props.onNext)) {
+      this.props.step.stepQueue.getCurrent().setEndTime();
       this.props.onNext(canNext => {
         if (canNext) {
           this.props.step.stepQueue
@@ -89,7 +92,13 @@ export default class StepPage extends Component {
   }
 
   reportErrorToCurrentStep(err) {
-    this.props.step.stepQueue.getCurrent().setError(err);
+    return new Promise((resolve, reject) => {
+      if (this.props.step.stepQueue.getCurrent().setError(err)) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
   }
 
   saveCurrentStepQueue() {
