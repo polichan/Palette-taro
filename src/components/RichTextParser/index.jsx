@@ -11,8 +11,8 @@ export default class RichTextParser extends Component {
     addGlobalClass: true
   };
 
-  handleImgClick(src, imgList) {
-    Taro.previewImage({ urls: imgList, current: src });
+  handleImgClick = (src, imgList) => {
+    Taro.previewImage({ urls: imgList, current: src }).then(() => {});
   }
 
   handleLinkClick(href) {
@@ -28,7 +28,7 @@ export default class RichTextParser extends Component {
         theme='light'
         latexApi={MD_RENDER_API}
         content={content}
-        onImgClick={this.handleImgClick.bind(this)}
+        onImgClick={this.handleImgClick}
         onLinkClick={this.handleLinkClick.bind(this)}
       />
     );

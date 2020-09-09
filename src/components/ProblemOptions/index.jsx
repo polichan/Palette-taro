@@ -95,18 +95,12 @@ export default class ProblemOptions extends Component {
                     className='checkbox-img'
                   ></Image>
                 )}
-                <Text className='order-num'>{item.order}.</Text>
+                <Text className='order-num'>{item.order}选项</Text>
               </View>
               <View className='option-container'>
-                <Text
-                  className={`${
-                    item.value == selectedValue
-                      ? "option-text option-text-selected"
-                      : "option-text"
-                  }`}
-                >
+                <View className='option-text'>
                   <RichTextParser content={item.label}></RichTextParser>
-                </Text>
+                </View>
               </View>
             </View>
           );
