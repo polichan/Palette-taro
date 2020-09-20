@@ -24,5 +24,7 @@
 
 ![qrcode](https://github.com/polichan/Palette-taro/blob/master/screenshots/qrcode.png)
 
+### 部署
+[部署详情](https://github.com/polichan/Palette-taro/blob/master/deployment.md)
 ### License
 GNU GENERAL PUBLIC LICENSE Version 2, June 1991
