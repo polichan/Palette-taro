@@ -4,7 +4,7 @@
 
 注：若需要查看源代码文件，可直接在源代码地址进行在线阅读或下载源代码进行查看。
 
-* 访问源代码地址，进入 Release 或直接点击访问（https://github.com/polichan/Palette-taro/releases/tag/1.0）下载编译后的 1.0 版本小程序代码压缩文件
+* 访问源代码地址，进入 Release 或直接点击访问[此处](https://github.com/polichan/Palette-taro/releases/tag/1.0）下载编译后的最新版本小程序代码压缩文件
 
 *  解压该压缩文件
 
