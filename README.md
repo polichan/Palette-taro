@@ -10,9 +10,19 @@
 
 ### 效果截图
 
+<figure>
+<img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_4.jpg" width="20%" /><img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_3.jpg" width="20%" />
+</figure>
+
 对人脸识别中一些难以理解的步骤，例如patch的提取和卷积的过程等。我们都以动画的形式进行更为直观的展示，让学生能有更好的学习体验。
 
+<figure>
+<img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_2.jpg" width="20%" /><img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_1.jpg" width="20%" />
+</figure>
+
 ### 小程序线上二维码
+
+![qrcode](https://github.com/polichan/Palette-taro/blob/master/screenshots/qrcode.png)
 
 ### 部署教程
 
@@ -31,23 +41,21 @@
 * 运行查看
 
 
+#### 关于配置文件：
 
-​      #### 关于配置文件：
+![img](https://github.com/polichan/Palette-taro/blob/master/screenshots/config.png)
 
-​      ![img](file:///C:/Users/Richter/AppData/Local/Temp/msohtmlclip1/04/clip_image002.jpg)
+配置文件位于：项目根目录/src/config/config.js；配置内容如下：
 
-​     配置文件位于：项目根目录/src/config/config.js；配置内容如下：
+![img](https://github.com/polichan/Palette-taro/blob/master/screenshots/config_detail.png)
 
-![img](file:///C:/Users/Richter/AppData/Local/Temp/msohtmlclip1/04/clip_image004.jpg)
+其中 **BASE_API** 为小程序请求接口地址，会根据当前的环境进行切换请求地址。
 
-​     其中 **BASE_API 为小程序请求接口地址，会根据当前的环境进行切换请求地址。**
-
-​     其中 **MD_RENDER_API** **为小程序渲染 Latex Markdown 文本的接口服务，在本小程序中用于公式渲染。**
+其中 **MD_RENDER_API** 为小程序渲染 Latex Markdown 文本的接口服务，在本小程序中用于公式渲染。
 
 #### 接口部署
 
-**注：接口已部署在腾讯云服务器，域名：api.fengkuangqie.cn；**
+**注**：接口已部署在腾讯云服务器，域名：api.fengkuangqie.cn
 
 ### License
-
-**GNU GENERAL PUBLIC LICENSE Version 2, June 1991**
+GNU GENERAL PUBLIC LICENSE Version 2, June 1991
