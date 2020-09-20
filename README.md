@@ -9,16 +9,16 @@
 在服务器端选用腾讯云，通过远程部署，将用户的登录信息存储在云服务器，在小程序端进行调用。通过云服务器，可以更好的对用户信息进行存储和调用，从而更好的服务于前端小程序。
 
 ### 效果截图
-
-<figure>
-<img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_4.jpg" width="20%" /><img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_3.jpg" width="20%" />
-</figure>
+                                                                                             
+截图 1                      |  截图 2
+:-------------------------:|:-------------------------:
+![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_4.jpg)  |  ![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_3.jpg)
 
 对人脸识别中一些难以理解的步骤，例如patch的提取和卷积的过程等。我们都以动画的形式进行更为直观的展示，让学生能有更好的学习体验。
 
-<figure>
-<img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_2.jpg" width="20%" /><img src="https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_1.jpg" width="20%" />
-</figure>
+截图 3                      |  截图 4
+:-------------------------:|:-------------------------:
+![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_2.jpg)  |  ![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_1.jpg)
 
 ### 小程序线上二维码
 
