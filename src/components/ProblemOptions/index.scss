@@ -10,13 +10,12 @@ $SELECTED_COLOR: #3d84ff !important;
 .option-box{
     margin: 10px 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
     .option-order{
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         .checkbox-img{
             margin-right: 15px !important;
@@ -33,9 +32,7 @@ $SELECTED_COLOR: #3d84ff !important;
     }
     .option-container{
         margin-left: 10px;
-        .option-text-selected{
-            color: $SELECTED_COLOR;
-        }
+        flex: 1;
     }
 }
 
