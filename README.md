@@ -9,45 +9,22 @@
 在服务器端选用腾讯云，通过远程部署，将用户的登录信息存储在云服务器，在小程序端进行调用。通过云服务器，可以更好的对用户信息进行存储和调用，从而更好的服务于前端小程序。
 
 ### 效果截图
+                                                                                             
+截图 1                      |  截图 2
+:-------------------------:|:-------------------------:
+![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_4.jpg)  |  ![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_3.jpg)
 
 对人脸识别中一些难以理解的步骤，例如patch的提取和卷积的过程等。我们都以动画的形式进行更为直观的展示，让学生能有更好的学习体验。
 
+截图 3                      |  截图 4
+:-------------------------:|:-------------------------:
+![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_2.jpg)  |  ![](https://github.com/polichan/Palette-taro/blob/master/screenshots/screenshot_1.jpg)
+
 ### 小程序线上二维码
 
-### 部署教程
+![qrcode](https://github.com/polichan/Palette-taro/blob/master/screenshots/qrcode.png)
 
-#### 源代码地址：https://github.com/polichan/Palette-taro
-
-注：若需要查看源代码文件，可直接在源代码地址进行在线阅读或下载源代码进行查看。
-
-* 访问源代码地址，进入 Release 或直接点击访问（https://github.com/polichan/Palette-taro/releases/tag/1.0）下载编译后的 1.0 版本小程序代码压缩文件
-
-*  解压该压缩文件
-
-* 打开微信开发者工具
-
-* 将解压后的文件导入至微信开发者工具
-
-* 运行查看
-
-
-
-​      #### 关于配置文件：
-
-​      ![img](file:///C:/Users/Richter/AppData/Local/Temp/msohtmlclip1/04/clip_image002.jpg)
-
-​     配置文件位于：项目根目录/src/config/config.js；配置内容如下：
-
-![img](file:///C:/Users/Richter/AppData/Local/Temp/msohtmlclip1/04/clip_image004.jpg)
-
-​     其中 **BASE_API 为小程序请求接口地址，会根据当前的环境进行切换请求地址。**
-
-​     其中 **MD_RENDER_API** **为小程序渲染 Latex Markdown 文本的接口服务，在本小程序中用于公式渲染。**
-
-#### 接口部署
-
-**注：接口已部署在腾讯云服务器，域名：api.fengkuangqie.cn；**
-
+### 部署
+[部署详情](https://github.com/polichan/Palette-taro/blob/master/deployment.md)
 ### License
-
-**GNU GENERAL PUBLIC LICENSE Version 2, June 1991**
+GNU GENERAL PUBLIC LICENSE Version 2, June 1991
