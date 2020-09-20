@@ -151,10 +151,14 @@ export default class Problem extends Component {
       this.state.questions.real.data.answer &&
       this.state.questions.real.data.answer.ID.toString();
     const optionId = this.state.selectedOption;
-    if (answerId == undefined) {
-      res = true;
-    } else {
-      res = answerId == optionId;
+    if(optionId.length == 0){
+      res = true
+    }else{
+      if (answerId == undefined) {
+        res = true;
+      } else {
+        res = answerId == optionId;
+      }
     }
     this.setState({
       shouldShowProblemOptionTip: !res
@@ -167,7 +171,7 @@ export default class Problem extends Component {
    */
   getRightAnswer() {
     return (
-      this.state.questions.real.data.answer &&
+      this.state.questions.real.data.answer && 
       this.state.questions.real.data.answer.content.toString()
     );
   }
