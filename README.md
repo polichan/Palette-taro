@@ -10,7 +10,7 @@
 
 在服务器端选用腾讯云，通过远程部署，将用户的登录信息存储在云服务器，在小程序端进行调用。通过云服务器，可以更好的对用户信息进行存储和调用，从而更好的服务于前端小程序。
 
-### 小程序线上二维码
+### 线上版本
 
 ![qrcode](https://github.com/polichan/Palette-taro/blob/master/screenshots/qrcode.png)
 
