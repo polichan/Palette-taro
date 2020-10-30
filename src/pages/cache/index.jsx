@@ -23,7 +23,6 @@ export default class Cache extends Component {
   }
 
   finishCachingTask() {
-    // when downloading task has finished
     Taro.showToast({
       icon: "none",
       title: "资源下载完毕，即将返回首页。",

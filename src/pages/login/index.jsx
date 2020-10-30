@@ -17,7 +17,6 @@ export default class Index extends Component {
     codeNumber: null,
     password: null,
     captcha: null,
-    inputAdjustPosition: 0
   };
 
   componentWillMount() {

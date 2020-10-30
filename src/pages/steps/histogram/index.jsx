@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image, Text } from "@tarojs/components";
+import { View, Image} from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import Panel from "@/components/Panel";
 import FloatLayout from "@/components/FloatLayout";

@@ -1,9 +1,9 @@
 import Taro from "@tarojs/taro";
 import Step from "@/utils/steps/step";
 import StepQueue from "@/utils/steps/stepsQueue";
-import * as stepApi from "./service";
 import moment from "moment";
 import { DEFAULT_TIME_FORMAT } from "@/constants";
+import * as stepApi from "./service";
 
 let s = new StepQueue();
 s.add(
