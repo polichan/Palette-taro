@@ -52,9 +52,9 @@ export const BLOCK_EXPLAIN = {
 }
 export const HISTOGRAM_EXPLAIN = {
     name: '什么是直方图？',
-    content: '对block里的每个像素值进行统计，绘制直方图，横轴表示像素值，纵轴表示block中该像素值的分布情况。'   
+    content: '对block里的每个像素值进行统计，绘制直方图，横轴表示像素值，纵轴表示block中该像素值的分布情况。'
 }
 export const FILTER_EXPLAIN = {
     name: "filter 个数的选择",
-    content:"这里我们选取对应特征值排在前8个的特征向量来构造滤波器，即将一维的特征向量排列成与前面Patch相同大小的二维矩阵，即构成了滤波器。"
+    content: "这里我们选取对应特征值排在前8个的特征向量来构造滤波器，即将一维的特征向量排列成与前面Patch相同大小的二维矩阵，即构成了滤波器。"
 }

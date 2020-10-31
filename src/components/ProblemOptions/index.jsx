@@ -53,7 +53,7 @@ export default class ProblemOptions extends Component {
 
   renderTip() {
     const { showTip } = this.props;
-    const tipComponent = null;
+    let tipComponent = null;
     if (showTip) {
       tipComponent = (
         <View className='tip-container'>

@@ -17,7 +17,9 @@ const reduxStore = store
 class App extends Component {
 
   componentDidMount() {
-    this.updateWeapp()
+    if(Taro.env == 'weapp'){
+      this.updateWeapp()
+    }
   }
 
   componentDidShow() { }
