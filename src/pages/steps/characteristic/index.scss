@@ -1,3 +1,5 @@
+@import "~taro-ui/dist/style/components/article.scss";
+
 .question-container {
   margin: 20px 20px;
 }
@@ -9,4 +11,26 @@
 
 .question-item-container{
   padding: 20px;
+}
+
+.header-text {
+  margin: 10px 20px 10px 20px;
+}
+
+.bottom-text {
+  margin: 20px 20px 40px 20px;
+}
+
+.visual-container{
+  margin-top: 20px;
+}
+
+.visual-container{
+  color: #666 !important;
+  font-size: 28px !important;
+  line-height: 42px;
+}
+
+.visual-img-container{
+  margin: 20px 0;
 }
