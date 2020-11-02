@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import ToolBar from "@/components/ToolBar";
 import NavBar from "@/components/NavBar";
 import { connect } from "@tarojs/redux";

@@ -1,7 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-import '@tarojs/async-await'
-import 'taro-ui/dist/style/index.scss'
 import Index from './pages/index'
 import store from './utils/store/store'
 import './app.scss'
@@ -12,12 +10,13 @@ import './app.scss'
 //   require('nerv-devtools')
 // }
 
-const reduxStore = store
 
 class App extends Component {
 
   componentDidMount() {
-    this.updateWeapp()
+    if (Taro.env == 'weapp') {
+      this.updateWeapp()
+    }
   }
 
   componentDidShow() { }
@@ -101,7 +100,7 @@ class App extends Component {
   // 请勿修改此函数
   render() {
     return (
-      <Provider store={reduxStore}>
+      <Provider store={store}>
         <Index />
       </Provider>
     )

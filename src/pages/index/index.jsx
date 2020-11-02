@@ -82,7 +82,7 @@ export default class Index extends Component {
   }
 
   handleLongPress() {
-    if(process.env.NODE_ENV == 'development'){
+    if (process.env.NODE_ENV == 'development') {
       Taro.clearStorageSync();
       Taro.showToast({
         icon: "none",
@@ -97,6 +97,43 @@ export default class Index extends Component {
         }
       });
     }
+  }
+
+  renderBottomText() {
+    return (
+      <View className='about-box'>
+        <View className='at-col'>
+          <Text
+            className='user-license bottom-text'
+            onClick={this.handleBottomTextClick.bind(
+              this,
+              '用户使用协议'
+            )}
+          >
+            用户使用协议
+          </Text>
+        </View>
+        <View className='at-col'>
+          <Text
+            className='about bottom-text'
+            onClick={this.handleBottomTextClick.bind(this, "about")}
+          >
+            关于本实验
+              </Text>
+        </View>
+        <View className='at-col'>
+          <Text
+            className='open-source-license bottom-text'
+            onClick={this.handleBottomTextClick.bind(
+              this,
+              '开源许可协议'
+            )}
+          >
+            开源许可协议
+          </Text>
+        </View>
+      </View>
+    )
   }
 
   render() {
@@ -139,52 +176,23 @@ export default class Index extends Component {
                   进行实验
                 </AtButton>
               ) : (
-                <AtButton
-                  type='primary'
-                  className='login-btn c-btn-linergradient-blue'
-                  size='normal'
-                  openType='getUserInfo'
-                  onClick={() => {
-                    this.handleLoginClick();
-                  }}
-                >
-                  登录
-                </AtButton>
-              )}
+                  <AtButton
+                    type='primary'
+                    className='login-btn c-btn-linergradient-blue'
+                    size='normal'
+                    openType='getUserInfo'
+                    onClick={() => {
+                      this.handleLoginClick();
+                    }}
+                  >
+                    登录
+                  </AtButton>
+                )}
             </View>
           </View>
-          <View className='about-box'>
-            <View className='at-col'>
-              <Text
-                className='user-license bottom-text'
-                onClick={this.handleBottomTextClick.bind(
-                  this,
-                  CONSTANTS.LICENSE_TYPE.USER_LICENSE
-                )}
-              >
-                {CONSTANTS.LICENSE_TYPE.USER_LICENSE}
-              </Text>
-            </View>
-            <View className='at-col'>
-              <Text
-                className='about bottom-text'
-                onClick={this.handleBottomTextClick.bind(this, "about")}
-              >
-                关于本实验
-              </Text>
-            </View>
-            <View className='at-col'>
-              <Text
-                className='open-source-license bottom-text'
-                onClick={this.handleBottomTextClick.bind(
-                  this,
-                  CONSTANTS.LICENSE_TYPE.OPEN_SOURCE_LICENSE
-                )}
-              >
-                {CONSTANTS.LICENSE_TYPE.OPEN_SOURCE_LICENSE}
-              </Text>
-            </View>
-          </View>
+          {
+            this.renderBottomText()
+          }
         </View>
       </View>
     );

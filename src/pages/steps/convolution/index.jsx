@@ -5,8 +5,8 @@ import Panel from "@/components/Panel/index";
 import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
 import { getLocalCacheImageSrc } from "@/utils/utils";
-import { CDN_IMAGE } from "../../../constants/index";
 import { connect } from "@tarojs/redux";
+import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
 @connect(({ step, loading }) => ({

@@ -6,8 +6,6 @@ import Skeleton from "taro-skeleton";
 import FormBox from "@/components/FormBox";
 import StepPage from "@/components/StepPage";
 import { getSrc } from "@/utils/utils";
-import moment from "moment";
-import { DEFAULT_TIME_FORMAT } from "@/constants";
 import "./index.scss";
 
 @connect(({ user, step, loading }) => ({
