@@ -160,7 +160,7 @@ export default {
       );
       sQueue.add(
         new Step({
-          navigationTitle: "选择人脸图像",
+          navigationTitle: "数据集可视化",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/face/index"
         })
@@ -257,6 +257,14 @@ export default {
           navigationTitle: "直方图",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/histogram/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "KNN 介绍",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/knn/index"
         })
       );
 

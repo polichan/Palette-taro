@@ -17,7 +17,6 @@ export default class Face extends Component {
   state = {
     current: 0,
     hasLoadedTabList: [0],
-    selectedFaceID: null
   };
 
   componentWillMount() {
@@ -32,20 +31,7 @@ export default class Face extends Component {
   }
 
   handleNextClick(callback) {
-    if (this.state.selectedFaceID == null) {
-      Taro.showToast({
-        icon: 'none',
-        title: "请先选择一张人脸图像"
-      })
-    } else {
-      Taro.showModal({
-        title: '提示',
-        content: '为简化步骤，实验过程中均采用「傅园慧」人脸进行实验展示。',
-        success: ()=>{
-          callback(true);
-        }
-      })
-    }
+    callback(true);
   }
 
   handleTabClick(targetIndex) {
@@ -84,20 +70,6 @@ export default class Face extends Component {
     })
   }
 
-  handleFaceImageClick(face) {
-    const faceID = face.ID
-    if (this.state.selectedFaceID == faceID) {
-      // 反选
-      this.setState({
-        selectedFaceID: null
-      })
-    } else {
-      this.setState({
-        selectedFaceID: faceID
-      })
-    }
-  }
-
   renderFacePanel() {
     const { current } = this.state;
     const { face } = this.props;
@@ -134,14 +106,10 @@ export default class Face extends Component {
   }
 
   renderFaces(itemList) {
-    const { selectedFaceID } = this.state
     return itemList.map(item => {
       return (
-        <View className={`${selectedFaceID == item.ID ? 'face-item face-mask' : 'face-itgem'}`} key={item.ID}>
-          {
-            selectedFaceID == item.ID ? (<Image src={getLocalCacheImageSrc(CDN_IMAGE.SELECTED_ICON)} className='selected-img'></Image>) : null
-          }
-          <Image src={getSrc(item.Media.cdnUrl)} className='face-img' onClick={this.handleFaceImageClick.bind(this, item)}></Image>
+        <View className='face-itgem' key={item.ID}>
+          <Image src={getSrc(item.Media.cdnUrl)} className='face-img'></Image>
         </View>
       )
     })
