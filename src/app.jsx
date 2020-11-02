@@ -76,6 +76,7 @@ class App extends Component {
       'pages/steps/block/index',
       'pages/steps/block_visual/index',
       'pages/steps/workflow/index',
+      'pages/steps/intro/index',
       'pages/steps/characteristic/index',
       'pages/steps/characteristic_visual/index',
       'pages/steps/binarization/index',
@@ -85,7 +86,6 @@ class App extends Component {
       'pages/license/index',
       'pages/about/index',
       'pages/thanks/index',
-      'pages/intro/index'
     ],
     window: {
       backgroundTextStyle: 'light',

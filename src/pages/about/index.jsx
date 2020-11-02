@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import Article from "@/components/Article";
-import NavBar from '@/components/NavBar'
+import Article from "../steps/intro/node_modules/@/components/Article";
+import NavBar from '../steps/intro/node_modules/@/components/NavBar'
 
 import "./index.scss";
 

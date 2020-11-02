@@ -2,20 +2,19 @@ import Taro, { Component } from '@tarojs/taro';
 import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import Article from '@/components/Article'
-import * as CONSTANTS from '@/constants'
 import NavBar from '@/components/NavBar'
 import './index.scss';
-@connect(({intro, loading}) => ({
+@connect(({ intro, loading }) => ({
   intro,
   loading
 }))
 export default class Intro extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      data:{
+      data: {
         title: "数据集的作用",
-        section:[
+        section: [
           '在进行机器学习算法之前，通常需要将数据集划分，通常分为训练集和测试集，部分还有验证集。首先介绍这三种数据集的含义：',
           '训练集（Training Set）：帮助我们训练模型，即通过训练集的数据让我们确定拟合曲线的参数。',
           '验证集（Validation Set）：用来做模型选择（model selection），即做模型的最终优化及确定的，用来辅助我们的模型的构建，可选；',
@@ -31,7 +30,7 @@ export default class Intro extends Component {
     navigationBarTitleText: 'intro',
   };
   render() {
-    const {data} = this.state
+    const { data } = this.state
     return (
       <View className='intro-page'>
         <NavBar background='#fff' back home title="数据集介绍" />

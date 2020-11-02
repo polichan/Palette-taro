@@ -153,6 +153,13 @@ export default {
       );
       sQueue.add(
         new Step({
+          navigationTitle: "数据集的作用",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/intro/index"
+        })
+      );
+      sQueue.add(
+        new Step({
           navigationTitle: "选择人脸图像",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/face/index"

@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
-import NavBar from "@/components/NavBar";
+import NavBar from "../steps/intro/node_modules/@/components/NavBar";
 import { connect } from "@tarojs/redux";
 import { AtButton } from "taro-ui";
 import * as Utils from "@/utils/utils";
