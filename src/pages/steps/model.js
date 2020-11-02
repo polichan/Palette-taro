@@ -165,18 +165,20 @@ export default {
           pagePath: "/pages/steps/face/index"
         })
       );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "取 Patch 作用",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/patch_visual/index"
+        })
+      );
+
       sQueue.add(
         new Step({
           navigationTitle: "选择 Patch",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/patch/index"
-        })
-      );
-      sQueue.add(
-        new Step({
-          navigationTitle: "Patch 可视化",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/patch_visual/index"
         })
       );
 
@@ -262,7 +264,7 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "KNN 介绍",
+          navigationTitle: "KNN介绍",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/knn/index"
         })
