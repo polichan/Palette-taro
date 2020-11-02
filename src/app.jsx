@@ -85,6 +85,7 @@ class App extends Component {
       'pages/license/index',
       'pages/about/index',
       'pages/thanks/index',
+      'pages/intro/index'
     ],
     window: {
       backgroundTextStyle: 'light',
