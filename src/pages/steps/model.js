@@ -176,39 +176,31 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "选择 Patch",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/patch/index"
-        })
-      );
-
-      sQueue.add(
-        new Step({
           navigationTitle: "特征向量和特征值",
-          buttonTitle: "提交解答",
+          buttonTitle: "下一步",
           pagePath: "/pages/steps/characteristic/index"
         })
       );
 
-      sQueue.add(
-        new Step({
-          navigationTitle: "特征值可视化",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/characteristic_visual/index"
-        })
-      );
+      // sQueue.add(
+      //   new Step({
+      //     navigationTitle: "选择 Patch",
+      //     buttonTitle: "下一步",
+      //     pagePath: "/pages/steps/patch/index"
+      //   })
+      // );
+
+      // sQueue.add(
+      //   new Step({
+      //     navigationTitle: "特征值可视化",
+      //     buttonTitle: "下一步",
+      //     pagePath: "/pages/steps/characteristic_visual/index"
+      //   })
+      // );
 
       sQueue.add(
         new Step({
-          navigationTitle: "选择 filter",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/filter/index"
-        })
-      );
-
-      sQueue.add(
-        new Step({
-          navigationTitle: "选择卷积层数",
+          navigationTitle: "什么是卷积",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/convolution/index"
         })
@@ -216,7 +208,7 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "卷积结果可视化",
+          navigationTitle: "第一层可视化",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/convolution_visual/index"
         })
@@ -235,6 +227,14 @@ export default {
           navigationTitle: "二值化可视化",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/binarization_visual/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "选择 filter",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/filter/index"
         })
       );
 

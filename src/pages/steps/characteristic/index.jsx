@@ -52,7 +52,7 @@ export default class Characteristic extends Component {
             }
           </View>
           <View className='flex flex-direction-column'>
-          <View className='header flex flex-direction-column'>
+            <View className='header flex flex-direction-column'>
               <Text className='header-text'>特征值得能量分布曲线图</Text>
             </View>
           </View>
