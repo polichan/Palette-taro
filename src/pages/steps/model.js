@@ -33,13 +33,10 @@ export default {
   effects: {
     *getExperimentResult({ }, { call, select }) {
       try {
-        const steps = yield select(state => state.step.steps)
+        const params = yield select(state => state.step.params)
         const res = yield call(
           stepApi.getExperimentResult,
-          {
-            patchSize: steps.patchSize,
-            histBlockSize: steps.histBlockSize
-          }
+          params
         );
         return res;
       } catch (error) {
