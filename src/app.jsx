@@ -80,6 +80,7 @@ class App extends Component {
       'pages/steps/characteristic/index',
       'pages/steps/binarization/index',
       'pages/steps/histogram/index',
+      'pages/steps/params/index',
       'pages/steps/result/index',
       'pages/steps/knn/index',
       'pages/license/index',
