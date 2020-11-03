@@ -170,7 +170,7 @@ export default {
         new Step({
           navigationTitle: "取 Patch 作用",
           buttonTitle: "下一步",
-          pagePath: "/pages/steps/patch_visual/index"
+          pagePath: "/pages/steps/patch/index"
         })
       );
 
@@ -182,23 +182,6 @@ export default {
         })
       );
 
-
-
-      // sQueue.add(
-      //   new Step({
-      //     navigationTitle: "选择 Patch",
-      //     buttonTitle: "下一步",
-      //     pagePath: "/pages/steps/patch/index"
-      //   })
-      // );
-
-      // sQueue.add(
-      //   new Step({
-      //     navigationTitle: "特征值可视化",
-      //     buttonTitle: "下一步",
-      //     pagePath: "/pages/steps/characteristic_visual/index"
-      //   })
-      // );
       sQueue.add(
         new Step({
           navigationTitle: "什么是卷积",
@@ -217,7 +200,7 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "二进制转十进制",
+          navigationTitle: "二转十可视化",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/binarization/index"
         })
@@ -225,7 +208,7 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "直方图",
+          navigationTitle: "直方图可视化",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/histogram/index"
         })
@@ -236,6 +219,14 @@ export default {
           navigationTitle: "KNN介绍",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/knn/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "选择参数",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/params/index"
         })
       );
 
@@ -254,16 +245,6 @@ export default {
           pagePath: "/pages/steps/block/index"
         })
       );
-
-      sQueue.add(
-        new Step({
-          navigationTitle: "Block可视化",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/block_visual/index"
-        })
-      );
-
-
 
       sQueue.add(
         new Step({
