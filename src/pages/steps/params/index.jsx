@@ -18,8 +18,14 @@ export default class Params extends Component {
   }
 
   handleNextClick(callback) {
-    console.log(this.props.step.params)
-
+    if (!this.isParamsValid()) {
+      Taro.showToast({
+        title: '请选择参数',
+        icon: 'none'
+      })
+      callback(false)
+      return
+    }
     const params = {
       patchSize: this.state.patchSize,
       blockSize: this.state.blockSize,
@@ -30,9 +36,16 @@ export default class Params extends Component {
       type: 'step/saveParams',
       payload: params
     }).then(() => {
-      console.log(this.props.step.params)
-      // callback()
+      callback(true)
     })
+  }
+
+  isParamsValid() {
+    const { patchSize, blockSize, kSize } = this.state
+    const isPatchSizeValid = patchSize != null
+    const isBlockSizeValid = blockSize != null
+    const isKSizeSizeValid = kSize != null
+    return isPatchSizeValid && isBlockSizeValid && isKSizeSizeValid
   }
 
   handlePatchSizeChange(patchSize) {

@@ -71,7 +71,6 @@ class App extends Component {
       'pages/steps/patch/index',
       'pages/steps/convolution/index',
       'pages/steps/convolution_visual/index',
-      'pages/steps/block/index',
       'pages/steps/workflow/index',
       'pages/steps/intro/index',
       'pages/steps/characteristic/index',

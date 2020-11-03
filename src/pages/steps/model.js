@@ -223,24 +223,8 @@ export default {
       sQueue.add(
         new Step({
           navigationTitle: "选择参数",
-          buttonTitle: "下一步",
+          buttonTitle: "提交参数",
           pagePath: "/pages/steps/params/index"
-        })
-      );
-
-      sQueue.add(
-        new Step({
-          navigationTitle: "选择 filter",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/filter/index"
-        })
-      );
-
-      sQueue.add(
-        new Step({
-          navigationTitle: "选择 Block 大小",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/block/index"
         })
       );
 
