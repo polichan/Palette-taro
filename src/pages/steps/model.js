@@ -17,11 +17,10 @@ s.add(
 export default {
   namespace: "step",
   state: {
-    steps: {
-      block: null,
-      numStages: null,
+    params: {
       patchSize: null,
-      histBlockSize: null
+      blockSize: null,
+      kSize: null
     },
     progressPercent: 0,
     stepQueue: s,
@@ -109,15 +108,14 @@ export default {
       return true
     },
 
-    *saveStep({ payload }, { put, select }) {
-      const orig = yield select(state => state.step.steps)
+    *saveParams({ payload }, { put }) {
       yield put({
         type: 'save',
         payload: {
-          steps: Object.assign(orig, { ...payload.data })
+          params: payload
         }
       })
-      return orig
+      return true
     },
 
     *addProgressPercent({ payload }, { select, put }) {
@@ -192,7 +190,7 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "第一层可视化",
+          navigationTitle: "卷积可视化",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/convolution_visual/index"
         })

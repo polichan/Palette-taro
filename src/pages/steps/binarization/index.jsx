@@ -16,7 +16,8 @@ export default class Binarization extends Component {
       ]
     },
     imgs: {
-      binaryVisualImg: getLocalCacheImageSrc(CDN_IMAGE.BINARY_VISUAL)
+      binaryFirstImg: getLocalCacheImageSrc(CDN_IMAGE.BINARY_FIRST_IMAGE),
+      binarySecondImg: getLocalCacheImageSrc(CDN_IMAGE.BINARY_SECOND_IMAGE),
     }
   }
 
@@ -30,7 +31,8 @@ export default class Binarization extends Component {
       <StepPage onNext={this.handleNextClick.bind(this)}>
         <Article sections={data.sections}></Article>
         <View className='binary-imgs-container flex flex-center flex-direction-column'>
-          <Image src={imgs.binaryVisualImg} className='binary-img' mode='aspectFill'></Image>
+          <Image src={imgs.binaryFirstImg} className='binary-img' mode='aspectFill'></Image>
+          <Image src={imgs.binarySecondImg} className='binary-img' mode='aspectFill'></Image>
         </View>
       </StepPage>
     );

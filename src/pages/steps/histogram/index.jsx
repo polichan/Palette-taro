@@ -28,7 +28,7 @@ export default class Histogram extends Component {
     return (
       <StepPage onNext={this.handleNextClick.bind(this)} showPanel={true}>
         <Article sections={data.sections}></Article>
-        <View className='histogram-container flex flex-direction-column'>
+        <View className='histogram-container flex flex-center flex-direction-column'>
           <Image src={this.state.imgs.histogramVisualImg} className='histogram-img'></Image>
         </View>
       </StepPage>

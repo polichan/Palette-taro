@@ -69,7 +69,6 @@ class App extends Component {
       'pages/login/index',
       'pages/steps/face/index',
       'pages/steps/patch/index',
-      'pages/steps/filter/index',
       'pages/steps/convolution/index',
       'pages/steps/convolution_visual/index',
       'pages/steps/block/index',

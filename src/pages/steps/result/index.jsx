@@ -26,7 +26,6 @@ export default class Result extends Component {
 
   async componentDidMount() {
     await this.endExperiment();
-    console.log("后", this.props.step.userExperiment);
     await this.saveExperimentLog();
   }
 
@@ -63,7 +62,6 @@ export default class Result extends Component {
   }
 
   saveExperimentLog() {
-    console.log(this.props.step.userExperiment);
     this.props
       .dispatch({
         type: "step/saveExperimentLog",
