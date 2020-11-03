@@ -24,7 +24,7 @@ export default class Intro extends Component {
   render() {
     const { data } = this.state
     return (
-      <StepPage onNext={this.handleNextClick} showPanel={false}>
+      <StepPage onNext={this.handleNextClick} showPanel>
         <View className='intro-container'>
           <Article sections={data.section}></Article>
         </View>

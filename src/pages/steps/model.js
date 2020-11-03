@@ -182,6 +182,8 @@ export default {
         })
       );
 
+
+
       // sQueue.add(
       //   new Step({
       //     navigationTitle: "选择 Patch",
@@ -197,7 +199,6 @@ export default {
       //     pagePath: "/pages/steps/characteristic_visual/index"
       //   })
       // );
-
       sQueue.add(
         new Step({
           navigationTitle: "什么是卷积",
@@ -216,7 +217,7 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "二值化",
+          navigationTitle: "二进制转十进制",
           buttonTitle: "下一步",
           pagePath: "/pages/steps/binarization/index"
         })
@@ -224,9 +225,17 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "二值化可视化",
+          navigationTitle: "直方图",
           buttonTitle: "下一步",
-          pagePath: "/pages/steps/binarization_visual/index"
+          pagePath: "/pages/steps/histogram/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "KNN介绍",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/knn/index"
         })
       );
 
@@ -254,21 +263,7 @@ export default {
         })
       );
 
-      sQueue.add(
-        new Step({
-          navigationTitle: "直方图",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/histogram/index"
-        })
-      );
 
-      sQueue.add(
-        new Step({
-          navigationTitle: "KNN介绍",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/knn/index"
-        })
-      );
 
       sQueue.add(
         new Step({
