@@ -79,9 +79,6 @@ class App extends Component {
       'pages/steps/params/index',
       'pages/steps/result/index',
       'pages/steps/knn/index',
-      'pages/steps/binarization_question/index',
-      'pages/steps/histogram_question/index',
-      'pages/steps/histogram_chart/index',
       'pages/license/index',
       'pages/about/index',
       'pages/thanks/index',
@@ -92,7 +89,18 @@ class App extends Component {
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black',
       navigationStyle: "custom",
-    }
+    },
+    subPackages: [
+      {
+        "root": "pages/steps/questions/",
+        "pages": [
+          "paper/index",
+          "binarization_question/index",
+          "histogram_chart/index",
+          "histogram_question/index"
+        ]
+      }
+    ]
   }
 
   // 在 App 类中的 render() 函数没有实际作用
