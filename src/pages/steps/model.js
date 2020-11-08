@@ -233,9 +233,10 @@ export default {
         })
       );
 
+
       sQueue.add(
         new Step({
-          navigationTitle: "直方图的绘制",
+          navigationTitle: "二进制转十进制",
           buttonTitle: "提交解答",
           pagePath: "/pages/steps/binarization_question/index"
         })
@@ -243,9 +244,17 @@ export default {
 
       sQueue.add(
         new Step({
-          navigationTitle: "二进制转十进制",
-          buttonTitle: "提交解答",
-          pagePath: "/pages/steps/binarization_question/index"
+          navigationTitle: "直方图的绘制",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/histogram_question/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "直方图的绘制",
+          buttonTitle: "下一步",
+          pagePath: "/pages/steps/histogram_chart/index"
         })
       );
 

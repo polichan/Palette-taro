@@ -5,8 +5,7 @@ import { connect } from "@tarojs/redux";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import EmptyData from "@/components/EmptyData";
 import Skeleton from "taro-skeleton";
-import { getSrc, getLocalCacheImageSrc } from "@/utils/utils";
-import { CDN_IMAGE } from "@/constants/index";
+import { getSrc } from "@/utils/utils";
 import "./index.scss";
 
 @connect(({ face, loading }) => ({

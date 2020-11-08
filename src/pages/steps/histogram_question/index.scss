@@ -31,7 +31,6 @@
 }
 
 .line-container {
-    overflow: hidden;
     .line-chart {
       padding: 60px 0 0 30px;
       height: 460px;
@@ -39,10 +38,4 @@
     .line-chart + .line-chart {
       margin-top: 50px;
     }
-  }
-  
-
-  .generate-echart-icon{
-      margin: 0 120px;
-      border-radius: 45px;
-  }
+}

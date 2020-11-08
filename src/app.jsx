@@ -81,6 +81,7 @@ class App extends Component {
       'pages/steps/knn/index',
       'pages/steps/binarization_question/index',
       'pages/steps/histogram_question/index',
+      'pages/steps/histogram_chart/index',
       'pages/license/index',
       'pages/about/index',
       'pages/thanks/index',
