@@ -1,11 +1,10 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Image } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { connect } from "@tarojs/redux";
 import EmptyData from "@/components/EmptyData";
 import Skeleton from "taro-skeleton";
 import FormBox from "@/components/FormBox";
 import StepPage from "@/components/StepPage";
-import { getSrc } from "@/utils/utils";
 import FaceRecognitionErrorRecord from "@/components/FaceRecognitionErrorRecord"
 import "./index.scss";
 

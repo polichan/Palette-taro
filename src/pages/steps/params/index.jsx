@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import { } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import StepPage from "@/components/StepPage";
 import { AtRadio } from "taro-ui";

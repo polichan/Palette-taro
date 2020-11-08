@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Image } from '@tarojs/components';
+import { } from '@tarojs/components';
 import StepPage from "@/components/StepPage"
 import './index.scss';
 
