@@ -1,0 +1,43 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-rows: 33.33% 33.33% 33.33%;
+    margin: 30px 0;
+    padding: 0 20px;
+}
+
+.grid-item-container{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .grid-item-text{
+        color: #061a3f;
+        font-size: 40px;
+        font-weight: 20;
+    }
+    border: 1px solid #eaeaea;
+}
+
+.field-text{
+    font-size: 30px;
+    color: #666;
+    padding: 0 20px;
+}
+
+.input-fields-container{
+    margin: 30px 0;
+}
+
+.line-container {
+    overflow: auto;
+    .line-chart {
+      padding: 60px 0 0 30px;
+      height: 460px;
+    }
+    .line-chart + .line-chart {
+      margin-top: 50px;
+    }
+  }
+  

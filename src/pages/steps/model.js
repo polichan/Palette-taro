@@ -235,6 +235,22 @@ export default {
 
       sQueue.add(
         new Step({
+          navigationTitle: "直方图的绘制",
+          buttonTitle: "提交解答",
+          pagePath: "/pages/steps/binarization_question/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "二进制转十进制",
+          buttonTitle: "提交解答",
+          pagePath: "/pages/steps/binarization_question/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
           navigationTitle: "致谢",
           buttonTitle: "返回首页",
           pagePath: "/pages/thanks/index"
