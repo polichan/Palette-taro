@@ -6,6 +6,7 @@ import Skeleton from "taro-skeleton";
 import FormBox from "@/components/FormBox";
 import StepPage from "@/components/StepPage";
 import { getSrc } from "@/utils/utils";
+import FaceRecognitionErrorRecord from "@/components/FaceRecognitionErrorRecord"
 import "./index.scss";
 
 @connect(({ user, step, loading }) => ({
@@ -16,8 +17,7 @@ import "./index.scss";
 export default class Result extends Component {
   state = {
     result: {},
-    resultImg: null,
-    noResultData: false
+    noResultData: false,
   };
 
   componentWillMount() {
@@ -26,7 +26,6 @@ export default class Result extends Component {
 
   async componentDidMount() {
     await this.endExperiment();
-    console.log("后", this.props.step.userExperiment);
     await this.saveExperimentLog();
   }
 
@@ -40,7 +39,7 @@ export default class Result extends Component {
           })
         }
       })
-      .then(() => {});
+      .then(() => { });
   }
 
   async getExperimentResult() {
@@ -52,7 +51,6 @@ export default class Result extends Component {
         if (res) {
           this.setState({
             result: res.data,
-            resultImg: getSrc(res.data.media.cdnUrl)
           });
         } else {
           this.setState({
@@ -63,7 +61,6 @@ export default class Result extends Component {
   }
 
   saveExperimentLog() {
-    console.log(this.props.step.userExperiment);
     this.props
       .dispatch({
         type: "step/saveExperimentLog",
@@ -83,22 +80,15 @@ export default class Result extends Component {
     callback(true);
   }
 
-  handleResultImgClick() {
-    Taro.previewImage({
-      current: this.state.resultImg,
-      urls: [this.state.resultImg]
-    });
-  }
 
   render() {
-    const { steps } = this.props.step;
     const isResultLoading = this.props.loading.effects[
       "step/getExperimentResult"
     ];
     const isSaveExperimentLogLoading = this.props.loading.effects[
       "step/saveExperimentLog"
     ];
-    const { result, resultImg, noResultData } = this.state;
+    const { result, noResultData } = this.state;
     return (
       <StepPage
         onNext={this.handleNextClick.bind(this)}
@@ -112,32 +102,31 @@ export default class Result extends Component {
           loading={isResultLoading}
         >
           <FormBox label='卷积层数'>
-            <Text className='form-box-text'>{steps.numStages}</Text>
-          </FormBox>
-          <FormBox label='PatchSize'>
-            <Text className='form-box-text'>{steps.patchSize}</Text>
+            <Text className='form-box-text'>{result.convolutionLevel} 层</Text>
           </FormBox>
           <FormBox label='卷积核个数'>
-            <Text className='form-box-text'>{steps.block} 个</Text>
+            <Text className='form-box-text'>{result.convolutionKernelNum} 个</Text>
           </FormBox>
-          <FormBox label='BlockSize'>
-            <Text className='form-box-text'>{steps.histBlockSize}</Text>
+          <FormBox label='Patch 大小'>
+            <Text className='form-box-text'>{result.patchSize}</Text>
+          </FormBox>
+          <FormBox label='Block 大小'>
+            <Text className='form-box-text'>{result.blockSize}</Text>
+          </FormBox>
+          <FormBox label='KNN 的 K 值大小'>
+            <Text className='form-box-text'>{result.kSize}</Text>
           </FormBox>
           <FormBox label='准确率'>
             <Text className='form-box-text'>
               {result.accuracy ? result.accuracy : "未知"}
             </Text>
           </FormBox>
-          <View className='result-container flex flex-center flex-direction-column'>
+          <View className='result-container flex flex-direction-column'>
             {noResultData ? (
               <EmptyData></EmptyData>
             ) : (
-              <Image
-                src={resultImg}
-                className='result-img'
-                onClick={this.handleResultImgClick.bind(this)}
-              ></Image>
-            )}
+                <FaceRecognitionErrorRecord data={result.errorRecord}></FaceRecognitionErrorRecord>
+              )}
           </View>
         </Skeleton>
       </StepPage>

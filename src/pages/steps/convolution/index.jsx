@@ -2,72 +2,34 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import { AtRadio } from "taro-ui";
 import Panel from "@/components/Panel/index";
-import FloatLayout from "@/components/FloatLayout/index";
 import StepPage from "@/components/StepPage";
 import { getLocalCacheImageSrc } from "@/utils/utils";
-import { connect } from "@tarojs/redux";
 import { CDN_IMAGE } from "../../../constants/index";
+import Article from "@/components/Article";
 import "./index.scss";
 
-@connect(({ step, loading }) => ({
-  step,
-  loading
-}))
+
 export default class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      convolutionValue: null,
-      helpFloatLayoutOpened: false,
-      imgs: {
-        ConvolutionImg: getLocalCacheImageSrc(CDN_IMAGE.CONVOLUTION_VISUAL)
-      }
-    };
+  state = {
+    convolutionValue: null,
+    helpFloatLayoutOpened: false,
+    imgs: {
+      ConvolutionImg: getLocalCacheImageSrc(CDN_IMAGE.CONVOLUTION_VISUAL)
+    },
+    data: {
+      sections: [
+        '对图像做卷积操作其实就是利用卷积核(即滤波器)在图像上滑动，将图像点上的像素灰度值与对应的卷积核上的数值相乘，然后将所有相乘后的值相加作为卷积核中间像素对应的图像上像素的灰度值，并最终滑动完所有图像的过程。(为了便于显示，这里展示的是7x7大小的filter对图片进行卷积计算的过程)'
+      ]
+    }
   }
-  componentDidMount() { }
-
-  config = {
-    navigationBarTitleText: "选择卷积层数"
-  };
-
   handleConvolutionChange(value) {
     this.setState({
       convolutionValue: value
     });
   }
 
-  handeCloseHelpFloatLayoutClick() {
-    this.setState({
-      helpFloatLayoutOpened: false
-    });
-  }
-
-  handleHelpClick() {
-    this.setState({
-      helpFloatLayoutOpened: true
-    });
-  }
-
-
   handleNextClick(callback) {
-    const convolutionValue = this.state.convolutionValue
-    if (convolutionValue != null) {
-      this.props.dispatch({
-        type: 'step/saveStep',
-        payload: {
-          data: {
-            numStages: convolutionValue
-          }
-        }
-      }).then(() => {
-        callback(true);
-      })
-    } else {
-      Taro.showToast({
-        icon: 'none',
-        title: '请选择卷积层数'
-      })
-    }
+    callback(true)
   }
 
   handleImageLoad() {
@@ -82,39 +44,11 @@ export default class Index extends Component {
   }
 
   render() {
-    const { helpFloatLayoutOpened } = this.state;
+    const { helpFloatLayoutOpened, data } = this.state;
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
-        <View>
-          <Panel
-            title='请选择卷积层数'
-            onHelp={this.handleHelpClick.bind(this)}
-          >
-            <AtRadio
-              options={[
-                {
-                  label: "一层",
-                  value: "一层"
-                },
-                {
-                  label: "二层",
-                  value: "二层"
-                }
-              ]}
-              value={this.state.convolutionValue}
-              onClick={this.handleConvolutionChange.bind(this)}
-            />
-          </Panel>
-          <FloatLayout
-            isOpened={helpFloatLayoutOpened}
-            onClose={() => {
-              this.handeCloseHelpFloatLayoutClick();
-            }}
-            type='convolution'
-          >
-            <Image src={this.state.imgs.ConvolutionImg} lazyLoad className='convolution-img'></Image>
-          </FloatLayout>
-        </View>
+      <StepPage onNext={this.handleNextClick.bind(this)} showPanel={true}>
+        <Article sections={data.sections}></Article>
+        <Image src={this.state.imgs.ConvolutionImg} lazyLoad className='convolution-img'></Image>
       </StepPage>
     );
   }

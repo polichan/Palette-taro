@@ -9,7 +9,8 @@ export default class ToolBar extends Component {
     onClick: () => { },
     title: "",
     nextButtonLoading: false,
-    nextButtonDisabled: false
+    nextButtonDisabled: false,
+    showNextButton: true
   };
 
   handleOnClick() {
@@ -19,19 +20,23 @@ export default class ToolBar extends Component {
   }
 
   render() {
-    const { title, nextButtonLoading, nextButtonDisabled } = this.props;
+    const { title, nextButtonLoading, nextButtonDisabled, showNextButton } = this.props;
     return (
       <View className='tool-bar-wrapper flex flex-direction-column flex-center'>
-        <View className='flex flex-direction-column flex-center'>
-          <AtButton
-            loading={nextButtonLoading}
-            disabled={nextButtonDisabled}
-            className='c-btn-linergradient-blue common-btn toolbar-btn'
-            onClick={this.handleOnClick.bind(this)}
-          >
-            {nextButtonDisabled ? "加载中.." : title}
-          </AtButton>
-        </View>
+        {
+          showNextButton && (
+            <View className='flex flex-direction-column flex-center'>
+              <AtButton
+                loading={nextButtonLoading}
+                disabled={nextButtonDisabled}
+                className='c-btn-linergradient-blue common-btn toolbar-btn'
+                onClick={this.handleOnClick.bind(this)}
+              >
+                {nextButtonDisabled ? "加载中.." : title}
+              </AtButton>
+            </View>
+          )
+        }
       </View>
     );
   }

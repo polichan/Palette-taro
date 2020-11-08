@@ -1,130 +1,44 @@
-import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
-import { AtRadio } from "taro-ui";
-import Panel from "@/components/Panel/index";
-import FloatLayout from "@/components/FloatLayout/index";
-import StepPage from "@/components/StepPage";
-import GuideTip from "@/components/GuideTip";
-import * as CONSTANT from "@/constants/index";
-import { connect } from "@tarojs/redux";
+import Taro, { Component } from '@tarojs/taro';
+import { View, Image } from '@tarojs/components';
+import StepPage from '@/components/StepPage'
+import { getLocalCacheImageSrc } from "@/utils/utils";
+import Article from "@/components/Article";
+import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
-@connect(({ step, loading }) => ({
-  step,
-  loading
-}))
-export default class Index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-      helpFloatLayoutOpened: false,
-      showGuideTip: false
-    };
-  }
+export default class Patch extends Component {
 
-  componentWillMount() {
-    if (!Taro.getStorageSync(CONSTANT.HAS_SHOWN_GUIDE_TIP)) {
-      this.setState({
-        showGuideTip: true
-      });
+  state = {
+    patchVisualImg: getLocalCacheImageSrc(CDN_IMAGE.PATCH_VISUAL),
+    data: {
+      title: "Patch作用",
+      sections: [
+        '在人脸识别过程中，我们要做的第一步就是将输入的原始图片分成很多小方块（patch），其大小可以我们自己定义，但是有固定的比例，然后进行接下来的训练。注：下图是取patch的动态过程，patch的大小为31×31。'
+      ]
     }
-  }
-
-  config = {
-    navigationBarTitleText: "选择 Patch"
-  };
-
-  handleGuideTipConfirmClick() {
-    this.setState(
-      {
-        showGuideTip: false
-      },
-      () => {
-        Taro.setStorageSync(CONSTANT.HAS_SHOWN_GUIDE_TIP, true);
-      }
-    );
-  }
-
-  handlePatchChange(value) {
-    this.setState({
-      value: value
-    });
   }
 
   handleNextClick(callback) {
-    const value = this.state.value;
-    if (value != null) {
-      this.props
-        .dispatch({
-          type: "step/saveStep",
-          payload: {
-            data: {
-              patchSize: value
-            }
-          }
-        })
-        .then(() => {
-          callback(true);
-        });
-    } else {
-      Taro.showToast({
-        icon: "none",
-        title: "请选择 Patch 大小"
-      });
-    }
+    callback(true)
   }
 
-  handleHelpClick() {
-    this.setState({
-      helpFloatLayoutOpened: true
-    });
-  }
-
-  handeCloseHelpFloatLayoutClick() {
-    this.setState({
-      helpFloatLayoutOpened: false
-    });
+  handleImageLoad() {
+    const gifurl = this.state.patchVisualImg;
+    const nowTime = + new Date();
+    setTimeout(() => {
+      this.setState({
+        patchVisualImg: gifurl + '?' + nowTime
+      })
+    }, 9000)
   }
 
   render() {
-    const { helpFloatLayoutOpened, showGuideTip } = this.state;
+    const { data } = this.state
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)} showPanel={false}>
-        <View hidden={!showGuideTip}>
-          <GuideTip onConfirm={this.handleGuideTipConfirmClick.bind(this)} />
-        </View>
-        <View className='patch-container'>
-          <Panel
-            title='请选择 Patch 大小'
-            onHelp={this.handleHelpClick.bind(this)}
-          >
-            <AtRadio
-              options={[
-                {
-                  label: "3 * 3",
-                  value: "3x3"
-                },
-                {
-                  label: "5 * 5",
-                  value: "5x5"
-                },
-                {
-                  label: "7 * 7",
-                  value: "7x7"
-                }
-              ]}
-              value={this.state.value}
-              onClick={this.handlePatchChange.bind(this)}
-            />
-          </Panel>
-          <FloatLayout
-            isOpened={helpFloatLayoutOpened}
-            onClose={() => {
-              this.handeCloseHelpFloatLayoutClick();
-            }}
-            type='patch'
-          ></FloatLayout>
+      <StepPage onNext={this.handleNextClick.bind(this)}>
+          <Article sections={data.sections}></Article>
+        <View className='patch-visual-container flex flex-center flex-direction-column'>
+          <Image src={this.state.patchVisualImg} mode='scaleToFill' className='visual-img' onLoad={this.handleImageLoad.bind(this)}></Image>
         </View>
       </StepPage>
     );

@@ -40,5 +40,8 @@ export const CDN_IMAGE = {
     QUESTION_ICON: "/media/file/5494af1f14a8c19939968c3e9e2d4f79_20200907112604.png",
     SOLUTION_ICON: "/media/file/550237b8fbcdf3741bb1127d0fc7f6bf_20200907112539.png",
     FINGER_ICON: "/media/file/e7efda40b1c94805070cd9bf9638ae27_20200907112628.png",
-    SELECTED_ICON: "/media/file/ef7de3f485174ff47f061ad27d83d0ee_20200907112547.png"
+    SELECTED_ICON: "/media/file/ef7de3f485174ff47f061ad27d83d0ee_20200907112547.png",
+    KNN_IMAGE: "/media/img/85a2b85541a02f2b56f968fb5b162290.png",
+    BINARY_FIRST_IMAGE: "/media/img/26da5d5ae4d4ac76a6008ceb710a2cc0.png",
+    BINARY_SECOND_IMAGE: "/media/img/33a573dd994f25d0d3085068e362b629.png"
 }

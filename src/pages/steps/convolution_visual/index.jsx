@@ -3,6 +3,7 @@ import { View, Text, Image } from '@tarojs/components';
 import StepPage from "@/components/StepPage";
 import { getLocalCacheImageSrc } from "@/utils/utils";
 import { CDN_IMAGE } from "../../../constants/index";
+import faceImage from "../../../assets/imgs/face.jpg"
 import "./index.scss";
 
 export default class ConvolutionVisual extends Component {
@@ -18,20 +19,38 @@ export default class ConvolutionVisual extends Component {
         callback(true)
     }
 
+    renderImage(img, secondPic = false, center = false) {
+        return <View className={`${center ? 'visual-img-container flex flex-direction-column flex-center' : 'visual-img-container flex flex-direction-column'}`}>
+            <Image src={img} className={`${secondPic ? 'visual-img second-visual-img' : 'visual-img'}`}></Image>
+        </View>
+    }
+
     render() {
         return (
             <StepPage onNext={this.handleNextClick.bind(this)}>
-                <View className='flex flex-center flex-direction-column'>
-                    <View className='header flex flex-center flex-direction-column'>
-                        <Text className='header-text'>卷积结果第一层</Text>
+                <View className='visual-container'>
+                    <View className='flex flex-direction-column'>
+                        <View className='header flex  flex-direction-column'>
+                            <Text className='header-text'>卷积结果第一层可视化</Text>
+                            <Text className='header-text'>卷积核8个</Text>
+                        </View>
+                        {
+                            this.renderImage(faceImage, false, true)
+                        }
+                        <View className='bottom flex flex-direction-column'>
+                            <Text className='bottom-text'>
+                                原图
+                            </Text>
+                        </View>
+                        {
+                            this.renderImage(this.state.imgs.convolutionVisualSecond, true, true)
+                        }
+                        <View className='bottom flex flex-direction-column'>
+                            <Text className='bottom-text'>
+                                卷积结果第一层
+                            </Text>
+                        </View>
                     </View>
-                    <Image src={this.state.imgs.convolutionVisualFirst} className='visual-img img'></Image>
-                </View>
-                <View className='flex flex-center flex-direction-column'>
-                    <View className='header flex flex-center flex-direction-column'>
-                        <Text className='header-text'>第一、二层卷积输出</Text>
-                    </View>
-                    <Image src={this.state.imgs.convolutionVisualSecond} className='second-visual-img'></Image>
                 </View>
             </StepPage>
         );
