@@ -4,11 +4,11 @@ import Echart from "@/components/Echart";
 import * as echarts from "@/components/Echart/echarts";
 import getOption from "./getOption"
 import { View, Text } from "@tarojs/components";
-import { AtInput, AtForm } from 'taro-ui'
+import { AtInput, AtForm, AtButton } from 'taro-ui'
 import "./index.scss";
 
-const xData = ['0','1','2','3','5']
-const yData = ['2', '3', '1', '2', '1'];
+const xData = ['0', '1', '2', '3', '5']
+const yData = [];
 
 export default class Binarization extends Component {
     state = {
@@ -77,8 +77,21 @@ export default class Binarization extends Component {
                 }
             }), () => {
                 // trigger charts
+                this.notifyEchart()
             })
         }
+    }
+
+    notifyEchart() {
+        let yData = []
+        this.state.fieldData.forEach(element => {
+            yData.push(element.value)
+        });
+        this.setState({
+            yData: yData
+        }, ()=>{
+            this.chart.setOption(getOption(this.state.xData, this.state.yData));
+        })
     }
 
     renderGrid() {
@@ -115,6 +128,46 @@ export default class Binarization extends Component {
         )
     }
 
+    onChartInit = (canvas, width, height, dpr) => {
+        const chart = echarts.init(canvas, null, {
+            width: width,
+            height: height,
+            devicePixelRatio: dpr, // new
+        });
+        canvas.setChart(chart);
+        chart.setOption(this.state.option);
+        return chart; // 必须return
+    };
+
+    setChartRef = node => {
+        this.chart = node;
+    };
+
+    exportImg = () => {
+        this.chart.canvasToTempFilePath({
+            success: res => {
+                this.setState({
+                    chartImage: res.tempFilePath,
+                });
+            },
+        });
+    };
+
+    manualSetOption() {
+        const newX = [...xData];
+        const newY = [...yData];
+        const date = new Date(2020, 3, 7);
+        setInterval(() => {
+            const newDate = new Date(date.setDate(date.getDate() + 1));
+            newX.shift();
+            newX.push(`${newDate.getMonth() + 1}/${newDate.getDate()}`);
+            newY.shift();
+            newY.push((100 * Math.random()).toFixed(2));
+            this.chart.setOption(getOption(newX, newY));
+        }, 1000);
+    }
+
+
     render() {
         const { option } = this.state
         return (
@@ -122,7 +175,7 @@ export default class Binarization extends Component {
                 <View className='histogram-container'>
                     <View className='line-container'>
                         <View className="line-chart">
-                            <Echart echarts={echarts} option={option} disableTouch />
+                            <Echart echarts={echarts} ref={this.setChartRef} option={option} disableTouch />
                         </View>
                     </View>
                     <Text className='field-text'>直方图数据：</Text>
@@ -133,7 +186,6 @@ export default class Binarization extends Component {
                     {
                         this.renderInputFields()
                     }
-
                 </View>
             </StepPage>
         );
