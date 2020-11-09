@@ -23,24 +23,6 @@ export default class Result extends Component {
     this.getExperimentResult();
   }
 
-  async componentDidMount() {
-    await this.endExperiment();
-    await this.saveExperimentLog();
-  }
-
-  async endExperiment() {
-    await this.props
-      .dispatch({
-        type: "step/endExperiment",
-        payload: {
-          userExperiment: Object.assign(this.props.step.userExperiment, {
-            log: JSON.stringify(this.props.step.stepQueue.exportAll())
-          })
-        }
-      })
-      .then(() => { });
-  }
-
   async getExperimentResult() {
     await this.props
       .dispatch({
@@ -59,39 +41,18 @@ export default class Result extends Component {
       });
   }
 
-  saveExperimentLog() {
-    this.props
-      .dispatch({
-        type: "step/saveExperimentLog",
-        payload: {
-          params: this.props.step.userExperiment
-        }
-      })
-      .then(() => {
-        Taro.showToast({
-          icon: "none",
-          title: "提交试验记录成功"
-        });
-      });
-  }
-
   handleNextClick(callback) {
     callback(true);
   }
-
 
   render() {
     const isResultLoading = this.props.loading.effects[
       "step/getExperimentResult"
     ];
-    const isSaveExperimentLogLoading = this.props.loading.effects[
-      "step/saveExperimentLog"
-    ];
     const { result, noResultData } = this.state;
     return (
       <StepPage
         onNext={this.handleNextClick.bind(this)}
-        nextButtonLoading={isSaveExperimentLogLoading}
       >
         <Skeleton
           animateName='elastic'

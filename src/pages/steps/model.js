@@ -27,6 +27,7 @@ export default {
     hasBuiltStepQueue: false,
     userExperiment: {
       log: null,
+      paper: null
     }
   },
 
