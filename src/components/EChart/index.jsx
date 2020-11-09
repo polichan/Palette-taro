@@ -15,12 +15,6 @@ export default class EChart extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.option !== prevProps.option) {
-      this.setOption(this.props.option);
-    }
-  }
-
   componentDidMount() {
     const { lazyLoad } = this.props;
     if (!lazyLoad) {
@@ -28,21 +22,10 @@ export default class EChart extends Component {
     }
   }
 
-  render() {
-    const { disableTouch, style } = this.props;
-    const canvasId = this.getCanvasId();
-    return (
-      <Canvas
-        type='2d'
-        className='techarts-canvas'
-        id={canvasId}
-        canvasId={canvasId}
-        style={style}
-        onTouchStart={disableTouch ? '' : this._touchStart}
-        onTouchMove={disableTouch ? '' : this._touchMove}
-        onTouchEnd={disableTouch ? '' : this._touchEnd}
-      ></Canvas>
-    );
+  componentDidUpdate(prevProps) {
+    if (this.props.option !== prevProps.option) {
+      this.setOption(this.props.option);
+    }
   }
 
   setOption(option) {
@@ -253,6 +236,23 @@ export default class EChart extends Component {
     }
     return this.chart;
   }
+
+  render() {
+    const { disableTouch, style } = this.props;
+    const canvasId = this.getCanvasId();
+    return (
+      <Canvas
+        type='2d'
+        className='techarts-canvas'
+        id={canvasId}
+        canvasId={canvasId}
+        style={style}
+        onTouchStart={disableTouch ? '' : this._touchStart}
+        onTouchMove={disableTouch ? '' : this._touchMove}
+        onTouchEnd={disableTouch ? '' : this._touchEnd}
+      ></Canvas>
+    );
+  }
 }
 
 function compareVersion(v1, v2) {
@@ -290,7 +290,7 @@ function wrapTouch(event) {
 }
 
 function canvasToTempFilePath(
-  { canvasId, fileType, quality, success, fail, complete },
+  { fileType, quality, success, fail, complete },
   componentInstance
 ) {
   try {

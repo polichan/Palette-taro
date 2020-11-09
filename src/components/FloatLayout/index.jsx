@@ -5,6 +5,13 @@ import "./index.scss";
 import * as Explain from "./../../constants/explain";
 
 export default class FloatLayout extends Component {
+
+
+  static options = {
+    addGlobalClass: true
+  };
+
+
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +19,7 @@ export default class FloatLayout extends Component {
       content: null
     };
   }
+
 
   componentDidMount() {
     switch (this.props.type) {
@@ -60,9 +68,6 @@ export default class FloatLayout extends Component {
     }
   }
 
-  static options = {
-    addGlobalClass: true
-  };
 
   /**
    * close 浮动层

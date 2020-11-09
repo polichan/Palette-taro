@@ -2,6 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import StepPage from "@/components/StepPage";
 import Article from "@/components/Article";
 import { getLocalCacheImageSrc } from "@/utils/utils";
+import { View, Image } from "@tarojs/components";
 import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
