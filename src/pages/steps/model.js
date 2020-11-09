@@ -238,7 +238,15 @@ export default {
         new Step({
           navigationTitle: "二进制转十进制",
           buttonTitle: "提交解答",
-          pagePath: "/pages/steps/binarization_question/index"
+          pagePath: "/pages/questions/binarization_question/index"
+        })
+      );
+
+      sQueue.add(
+        new Step({
+          navigationTitle: "直方图的计算",
+          buttonTitle: "下一步",
+          pagePath: "/pages/questions/histogram_question/index"
         })
       );
 
@@ -246,15 +254,15 @@ export default {
         new Step({
           navigationTitle: "直方图的绘制",
           buttonTitle: "下一步",
-          pagePath: "/pages/steps/histogram_question/index"
+          pagePath: "/pages/questions/histogram_chart/index"
         })
       );
 
       sQueue.add(
         new Step({
-          navigationTitle: "直方图的绘制",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/histogram_chart/index"
+          navigationTitle: "实验心得",
+          buttonTitle: "提交心得",
+          pagePath: "/pages/questions/paper/index"
         })
       );
 

@@ -67,7 +67,7 @@ function getSystemInfo() {
       //开启wifi和打电话下
       systemInfo.statusBarHeight =
         systemInfo.screenHeight - systemInfo.windowHeight - 20;
-      navBarHeight = (function() {
+      navBarHeight = (function () {
         let gap = rect.top - systemInfo.statusBarHeight;
         return 2 * gap + rect.height;
       })();
@@ -75,7 +75,7 @@ function getSystemInfo() {
       systemInfo.statusBarHeight = 0;
       systemInfo.navBarExtendHeight = 0; //下方扩展4像素高度 防止下方边距太小
     } else {
-      navBarHeight = (function() {
+      navBarHeight = (function () {
         let gap = rect.top - systemInfo.statusBarHeight;
         return systemInfo.statusBarHeight + 2 * gap + rect.height;
       })();
@@ -96,6 +96,11 @@ function getSystemInfo() {
 }
 let globalSystemInfo = getSystemInfo();
 class AtComponent extends Component {
+  static options = {
+    multipleSlots: true,
+    addGlobalClass: true
+  };
+
   static defaultProps = {
     extClass: "",
     background: "rgba(255,255,255,1)", //导航栏背景
@@ -149,10 +154,7 @@ class AtComponent extends Component {
     }
   }
 
-  static options = {
-    multipleSlots: true,
-    addGlobalClass: true
-  };
+
 
   setStyle(systemInfo) {
     const {
@@ -246,9 +248,8 @@ class AtComponent extends Component {
     return (
       <View
         className={`lxy-nav-bar ${ios ? "ios" : "android"} ${extClass}`}
-        style={`background: ${
-          backgroundColorTop ? backgroundColorTop : background
-        };height:${navBarHeight + navBarExtendHeight}px;`}
+        style={`background: ${backgroundColorTop ? backgroundColorTop : background
+          };height:${navBarHeight + navBarExtendHeight}px;`}
       >
         <View
           className={`lxy-nav-bar__placeholder ${ios ? "ios" : "android"}`}

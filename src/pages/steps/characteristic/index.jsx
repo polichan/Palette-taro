@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import StepPage from "@/components/StepPage";
+import { View, Text, Image } from "@tarojs/components";
 import Article from "@/components/Article";
 import { EIGENVECTOR_EXPLAIN } from "@/constants/explain"
 import { getLocalCacheImageSrc } from "@/utils/utils";

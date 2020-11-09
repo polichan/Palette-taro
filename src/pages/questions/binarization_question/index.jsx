@@ -34,10 +34,10 @@ export default class Binarization extends Component {
         return (
             <StepPage onNext={this.handleNextClick.bind(this)} ref={this.refStepPage}>
                 <Problem
-                    data={PROBLEM_CONSTANT.BINARIZATION.DATA}
-                    questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}
-                    showExampleQuestionTab={false}
-                    ref={this.refProblem}
+                  data={PROBLEM_CONSTANT.BINARIZATION.DATA}
+                  questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}
+                  showExampleQuestionTab={false}
+                  ref={this.refProblem}
                 ></Problem>
             </StepPage>
         );

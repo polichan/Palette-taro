@@ -1,8 +1,8 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text, Image } from "@tarojs/components";
+import { View, Image, Block } from "@tarojs/components";
 import { getSrc } from "@/utils/utils";
-import RightArrowImage from "../../assets/imgs/right-arrow.png"
 import Article from "@/components/Article";
+import RightArrowImage from "../../assets/imgs/right-arrow.png"
 import "./index.scss";
 
 class FaceRecognitionErrorRecord extends Component {

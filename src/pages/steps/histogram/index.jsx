@@ -2,8 +2,8 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import { getLocalCacheImageSrc } from "@/utils/utils";
-import { CDN_IMAGE } from "../../../constants/index";
 import Article from "@/components/Article";
+import { CDN_IMAGE } from "../../../constants/index";
 import "./index.scss";
 
 export default class Histogram extends Component {
@@ -26,7 +26,7 @@ export default class Histogram extends Component {
   render() {
     const { data } = this.state
     return (
-      <StepPage onNext={this.handleNextClick.bind(this)} showPanel={true}>
+      <StepPage onNext={this.handleNextClick.bind(this)} showPanel>
         <Article sections={data.sections}></Article>
         <View className='histogram-container flex flex-center flex-direction-column'>
           <Image src={this.state.imgs.histogramVisualImg} className='histogram-img'></Image>

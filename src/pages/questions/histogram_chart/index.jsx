@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
 import Echart from "@/components/Echart";
-import * as echarts from "@/components/Echart/echarts";
+import echarts from "@/components/Echart/echarts";
 import { connect } from "@tarojs/redux";
 import getOption from "./getOption"
 import "./index.scss";
@@ -33,10 +33,10 @@ export default class HistogramChart extends Component {
 
     render() {
         return (
-            <StepPage onNext={this.handleNextClick.bind(this)} showPanel={true}>
+            <StepPage onNext={this.handleNextClick.bind(this)} showPanel>
                 <View className='histogram-chart-container'>
                     <View className='line-container'>
-                        <View className="line-chart">
+                        <View className='line-chart'>
                             <Echart echarts={echarts} ref={this.setChartRef} onInit={this.onInit} disableTouch />
                         </View>
                     </View>

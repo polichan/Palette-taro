@@ -25,7 +25,8 @@
 		"dev:rn": "npm run build:rn -- --watch",
 		"dev:qq": "npm run build:qq -- --watch",
 		"dev:quickapp": "npm run build:quickapp -- --watch",
-		"tep": "node template"
+		"tep": "node template",
+		"lint-fix": "eslint --fix --ext .js --ext .jsx src/"
 	},
 	"author": "",
 	"license": "MIT",
