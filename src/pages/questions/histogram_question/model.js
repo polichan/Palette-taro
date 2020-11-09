@@ -11,7 +11,8 @@ export default {
     namespace: "histogram",
     state: {
         chartXData: ["0", "1", "2", "4", "5"],
-        chartYData: []
+        chartYData: [],
+        rightYData: ["2", "3", "1", "2", "1"]
     },
 
     effects: {
