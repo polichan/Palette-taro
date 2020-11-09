@@ -135,6 +135,7 @@ class AtComponent extends Component {
   handleBackClick() {
     if (_isFunction(this.props.onBack)) {
       this.props.onBack();
+      return
     }
     const pages = Taro.getCurrentPages();
     if (pages.length >= 2) {

@@ -23,7 +23,9 @@ export default class Thanks extends Component {
           .dispatch({
             type: "step/buildStepQueue"
           }).then(() => {
-            navigateTo("/pages/index/index");
+            Taro.reLaunch({
+              url: '/pages/index/index'
+            })
           })
       });
   }

@@ -82,7 +82,7 @@ export default class Step {
         } else {
             this.error = this.error + '\n' + err
         }
-        return this.error == err
+        return true
     }
 
     setEndTime(time = null) {

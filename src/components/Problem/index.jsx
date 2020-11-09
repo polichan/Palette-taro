@@ -15,8 +15,8 @@ import "./index.scss";
 export default class Problem extends Component {
   static defaultProps = {
     questionApi: {
-      example: () => {},
-      real: () => {}
+      example: () => { },
+      real: () => { }
     },
     data: {
       title: "什么是特征向量和特征值?",
@@ -151,14 +151,14 @@ export default class Problem extends Component {
       this.state.questions.real.data.answer &&
       this.state.questions.real.data.answer.ID.toString();
     const optionId = this.state.selectedOption;
-    if(optionId.length == 0){
+    if (optionId.length == 0) {
       res = true
-    }else{
-      if (answerId == undefined) {
-        res = true;
-      } else {
-        res = answerId == optionId;
-      }
+    } else {
+      // if (answerId == undefined) {
+      //   res = true;
+      // } else {
+      res = answerId == optionId;
+      // }
     }
     this.setState({
       shouldShowProblemOptionTip: !res
@@ -171,7 +171,7 @@ export default class Problem extends Component {
    */
   getRightAnswer() {
     return (
-      this.state.questions.real.data.answer && 
+      this.state.questions.real.data.answer &&
       this.state.questions.real.data.answer.content.toString()
     );
   }
@@ -227,26 +227,26 @@ export default class Problem extends Component {
                         content={questions.example.data.content}
                       ></Question>
                     ) : (
-                      <Block>
-                        <Question
-                          content={questions.real.data.content}
-                        ></Question>
-                        {questions.real.data.options &&
-                        questions.real.data.options.length > 0 ? (
-                          <View className='problem-options-container'>
-                            <View className='question-box'></View>
-                            <ProblemOptions
-                              optionList={questions.real.data.options}
-                              onSelect={this.handleProblemOptionSelect.bind(
-                                this
-                              )}
-                              value={selectedOption}
-                              showTip={shouldShowProblemOptionTip}
-                            ></ProblemOptions>
-                          </View>
-                        ) : null}
-                      </Block>
-                    )}
+                        <Block>
+                          <Question
+                            content={questions.real.data.content}
+                          ></Question>
+                          {questions.real.data.options &&
+                            questions.real.data.options.length > 0 ? (
+                              <View className='problem-options-container'>
+                                <View className='question-box'></View>
+                                <ProblemOptions
+                                  optionList={questions.real.data.options}
+                                  onSelect={this.handleProblemOptionSelect.bind(
+                                    this
+                                  )}
+                                  value={selectedOption}
+                                  showTip={shouldShowProblemOptionTip}
+                                ></ProblemOptions>
+                              </View>
+                            ) : null}
+                        </Block>
+                      )}
                   </View>
                 </Skeleton>
               </AtTabsPane>

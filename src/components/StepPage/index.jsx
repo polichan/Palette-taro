@@ -61,7 +61,7 @@ export default class StepPage extends Component {
               // 进度条增加
               this.setProgressPercent();
               // 缓存到本地
-              this.saveCurrentStepQueue();
+              // this.saveCurrentStepQueue();
               navigateTo(this.props.step.stepQueue.getCurrent().getPagePath());
             })
             .catch(() => {
@@ -75,33 +75,27 @@ export default class StepPage extends Component {
     }
   }
 
-  handleBackClick() {
-    if (_isFunction(this.props.onBack)) {
-      this.props.onBack();
-    }
-    this.state.stepQueue.back().then(() => {
-      Taro.navigateTo({
-        url: this.state.stepQueue.getCurrent().getPagePath()
-      });
-    });
-  }
-
   handleBack() {
-    this.props.step.stepQueue.back().then(() => {
-      this.setProgressPercent(false)
-    }).catch(() => {
-      // 如果直接从首页返回的
-      this.props
-        .dispatch({
-          type: "step/resetStep"
-        })
-        .then(() => {
-          this.props
-            .dispatch({
-              type: "step/buildStepQueue"
-            }).then()
-        });
-    });
+    if (Taro.getCurrentPages().length - 1 != 0) {
+      this.props.step.stepQueue.back().then(() => {
+        Taro.navigateBack()
+        this.setProgressPercent(false)
+      }).catch(() => {
+        // 如果不能返回了
+        this.props
+          .dispatch({
+            type: "step/resetStep"
+          })
+          .then(() => {
+            this.props
+              .dispatch({
+                type: "step/buildStepQueue"
+              }).then(() => {
+                Taro.navigateBack()
+              })
+          });
+      });
+    }
   }
 
   reportErrorToCurrentStep(err) {
@@ -138,11 +132,12 @@ export default class StepPage extends Component {
       nextButtonDisabled,
       showNextButton
     } = this.props;
+    const shouldShowBack = Taro.getCurrentPages().length - 1 != 0
     return (
       <View className='step-page'>
         <NavBar
           background='#fff'
-          back
+          back={shouldShowBack}
           title={stepQueue.getCurrent().getNavigationTitle()}
           onBack={this.handleBack.bind(this)}
         />

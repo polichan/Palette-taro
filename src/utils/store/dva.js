@@ -29,7 +29,7 @@ const persistConfig = {
     }
   },
   keyPrefix: "cache-",
-  debug: true,
+  debug: false,
   blacklist: ["dva", "@@dva"],
   stateReconciler: autoMergeLevel2 // 查看 'Merge Process' 部分的具体情况
 };
@@ -52,7 +52,9 @@ function createApp(opt) {
   // 加载持久化
   opt.extraEnhancers = [persistEnhancer()];
   // redux日志
-  opt.onAction = [createLogger()];
+  if(process.env != 'producation'){
+    // opt.onAction = [createLogger()];
+  }
   app = create(opt);
 
   // 全局 loading
