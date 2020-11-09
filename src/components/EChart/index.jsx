@@ -33,8 +33,8 @@ export default class EChart extends Component {
     const canvasId = this.getCanvasId();
     return (
       <Canvas
-        type="2d"
-        className="techarts-canvas"
+        type='2d'
+        className='techarts-canvas'
         id={canvasId}
         canvasId={canvasId}
         style={style}

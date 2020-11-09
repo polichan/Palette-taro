@@ -28,7 +28,7 @@ export default class Knn extends Component {
   render() {
     const { data, imgs } = this.state
     return (
-      <StepPage onNext={this.handleNextClick} showPanel={true}>
+      <StepPage onNext={this.handleNextClick} showPanel>
         <Article sections={data.section}></Article>
         <View className='knn-container flex flex-direction-column flex-center'>
           <Image src={imgs.knnImage} className='knn-image' mode='aspectFit'></Image>

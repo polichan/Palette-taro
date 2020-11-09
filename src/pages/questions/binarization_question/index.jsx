@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import StepPage from "@/components/StepPage";
 import Problem from "@/components/Problem";
-import PROBLEM_CONSTANT from "../../../../constants/problem";
+import PROBLEM_CONSTANT from "../../../constants/problem";
 import "./index.scss";
 
 export default class Binarization extends Component {
@@ -34,10 +34,10 @@ export default class Binarization extends Component {
         return (
             <StepPage onNext={this.handleNextClick.bind(this)} ref={this.refStepPage}>
                 <Problem
-                    data={PROBLEM_CONSTANT.BINARIZATION.DATA}
-                    questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}
-                    showExampleQuestionTab={false}
-                    ref={this.refProblem}
+                  data={PROBLEM_CONSTANT.BINARIZATION.DATA}
+                  questionApi={PROBLEM_CONSTANT.BINARIZATION.QUESTION_API}
+                  showExampleQuestionTab={false}
+                  ref={this.refProblem}
                 ></Problem>
             </StepPage>
         );

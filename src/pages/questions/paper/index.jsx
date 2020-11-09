@@ -14,7 +14,7 @@ export default class Paper extends Component {
 
     render() {
         return (
-            <StepPage onNext={this.handleNextClick} showPanel={true}>
+            <StepPage onNext={this.handleNextClick} showPanel>
             </StepPage>
         )
     }
