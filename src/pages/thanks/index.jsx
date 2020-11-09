@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import StepPage from "@/components/StepPage";
-import { navigateTo , getLocalCacheImageSrc } from "@/utils/utils";
+import { navigateTo, getLocalCacheImageSrc } from "@/utils/utils";
 import { connect } from "@tarojs/redux";
 import { CDN_IMAGE } from "@/constants/index";
 import "./index.scss";
@@ -11,9 +11,6 @@ import "./index.scss";
   loading
 }))
 export default class Thanks extends Component {
-  config = {
-    navigationBarTitleText: "感谢测试"
-  };
 
   handleNextClick(callback) {
     callback(false);
@@ -22,7 +19,12 @@ export default class Thanks extends Component {
         type: "step/resetStep"
       })
       .then(() => {
-        navigateTo("/pages/index/index");
+        this.props
+          .dispatch({
+            type: "step/buildStepQueue"
+          }).then(() => {
+            navigateTo("/pages/index/index");
+          })
       });
   }
 

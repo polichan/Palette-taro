@@ -16,8 +16,8 @@ import "./index.scss";
 }))
 export default class StepPage extends Component {
   static defaultProps = {
-    onNext: () => {},
-    onBack: () => {},
+    onNext: () => { },
+    onBack: () => { },
     nextButtonLoading: false,
     backButtonLoading: false,
     showPanel: true,
@@ -39,8 +39,6 @@ export default class StepPage extends Component {
   componentDidMount() {
     this.props.step.stepQueue.getCurrent().setBeginTime();
   }
-
-  componentWillUnmount() {}
 
   setProgressPercent(add = true) {
     const all = this.props.step.stepQueue.getAll().length;
@@ -89,7 +87,21 @@ export default class StepPage extends Component {
   }
 
   handleBack() {
-    this.props.step.stepQueue.back().then(this.setProgressPercent(false));
+    this.props.step.stepQueue.back().then(() => {
+      this.setProgressPercent(false)
+    }).catch(() => {
+      // 如果直接从首页返回的
+      this.props
+        .dispatch({
+          type: "step/resetStep"
+        })
+        .then(() => {
+          this.props
+            .dispatch({
+              type: "step/buildStepQueue"
+            }).then()
+        });
+    });
   }
 
   reportErrorToCurrentStep(err) {
@@ -152,8 +164,8 @@ export default class StepPage extends Component {
               <View className='container'>{this.props.children}</View>
             </Panel>
           ) : (
-            <View className='container'>{this.props.children}</View>
-          )}
+              <View className='container'>{this.props.children}</View>
+            )}
           <View className='safe-area-block-container'></View>
         </View>
         <View className='footer-content flex flex-direction-column flex-center'>

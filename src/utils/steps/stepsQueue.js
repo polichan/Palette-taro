@@ -21,6 +21,10 @@ export default class StepQueue {
     return this.steps;
   }
 
+  getCurrentIndex(){
+    return this.current
+  }
+
   getCurrent() {
     return this.steps[this.current];
   }
