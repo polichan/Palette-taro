@@ -75,7 +75,7 @@ export function getBaseApi() {
  */
 export function navigateTo(url) {
   if (Taro.getCurrentPages().length >= 10) {
-    Taro.redirectTo({
+    Taro.reLaunch({
       url: url,
       success: function () { },
       fail: function () { },

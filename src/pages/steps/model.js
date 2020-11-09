@@ -194,13 +194,13 @@ export default {
         })
       );
 
-      sQueue.add(
-        new Step({
-          navigationTitle: "二转十可视化",
-          buttonTitle: "下一步",
-          pagePath: "/pages/steps/binarization/index"
-        })
-      );
+      // sQueue.add(
+      //   new Step({
+      //     navigationTitle: "二转十可视化",
+      //     buttonTitle: "下一步",
+      //     pagePath: "/pages/steps/binarization/index"
+      //   })
+      // );
 
       sQueue.add(
         new Step({
