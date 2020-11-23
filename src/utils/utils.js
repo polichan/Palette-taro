@@ -56,7 +56,7 @@ export function getSrc(name, slash = true) {
  * 获取缓存资源包中的图片文件
  * @param {*} name 
  */
-export function getLocalCacheImageSrc(name){
+export function getLocalCacheImageSrc(name) {
   const userPath = Taro.env.USER_DATA_PATH
   const n = name.split('/')
   return `${userPath}/${n[n.length - 1]}`
@@ -127,4 +127,23 @@ export function minusStepProgress(callback) {
   }).then(() => {
     callback()
   });
+}
+
+/**
+ * 重置步骤队列
+ * @param {*} callback 重置完成后的回调
+ */
+export function resetStepsQueue(callback) {
+  store
+    .dispatch({
+      type: "step/resetStep"
+    })
+    .then(() => {
+      store
+        .dispatch({
+          type: "step/buildStepQueue"
+        }).then(() => {
+          callback()
+        })
+    });
 }

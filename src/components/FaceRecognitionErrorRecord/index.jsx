@@ -32,20 +32,24 @@ class FaceRecognitionErrorRecord extends Component {
         const { articleData } = this.state
         return (
             <View className='frer-wrapper'>
-                <Article sections={articleData.sections}></Article>
-                <View className='frer-container'>
-                    {
-                        data.map((item) => {
-                            return (
-                                <Block key={item.ID}>
-                                    {
-                                        this.renderItem(item)
-                                    }
-                                </Block>
-                            )
-                        })
-                    }
-                </View>
+                {data.length && (
+                    <Block>
+                        <Article sections={articleData.sections}></Article>
+                        <View className='frer-container'>
+                            {
+                                data.map((item) => {
+                                    return (
+                                        <Block key={item.ID}>
+                                            {
+                                                this.renderItem(item)
+                                            }
+                                        </Block>
+                                    )
+                                })
+                            }
+                        </View>
+                    </Block>
+                )}
             </View>
         );
     }

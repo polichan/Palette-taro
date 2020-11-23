@@ -1,8 +1,8 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-18 22:53:13
- * @LastEditTime: 2020-08-02 11:48:03
- * @LastEditors: 陈鹏宇
+ * @LastTime: 2020-11-23 22:19:39
+ * @LastAuthor: 陈鹏宇
  * @Description: 一键退出登录
  * @Version: 1.0
  */
@@ -10,6 +10,7 @@
 import store from "@/utils/store/store";
 import Taro from "@tarojs/taro";
 import * as CONSTANTS from "../constants/index";
+import { resetStepsQueue } from "./utils"
 /**
  * 重新登录
  */
@@ -18,9 +19,7 @@ const logOut = (authorizationExpired = false) => {
       store.dispatch({
          type: 'user/logOut'
       }).then(() => {
-         store.dispatch({
-            type: 'step/setStepQueueToRebuild',
-         }).then(() => {
+         resetStepsQueue(() => {
             redirectToIndex()
          })
       })
@@ -34,18 +33,14 @@ const logOut = (authorizationExpired = false) => {
                store.dispatch({
                   type: 'user/logOut'
                }).then(() => {
-                  store.dispatch({
-                     type: 'step/setStepQueueToRebuild',
-                  }).then(() => {
+                  resetStepsQueue(() => {
                      redirectToIndex()
                   })
                })
             }
          })
       } else {
-         store.dispatch({
-            type: 'step/setStepQueueToRebuild',
-         }).then(() => {
+         resetStepsQueue(() => {
             redirectToIndex()
          })
       }
