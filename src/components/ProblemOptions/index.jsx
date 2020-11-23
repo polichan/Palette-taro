@@ -78,11 +78,10 @@ export default class ProblemOptions extends Component {
               onClick={this.handleOptionChange.bind(this, item.value)}
             >
               <View
-                className={`${
-                  item.value == selectedValue
-                    ? "option-order option-order-selected"
-                    : "option-order"
-                }`}
+                className={`${item.value == selectedValue
+                  ? "option-order option-order-selected"
+                  : "option-order"
+                  }`}
               >
                 {item.value == selectedValue ? (
                   <Image
@@ -90,17 +89,25 @@ export default class ProblemOptions extends Component {
                     className='checkbox-img'
                   ></Image>
                 ) : (
-                  <Image
-                    src={CheckBoxUnselected}
-                    className='checkbox-img'
-                  ></Image>
-                )}
-                <Text className='order-num'>{item.order}选项</Text>
+                    <Image
+                      src={CheckBoxUnselected}
+                      className='checkbox-img'
+                    ></Image>
+                  )}
+                <Text className='order-num'>{item.order}.</Text>
               </View>
               <View className='option-container'>
-                <View className='option-text'>
+                {/* <View className='option-text'>
                   <RichTextParser content={item.label}></RichTextParser>
-                </View>
+                </View> */}
+                <Text
+                  className={`${item.value == selectedValue
+                    ? "option-text option-text-selected"
+                    : "option-text"
+                    }`}
+                >
+                  {item.label}
+                </Text>
               </View>
             </View>
           );

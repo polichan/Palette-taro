@@ -1,8 +1,8 @@
 /*
  * @Autor: 陈鹏宇
  * @Date: 2020-07-15 14:11:53
- * @LastEditTime: 2020-09-07 11:36:39
- * @LastEditors: 陈鹏宇
+ * @LastTime: 2020-11-24 00:39:42
+ * @LastAuthor: 陈鹏宇
  * @Description: 常量定义入口
  * @Version: 1.0
  */
@@ -41,7 +41,7 @@ export const CDN_IMAGE = {
     SOLUTION_ICON: "/media/file/550237b8fbcdf3741bb1127d0fc7f6bf_20200907112539.png",
     FINGER_ICON: "/media/file/e7efda40b1c94805070cd9bf9638ae27_20200907112628.png",
     SELECTED_ICON: "/media/file/ef7de3f485174ff47f061ad27d83d0ee_20200907112547.png",
-    KNN_IMAGE: "/media/img/85a2b85541a02f2b56f968fb5b162290.png",
+    KNN_IMAGE: "/media/file/bcd71d99ecb27d9db08b247499e382e2_20201124003723.png",
     BINARY_FIRST_IMAGE: "/media/img/26da5d5ae4d4ac76a6008ceb710a2cc0.png",
     BINARY_SECOND_IMAGE: "/media/img/33a573dd994f25d0d3085068e362b629.png"
 }

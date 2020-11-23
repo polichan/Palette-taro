@@ -25,13 +25,21 @@ export default class Knn extends Component {
     callback(true)
   }
 
+  handleImageClick = () => {
+    const { knnImage } = this.state.imgs
+    Taro.previewImage({
+      current: knnImage,
+      urls: [knnImage]
+    })
+  }
+
   render() {
     const { data, imgs } = this.state
     return (
       <StepPage onNext={this.handleNextClick} showPanel>
         <Article sections={data.section}></Article>
         <View className='knn-container flex flex-direction-column flex-center'>
-          <Image src={imgs.knnImage} className='knn-image' mode='aspectFit'></Image>
+          <Image src={imgs.knnImage} className='knn-image' mode='aspectFit' onClick={this.handleImageClick}></Image>
         </View>
       </StepPage>
     )
