@@ -13,18 +13,18 @@
 }
 
 .frer-container{
-    margin-top: 30px;
+    margin-top: 10px;
     width: 100%;
     display: grid !important;
     grid-template-columns: repeat(
       auto-fill,
       320px
     );
-    grid-template-rows: 150px;
     justify-content: space-around;
 }
 
 .frer-item-container{
+    margin: 10px 0 !important;
     display: flex;
     justify-content: center;
     align-items: center;
