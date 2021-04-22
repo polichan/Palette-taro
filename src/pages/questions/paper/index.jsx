@@ -45,11 +45,16 @@ export default class Paper extends Component {
     }
 
     saveExperimentLog() {
+        const logs = JSON.parse(this.props.step.userExperiment.log)
+        const errorCount = logs.filter(item => item.error != null).length
+        const score = 100 - errorCount * 10 < 0 ? 0 : 100 - errorCount * 10
         this.props
             .dispatch({
                 type: "step/saveExperimentLog",
                 payload: {
-                    params: this.props.step.userExperiment
+                    params: Object.assign(this.props.step.userExperiment, {
+                        score: score
+                    })
                 }
             })
             .then(() => {
