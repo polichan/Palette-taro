@@ -43,6 +43,9 @@ const config = {
     "@/models": 'src/models'
   },
   mini: {
+    webpackChain (chain) {
+      chain.optimization.sideEffects(false)
+    },
     postcss: {
       autoprefixer: {
         enable: true,
