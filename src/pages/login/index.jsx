@@ -168,7 +168,6 @@ export default class Index extends Component {
                     <Input
                       onInput={this.handleCodeNumberChange.bind(this)}
                       className='input_name'
-                      maxLength='10'
                       placeholder='请输入学号'
                       value={this.state.codeNumber}
                     ></Input>
