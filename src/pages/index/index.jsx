@@ -158,7 +158,7 @@ export default class Index extends Component {
           <View className='at-row'>
             <View className='at-col at-col-24 at-col--wrap'>
               <Text className='desc'>
-                欢迎来到上海电机学院人脸识别虚拟仿真实验！本实验主要以多层卷积神经网络进行人脸识别，人脸识别的每一步都进行可视化的展现，并且可以自定义一些参数，让您有更深刻直白的人工智能学习体验。快来动手实现它吧！
+                欢迎来到上海电机学院人脸识别虚拟仿真实验！本实验主要以多层卷积神经网络进行人脸识别，人脸识别的每一步都进行可视化的展现，并且可以自定义一些参数，让您有更深刻直白的人工智能学习体验。快来动手实现它吧！\n\n 访客登录，用户名：fangke ，密码：fangke
               </Text>
             </View>
           </View>
