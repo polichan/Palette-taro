@@ -26,8 +26,11 @@ export default class Paper extends Component {
             return
         }
         await this.endExperiment()
-        await this.saveExperimentLog()
-        callback(true)
+        this.saveExperimentLog().then(() => {
+            callback(true)
+        }).catch(() => {
+            callback(false)
+        })
     }
 
     async endExperiment() {
@@ -48,21 +51,34 @@ export default class Paper extends Component {
         const logs = JSON.parse(this.props.step.userExperiment.log)
         const errorCount = logs.filter(item => item.error != null).length
         const score = 100 - errorCount * 10 < 0 ? 0 : 100 - errorCount * 10
-        this.props
-            .dispatch({
-                type: "step/saveExperimentLog",
-                payload: {
-                    params: Object.assign(this.props.step.userExperiment, {
-                        score: score
-                    })
-                }
-            })
-            .then(() => {
-                Taro.showToast({
-                    icon: "none",
-                    title: "提交试验记录成功"
+        return new Promise((resolve, reject) => {
+            this.props
+                .dispatch({
+                    type: "step/saveExperimentLog",
+                    payload: {
+                        params: Object.assign(this.props.step.userExperiment, {
+                            score: score
+                        })
+                    }
+                })
+                .then((res) => {
+                    const { data, err } = res
+                    if (err == null) {
+                        Taro.showToast({
+                            icon: "none",
+                            title: "提交试验记录成功"
+                        });
+                        resolve()
+                        return
+                    }
+                    Taro.hideToast()
+                    Taro.showToast({
+                        icon: "none",
+                        title: err
+                    });
+                    reject()
                 });
-            });
+        })
     }
 
     handleChange(value) {

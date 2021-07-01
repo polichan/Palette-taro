@@ -50,7 +50,19 @@ export default {
     },
 
     *saveExperimentLog({ payload }, { call }) {
-      yield call(stepApi.createUsersExperiments, payload.params)
+      try {
+        const res = yield call(stepApi.createUsersExperiments, payload.params)
+        return {
+          data: res,
+          err: null
+        }
+      } catch (error) {
+        return {
+          err: error,
+          data: null
+        }
+      }
+
     },
 
     *endExperiment({ payload }, { put }) {
